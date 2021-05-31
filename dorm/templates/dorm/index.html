@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}หอพัก{% endblock %}
+
+{% block content %}
+    {% for dormitory in dormitorys %}
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ dormitory.name }}</h5>
+                <a href="{% url "room-name" dormitory.name %}" class="btn btn-primary">เพิ่มเติม</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

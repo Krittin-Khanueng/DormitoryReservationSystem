@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}ห้องพักทั้งหมด{% endblock %}
+
+{% block content %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for room in rooms %}
+
+            <div class="col">
+                <a href="#">
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ room.room_id }}</h5>
+                            <p class="card-text">{{ room.amount }}</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
