@@ -17,6 +17,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='room',
             name='is_status',
-            field=models.BooleanField(default=True, verbose_name='สถานะของห้อง'),
+            field=models.BooleanField(
+                default=True, verbose_name='สถานะของห้อง'),
         ),
     ]
