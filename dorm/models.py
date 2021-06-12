@@ -4,7 +4,9 @@ from django.db import models
 # Create your models here.
 
 class Dormitory(models.Model):
-	name = models.CharField(max_length=100)
+	name = models.CharField(max_length=100, unique=True)
+	description = models.TextField(blank=True)
+	images = models.ImageField(upload_to="images/dorm/", blank=True)
 
 	def __str__(self):
 		return self.name
@@ -18,7 +20,7 @@ class Room(models.Model):
 	room_id = models.CharField(max_length=10, blank=True, null=True, unique=True, verbose_name="เลขห้อง")
 	room_type = models.CharField(max_length=10, choices=TYPE_IN_ROOM, verbose_name="ประเภทห้องพัก")
 	amount = models.PositiveIntegerField(default=3, verbose_name="จำนวน")
-	status_room = models.BooleanField(default=False, verbose_name="สถานะของห้อง")
+	is_status = models.BooleanField(default=True, verbose_name="สถานะของห้อง")
 
 	def __str__(self):
 		return f"หอพัก:{self.dorm_name} ชั้น:{self.floor} ห้อง:{self.room_id} จำนวน:{self.amount}"
