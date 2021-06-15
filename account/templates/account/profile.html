@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}โปรไฟล์{% endblock %}
+
 {% block content %}
+
+
     <p class="text-muted text-center h3 py-2"> Profile</p>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
                 <div class="text-center py-5"><img src="{% static 'images/pic/profile.png' %}" width="200" height="250">
                 </div>
-                <p class="text-muted text-center py-2">เเก้ไขรูปภาพ</p>
+                <p class="text-muted text-center ">เเก้ไขรูปภาพ</p>
             </div>
             <div class="col-md-8">
                 <div class="row">
@@ -19,9 +22,9 @@
                     <table class="table table-borderless m-0">
                         <thead>
                         <tr>
-                            <th scope="col" width="10%">คำนำหน้า</th>
-                            <th scope="col" width="25%">ชื่อ (ภาษาไทย)</th>
-                            <th scope="col" width="30%">นามสกุล</th>
+                            <th scope="col" >คำนำหน้า</th>
+                            <th scope="col" >ชื่อ (ภาษาไทย)</th>
+                            <th scope="col">นามสกุล</th>
                         </tr>
                         </thead>
 
@@ -40,13 +43,12 @@
                             </td>
                         </tr>
                         </tbody>
-                    </table>
-                    <table class="table table-borderless m-0">
+
                         <thead>
                         <tr>
-                            <th scope="col" width="15%">Name Title</th>
-                            <th scope="col" width="35%">Firstname</th>
-                            <th scope="col" width="40">Lastname</th>
+                            <th scope="col"  >Name Title</th>
+                            <th scope="col"  >Firstname</th>
+                            <th scope="col"  >Lastname</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -64,39 +66,36 @@
                             </td>
                         </tr>
                         </tbody>
-                    </table>
-                    <table class="table table-borderless m-0">
+
                         <thead>
                         <tr>
-                            <th scope="col" width="20%">วัน/เดือน/ปีเกิด</th>
-                            <th scope="col" width="70%">เพศ</th>
+                            <th scope="col">วัน/เดือน/ปีเกิด</th>
+                            <th scope="col">เพศ</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>
-                                <div class="form-group ">
+                                <div class="form-group">
 
-                                    <input class="form-control" type="date" value="2011-08-19"
-                                           id="example-date-input" style="height:30px; ">
+                                    <input class="form-control  " type="date" value="2011-08-19"
+                                           id="example-date-input" >
                                 </div>
                             </td>
                             <td>ชาย</td>
                         </tr>
                         </tbody>
-                    </table>
 
-                    <table class="table table-borderless m-0">
                         <thead>
                         <tr>
-                            <th scope="col" width="5%">เบอร์โทรศัพท์</th>
-                            <th scope="col" width="20%">บัญชีธนาคาร</th>
+                            <th scope="col" >เบอร์โทรศัพท์</th>
+                            <th scope="col">บัญชีธนาคาร</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>
-                                <div class="form-group ">
+                                <div class="form-group col-6 ">
                                     <input type="text" class="form-control" id="name" placeholder="0633920820"
                                            style="height:30px;">
                                 </div>
