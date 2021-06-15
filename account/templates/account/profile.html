@@ -1,17 +1,92 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}โปรไฟล์{% endblock %}
-{% block content  %}
-     <p class="text-muted text-center h3 py-2"> Profile
+{% block content %}
+    <p class="text-muted text-center h3 py-2"> Profile</p>
     <div class="container-fluid">
-    <div class="row">
-    <div class="col-md-4">
-        ffff
-    </div>
-    <div class="col-md-8">
-       <p class="text-muted h4 py-2"> รหัสนักศึกษา
-    </div>
-    </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-center py-5"> <img src="{% static 'images/pic/profile.png' %}" width="200" height="250"> </div>
+                <p class="text-muted text-center py-2">เเก้ไขรูปภาพ</p>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <h5 class="card-title text-dark m-0">รหัสนักศึกษา</h5>
+                    <p class="card-text m-2 ">6110210013</p>
 
-     </div>
+                    <table class="table table-borderless m-0">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width:50px;" >คำนำหน้า</th>
+                            <th scope="col" style="width:50px;">ชื่อ (ภาษาไทย)</th>
+                            <th scope="col" style="width:50px;">นามสกุล</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td scope="col-3">นาย</td>
+                            <td>สมมุติ</td>
+                            <td>ไม่มีจริง</td>
+                        </tr>
+                        </tbody>
+                        <thead>
+                        <tr>
+                            <th scope="col">Name Title</th>
+                            <th scope="col">Firstname</th>
+                            <th scope="col">Lastname</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Mr.</td>
+                            <td>Sommud</td>
+                            <td>Maimeejing</td>
+                        </tr>
+                        </tbody>
+
+                        <thead>
+                        <tr>
+                            <th scope="col">วัน/เดือน/ปีเกิด</th>
+                            <th scope="col">เพศ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-group row">
+                                    <div class="col-6">
+                                        <input class="form-control" type="date" value="2011-08-19"
+                                               id="example-date-input">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>ชาย</td>
+                        </tr>
+                        </tbody>
+                        <thead>
+                        <tr>
+                            <th scope="col">เบอร์โทรศัพท์</th>
+                            <th scope="col">บัญชีธนาคาร</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>0629748790</td>
+                            <td>123-223-3333-3</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+
+                        <div class="mt-2 ">
+                            <input type="submit" style="padding-top: 2px;" class="btn btn-primary fw-bold py-2 me-4 " value="บันทึก">
+                            <input type="submit" style="padding-top: 2px;" class="btn btn-secondary fw-bold py-2 me-4 " value="ยกเลิก">
+                        </div>
+
+
+                </div>
+            </div>
+
+        </div>
 {% endblock %}
