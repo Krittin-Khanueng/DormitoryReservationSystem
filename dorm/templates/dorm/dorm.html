@@ -14,7 +14,10 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ dormitory.name }}</h5>
                             <p class="card-text">{{ dormitory.description }}</p>
-                            <a href="{% url "room-name" dormitory.name %}" class="btn btn-primary">เพิ่มเติม</a>
+                             <div class="card-footer bg-transparent border-success">
+                                 <button type="button" class="btn btn-outline-success">{{ dormitory.room_not_full }}</button>
+                             </div>
+                            <a href="{% url "room-name" dormitory.id %}" class="btn btn-primary">กดเลือก</a>
                         </div>
                     </div>
                 </div>
