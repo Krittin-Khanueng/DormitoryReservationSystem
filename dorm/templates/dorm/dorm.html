@@ -10,7 +10,9 @@
 
                 <div class="col">
                     <div class="card h-100">
+                        {% if dormitory.images %}
                         <img src="{{ dormitory.images.url }}" class="card-img-top" alt="...">
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ dormitory.name }}</h5>
                             <p class="card-text">{{ dormitory.description }}</p>

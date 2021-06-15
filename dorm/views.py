@@ -22,9 +22,9 @@ class IndexView(View):
 
 
 class GetAllRoomView(View):
-	def get(self, request, id):
+	def get(self, request, pk):
 		context = {}
-		dorm = Dormitory.objects.get(id=id)
+		dorm = Dormitory.objects.get(pk=pk)
 		context["rooms"] = dorm.dormitory.all()
 		return render(request, "dorm/all-room.html", context)
 
