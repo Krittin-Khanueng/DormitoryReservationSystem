@@ -1,15 +1,25 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}หอพัก{% endblock %}
 
 {% block content %}
-    {% for dormitory in dormitorys %}
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{ dormitory.name }}</h5>
-                <a href="{% url "room-name" dormitory.name %}" class="btn btn-primary">เพิ่มเติม</a>
-            </div>
+    <div class="content">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for dormitory in dormitorys %}
+
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="{{ dormitory.images.url }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ dormitory.name }}</h5>
+                            <p class="card-text">{{ dormitory.description }}</p>
+                            <a href="{% url "room-name" dormitory.name %}" class="btn btn-primary">เพิ่มเติม</a>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
         </div>
-    {% endfor %}
+
+    </div>
 {% endblock %}

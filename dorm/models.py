@@ -9,7 +9,7 @@ class DormitoryManager(models.Manager):
 class Dormitory(models.Model):
 	name = models.CharField(max_length=100, unique=True)
 	description = models.TextField(blank=True)
-	images = models.ImageField(upload_to="images/dorm/", blank=True)
+	images = models.ImageField(upload_to="images/dorm/", blank=True, null=True)
 
 	def __str__(self):
 		return self.name
