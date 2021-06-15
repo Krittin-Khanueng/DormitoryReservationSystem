@@ -10,15 +10,15 @@ from .models import Dormitory, Room
 
 
 class IndexView(ListView):
-	model = Dormitory
-	context_object_name = "dormitorys"
-	template_name = "dorm/dorm.html"
+    model = Dormitory
+    context_object_name = "dormitorys"
+    template_name = "dorm/dorm.html"
 
 
 class GetAllRoomView(View):
 
-	def get(self, request, name):
-		context = {}
-		dorm = Dormitory.objects.get(name=name)
-		context["rooms"] = dorm.dormitory.all()
-		return render(request, "dorm/all-room.html", context)
+    def get(self, request, name):
+        context = {}
+        dorm = Dormitory.objects.get(name=name)
+        context["rooms"] = dorm.dormitory.all()
+        return render(request, "dorm/all-room.html", context)
