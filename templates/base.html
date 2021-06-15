@@ -13,8 +13,14 @@
     <!-- Favicons -->
     <link rel="icon" href="{% static 'images/favicons/favicon.png' %}">
 
+    <!--font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap" rel="stylesheet">
 
+    <!-- icon -->
     <link href="{% static  'css/carousel.css' %}" rel="stylesheet">
+
+    <!-- css -->
     {% block css_file %} {% endblock %}
 
     <style>
@@ -24,7 +30,7 @@
         }
 
         body {
-            font-family: 'K2D', sans-serif;
+            font-family: 'Kanit', sans-serif;
             /* Margin bottom by footer height */
             margin-bottom: 40px;
         }

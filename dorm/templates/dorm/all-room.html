@@ -1,11 +1,38 @@
 {% extends "base.html" %}
 
 {% block title %}ห้องพักทั้งหมด{% endblock %}
-
+{% block css_file %}
+    <style>
+        .btn-room {
+            width: 100px;
+            margin-right: 20px;
+            font-size: larger;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+    </style>
+{% endblock %}
 {% block content %}
-    <div class="container">
-    <h1>เลือกห้องพัก</h1>
-    <p>ชั้น3</p>
+
+    <div class="container d-grid gap-3 ">
+        <h1>เลือกห้องพัก</h1>
+        <h3 class="font-weight-bold">ชั้น3</h3>
+        <div class="row justify-content-center">
+            <a href="#" class="btn btn-secondary text-wrap btn-room" role="button">1</a>
+            <a href="#" class="btn btn-secondary text-wrap btn-room" role="button">2</a>
+            <a href="#" class="btn btn-secondary text-wrap btn-room" role="button">3</a>
+            <a href="#" class="btn btn-secondary text-wrap btn-room" role="button">4</a>
+            <a href="#" class="btn btn-secondary text-wrap btn-room" role="button">5</a>
+            <a href="#" class="btn btn-secondary text-wrap btn-room" role="button">6</a>
+            <a href="#" class="btn btn-secondary text-wrap btn-room" role="button">7</a>
+            <a href="#" class="btn btn-secondary text-wrap btn-room" role="button">8</a>
+        </div>
+
+
     </div>
+
+
 
 {% endblock %}
