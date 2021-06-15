@@ -6,7 +6,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <div class="text-center py-5"> <img src="{% static 'images/pic/profile.png' %}" width="200" height="250"> </div>
+                <div class="text-center py-5"><img src="{% static 'images/pic/profile.png' %}" width="200" height="250">
+                </div>
                 <p class="text-muted text-center py-2">เเก้ไขรูปภาพ</p>
             </div>
             <div class="col-md-8">
@@ -14,75 +15,111 @@
                     <h5 class="card-title text-dark m-0">รหัสนักศึกษา</h5>
                     <p class="card-text m-2 ">6110210013</p>
 
+
                     <table class="table table-borderless m-0">
                         <thead>
                         <tr>
-                            <th scope="col" style="width:50px;" >คำนำหน้า</th>
-                            <th scope="col" style="width:50px;">ชื่อ (ภาษาไทย)</th>
-                            <th scope="col" style="width:50px;">นามสกุล</th>
+                            <th scope="col" width="10%">คำนำหน้า</th>
+                            <th scope="col" width="25%">ชื่อ (ภาษาไทย)</th>
+                            <th scope="col" width="30%">นามสกุล</th>
                         </tr>
                         </thead>
+
                         <tbody>
                         <tr>
-                            <td scope="col-3">นาย</td>
-                            <td>สมมุติ</td>
-                            <td>ไม่มีจริง</td>
+                            <td>นาย</td>
+                            <td>
+                                <div class="form-group col-7">
+                                    <input type="text" class="form-control" id="name" placeholder="สมมุติ">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group col-7">
+                                    <input type="text" class="form-control" id="name" placeholder="ไม่มีจริง">
+                                </div>
+                            </td>
                         </tr>
                         </tbody>
+                    </table>
+                    <table class="table table-borderless m-0">
                         <thead>
                         <tr>
-                            <th scope="col">Name Title</th>
-                            <th scope="col">Firstname</th>
-                            <th scope="col">Lastname</th>
+                            <th scope="col" width="15%">Name Title</th>
+                            <th scope="col" width="35%">Firstname</th>
+                            <th scope="col" width="40">Lastname</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>Mr.</td>
-                            <td>Sommud</td>
-                            <td>Maimeejing</td>
+                            <td>
+                                <div class="form-group col-7">
+                                    <input type="text" class="form-control" id="name" placeholder="Sommud">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group col-7">
+                                    <input type="text" class="form-control" id="name" placeholder="Maimeejing">
+                                </div>
+                            </td>
                         </tr>
                         </tbody>
-
+                    </table>
+                    <table class="table table-borderless m-0">
                         <thead>
                         <tr>
-                            <th scope="col">วัน/เดือน/ปีเกิด</th>
-                            <th scope="col">เพศ</th>
+                            <th scope="col" width="20%">วัน/เดือน/ปีเกิด</th>
+                            <th scope="col" width="70%">เพศ</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>
-                                <div class="form-group row">
-                                    <div class="col-6">
-                                        <input class="form-control" type="date" value="2011-08-19"
-                                               id="example-date-input">
-                                    </div>
+                                <div class="form-group ">
+
+                                    <input class="form-control" type="date" value="2011-08-19"
+                                           id="example-date-input" style="height:30px; ">
                                 </div>
                             </td>
                             <td>ชาย</td>
                         </tr>
                         </tbody>
+                    </table>
+
+                    <table class="table table-borderless m-0">
                         <thead>
                         <tr>
-                            <th scope="col">เบอร์โทรศัพท์</th>
-                            <th scope="col">บัญชีธนาคาร</th>
+                            <th scope="col" width="5%">เบอร์โทรศัพท์</th>
+                            <th scope="col" width="20%">บัญชีธนาคาร</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>0629748790</td>
-                            <td>123-223-3333-3</td>
+                            <td>
+                                <div class="form-group ">
+                                    <input type="text" class="form-control" id="name" placeholder="0633920820"
+                                           style="height:30px;">
+                                </div>
+
+                            </td>
+                            <td>
+                                <div class="form-group col-6">
+                                    <input type="text" class="form-control" id="name" placeholder="123-223-3333-3"
+                                           style="height:30px;">
+                                </div>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="row">
 
-                        <div class="mt-2 ">
-                            <input type="submit" style="padding-top: 2px;" class="btn btn-primary fw-bold py-2 me-4 " value="บันทึก">
-                            <input type="submit" style="padding-top: 2px;" class="btn btn-secondary fw-bold py-2 me-4 " value="ยกเลิก">
-                        </div>
+                    <div class="mt-3 ">
+                        <input type="submit" style="padding-top: 2px;" class="btn btn-primary fw-bold py-2 me-5 "
+                               value="บันทึก">
+                        <input type="submit" style="padding-top: 2px;" class="btn btn-secondary fw-bold py-2 me-5 "
+                               value="ยกเลิก">
+                    </div>
 
 
                 </div>
