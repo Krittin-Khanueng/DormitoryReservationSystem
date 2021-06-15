@@ -10,21 +10,20 @@ from .models import Dormitory, Room
 
 
 class IndexView(View):
-	def get(self,request):
-		dorm = Dormitory.objects.all()
-		# print(dorm[0].dormitory.filter(amount__gt=0).count())
+    def get(self, request):
+        dorm = Dormitory.objects.all()
+        # print(dorm[0].dormitory.filter(amount__gt=0).count())
 
-		context = {
-			"dormitorys": dorm,
+        context = {
+            "dormitorys": dorm,
 
-		}
-		return render(request, 'dorm/dorm.html',context)
+        }
+        return render(request, 'dorm/dorm.html', context)
 
 
 class GetAllRoomView(View):
-	def get(self, request, id):
-		context = {}
-		dorm = Dormitory.objects.get(id=id)
-		context["rooms"] = dorm.dormitory.all()
-		return render(request, "dorm/all-room.html", context)
-
+    def get(self, request, id):
+        context = {}
+        dorm = Dormitory.objects.get(id=id)
+        context["rooms"] = dorm.dormitory.all()
+        return render(request, "dorm/all-room.html", context)
