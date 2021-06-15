@@ -1,19 +1,24 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
+from django.views.generic import ListView
+
 from .models import Dormitory, Room
 
 
 # Create your views here.
 
 
-class IndexView(View):
+class IndexView(ListView):
 
-	def get(self, request):
-		context = {}
-		dormitorys = Dormitory.objects.all()
-		context["dormitorys"] = dormitorys
-		return render(request, "dorm/index.html", context)
+	model = Dormitory
+	context_object_name = "dormitorys"
+	template_name = "dorm/index.html"
+	# def get(self, request):
+	# 	context = {}
+	# 	dormitorys = Dormitory.objects.all()
+	# 	context["dormitorys"] = dormitorys
+	# 	return render(request, "dorm/index.html", context)
 
 
 class GetAllRoomView(View):
