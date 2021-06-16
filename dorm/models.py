@@ -36,3 +36,4 @@ class Room(models.Model):
 
 	def __str__(self):
 		return f"หอพัก:{self.floor.dorm_name} ชั้น:{self.floor.number} ห้อง:{self.room_id} จำนวน:{self.amount}"
+

@@ -39,8 +39,12 @@
 
                 </ul>
                 <form class="d-flex form-inline mt-2 mt-md-0">
-                    <button class="btn btn-outline-success me-2 my-sm-0" type="button">เข้าสู่ระบบ</button> &nbsp;
-                    <button class="btn btn-outline-danger me-2 my-sm-0" type="button">ออกจากระบบ</button>
+                    {% if request.user.is_authenticated %}
+                        <p>{{ request.user }}</p>
+                        <a href="{% url 'logout' %}" class="btn btn-outline-danger me-2 my-sm-0" type="button">ออกจากระบบ</a>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-outline-success me-2 my-sm-0" type="button">เข้าสู่ระบบ</a> &nbsp;
+                    {% endif %}
                 </form>
             </div>
         </div>
