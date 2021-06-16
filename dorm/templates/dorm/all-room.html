@@ -28,10 +28,10 @@
             {% for floor in floors %}
                 <h3 class="font-weight-bold my-3"> ชั้นที่:{{ floor.number }} </h3>
 
-                <div class="row  justify-content-center">
+                <div class="row justify-content-center ">
                     {% for room in floor.floor.all %}
-                        <div class="col"><a href="#" class="btn btn-secondary text-wrap btn-room mt-3"
-                                            role="button">{{ room.room_id }}<p id="text-amount">({{ room.amount }})</p>
+                        <div class="col " style="margin: 3px">
+                            <a href="#" class="btn btn-secondary text-wrap btn-room mt-3" role="button">{{ room.room_id }}<p id="text-amount">({{ room.amount }})</p>
                         </a></div>
                     {% endfor %}
                 </div>
