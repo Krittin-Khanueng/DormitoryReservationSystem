@@ -7,24 +7,25 @@ import uuid
 
 
 class Migration(migrations.Migration):
-	initial = True
+    initial = True
 
-	dependencies = [
-		('dorm', '0005_auto_20210616_1520'),
-		migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-	]
+    dependencies = [
+        ('dorm', '0005_auto_20210616_1520'),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+    ]
 
-	operations = [
-		migrations.CreateModel(
-			name='Booking',
-			fields=[
-				('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-				('date', models.DateTimeField(auto_now_add=True)),
-				('room',
-				 models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='booking_room',
-								   to='dorm.room')),
-				('user', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE,
-										   to=settings.AUTH_USER_MODEL)),
-			],
-		),
-	]
+    operations = [
+        migrations.CreateModel(
+            name='Booking',
+            fields=[
+                ('id', models.UUIDField(default=uuid.uuid4,
+                 editable=False, primary_key=True, serialize=False)),
+                ('date', models.DateTimeField(auto_now_add=True)),
+                ('room',
+                 models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='booking_room',
+                                   to='dorm.room')),
+                ('user', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE,
+                                           to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+    ]

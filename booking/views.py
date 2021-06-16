@@ -5,4 +5,4 @@ from django.views import View
 
 
 class BookingRoomView(View):
-	pass
+    pass
