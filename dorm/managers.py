@@ -3,4 +3,4 @@ from dorm.models import Dormitory
 
 
 class DormitoryManagers(models.Manager):
-	pass
+    pass

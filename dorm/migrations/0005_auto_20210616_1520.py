@@ -5,29 +5,31 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-	dependencies = [
-		('dorm', '0004_alter_dormitory_images'),
-	]
+    dependencies = [
+        ('dorm', '0004_alter_dormitory_images'),
+    ]
 
-	operations = [
-		migrations.RemoveField(
-			model_name='room',
-			name='dorm_name',
-		),
-		migrations.CreateModel(
-			name='Floor',
-			fields=[
-				('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-				('number', models.PositiveIntegerField(default=1, verbose_name='ชั้น')),
-				('dorm_name', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='dormitory',
-												related_query_name='dormitory', to='dorm.dormitory',
-												verbose_name='ชื่อหอพัก')),
-			],
-		),
-		migrations.AlterField(
-			model_name='room',
-			name='floor',
-			field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='floor',
-									related_query_name='floor', to='dorm.floor', verbose_name='ชั้น'),
-		),
-	]
+    operations = [
+        migrations.RemoveField(
+            model_name='room',
+            name='dorm_name',
+        ),
+        migrations.CreateModel(
+            name='Floor',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('number', models.PositiveIntegerField(
+                    default=1, verbose_name='ชั้น')),
+                ('dorm_name', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='dormitory',
+                                                related_query_name='dormitory', to='dorm.dormitory',
+                                                verbose_name='ชื่อหอพัก')),
+            ],
+        ),
+        migrations.AlterField(
+            model_name='room',
+            name='floor',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='floor',
+                                    related_query_name='floor', to='dorm.floor', verbose_name='ชั้น'),
+        ),
+    ]
