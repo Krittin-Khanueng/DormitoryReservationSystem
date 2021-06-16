@@ -13,7 +13,7 @@ class Dormitory(models.Model):
 		return self.name
 
 	def room_not_full(self):
-		return Floor.objects.filter(floor__amount__gt=0).count()
+		return Floor.objects.filter(dorm_name=self, floor__amount__gt=0).count()
 
 
 class Floor(models.Model):
@@ -22,6 +22,8 @@ class Floor(models.Model):
 								  verbose_name="ชื่อหอพัก")
 	number = models.PositiveIntegerField(default=1, verbose_name="ชั้น")
 
+	def __str__(self):
+		return f"หอพัก:{self.dorm_name.name} ชั้น:{self.number}"
 
 class Room(models.Model):
 	TYPE_IN_ROOM = [('MALE', 'ผู้ชาย'), ('FEMALE', 'ผู้หญิง')]

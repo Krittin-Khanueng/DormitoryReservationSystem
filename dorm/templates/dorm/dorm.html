@@ -4,27 +4,32 @@
 {% block title %}หอพัก{% endblock %}
 
 {% block content %}
-    <div class="content">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for dormitory in dormitorys %}
+    <div class="container-fluid">
+        {% if dormitorys %}
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for dormitory in dormitorys %}
 
-                <div class="col">
-                    <div class="card h-100">
-                        {% if dormitory.images %}
-                        <img src="{{ dormitory.images.url }}" class="card-img-top" alt="...">
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title">{{ dormitory.name }}</h5>
-                            <p class="card-text">{{ dormitory.description }}</p>
-                             <div class="card-footer bg-transparent border-success">
-                                 <button type="button" class="btn btn-outline-success">{{ dormitory.room_not_full }}</button>
-                             </div>
-                            <a href="{% url "room-name" dormitory.id %}" class="btn btn-primary">กดเลือก</a>
+                    <div class="col">
+                        <div class="card h-100">
+                            {% if dormitory.images %}
+                                <img src="{{ dormitory.images.url }}" class="card-img-top" alt="..."
+                                     style="width: 100%; height: 230px;">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ dormitory.name }}</h5>
+                                <p class="card-text">{{ dormitory.description }}</p>
+                                <div class="card-footer bg-transparent border-success">
+                                    <button type="button"
+                                            class="btn btn-outline-success">{{ dormitory.room_not_full }}</button>
+                                </div>
+                                <a href="{% url "room-name" dormitory.id %}" class="btn btn-primary">กดเลือก</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-        {% endfor %}
-        </div>
-
+                {% endfor %}
+            </div>
+        {% else %}
+            ไม่มีข้อมูลในขณะนี้
+        {% endif %}
     </div>
 {% endblock %}

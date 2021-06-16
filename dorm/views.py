@@ -9,19 +9,17 @@ from .models import Dormitory, Room
 # Create your views here.
 
 
-class IndexView(View):
-	def get(self,request):
+class DormView(View):
+	def get(self, request):
 		dorm = Dormitory.objects.all()
-		# print(dorm[0].dormitory.filter(amount__gt=0).count())
-
 		context = {
 			"dormitorys": dorm,
 
 		}
-		return render(request, 'dorm/dorm.html',context)
+		return render(request, 'dorm/dorm.html', context)
 
 
-class GetAllRoomView(View):
+class RoomView(View):
 	def get(self, request, pk):
 		context = {}
 		dorm = Dormitory.objects.get(pk=pk)
