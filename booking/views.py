@@ -25,12 +25,13 @@ class BookingRoomView(View):
         else:
             return JsonResponse({"status": 'ห้องเต็มแล้ว'})
 
-
     # get room
+
     def get_room(self, room_id):
 
         try:
-            room = Room.objects.get(room_id__exact=room_id, amount__gt=0, is_status=True)
+            room = Room.objects.get(
+                room_id__exact=room_id, amount__gt=0, is_status=True)
         except Room.DoesNotExist:
             room = None
         return room
