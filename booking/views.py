@@ -22,7 +22,8 @@ class BookingRoomView(View):
         return render(request, 'booking/booking_success.html')
 
     def get_room(self, room_id):
-        room = Room.objects.get(room_id__exact=room_id, amount__gt=0, is_status=True)
+        room = Room.objects.get(room_id__exact=room_id,
+                                amount__gt=0, is_status=True)
         if room:
             return room
         return None
