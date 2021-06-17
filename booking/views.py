@@ -9,24 +9,18 @@ from .models import Booking
 
 
 class BookingRoomView(View):
-    def get(self, request, room_id):
+    def post(self, request):
         user = self.get_user(request.user.id)
-        room = self.check_room(room_id)
-
-        if room:
-            try:
-                booking = Booking(room=room, user=user)
-
-            except:
-                pass
-            booking.add_to_room()
-            booking.save()
-        else:
+        room = self.get_room(request.POST.get('room_id'))
+        try:
+            booking = Booking(room=room, user=user)
+        except:
             pass
-        # room is Full
+        booking.add_to_room()
+        booking.save()
         return render(request, 'booking/booking_success.html')
 
-    def check_room(self, room_id):
+    def get_room(self, room_id):
         room = get_object_or_404(Room, room_id__exact=room_id, amount__gt=0, is_status=True)
         if room:
             return room

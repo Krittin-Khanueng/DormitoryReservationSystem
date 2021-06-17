@@ -4,7 +4,7 @@
 {% block css_file %}
     <style>
         .btn-room {
-            width: 100px;
+            width: 80px;
             margin-right: 20px;
             font-size: larger;
             padding-top: 8px;
@@ -20,22 +20,29 @@
 {% endblock %}
 {% block content %}
 
-        <p class="text-dark  h1 py-2"> เลือกห้องพัก</p>
+    <p class="text-dark  h1 py-2"> เลือกห้องพัก</p>
 
-        <div class="row " style="overflow-y: scroll; height: 60vh;">
+    <div class="row " style="overflow-y: scroll; height: 60vh;">
 
-            {% for floor in floors %}
-                <h3 class="font-weight-bold my-3"> ชั้นที่:{{ floor.number }} </h3>
+        {% for floor in floors %}
+            <h3 class="font-weight-bold my-3"> ชั้นที่:{{ floor.number }} </h3>
 
-                <div class="row row-cols-6 ">
-                    {% for room in floor.floor.all %}
-                        <div class="col" >
-                            <a href="{% url 'booking' room.room_id %}" class="btn btn-secondary text-wrap btn-room mt-3" role="button">{{ room.room_id }}<p id="text-amount">({{ room.amount }})</p>
-                        </a></div>
-                    {% endfor %}
-                </div>
+            <div class="row row-cols-3 row-cols-sm-3 row-cols-md-6 ">
+                {% for room in floor.floor.all %}
+                    <div class="col">
 
-            {% endfor %}
+                        <form method="post" action="{% url 'booking' %}">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ room.room_id }}" name="room_id">
+                            <button type="submit" class="btn btn-secondary text-wrap btn-room mt-3"
+                                    role="button">{{ room.room_id }}<p id="text-amount">({{ room.amount }})</p>
+                            </button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+
+        {% endfor %}
 
 
 
