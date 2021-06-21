@@ -24,4 +24,4 @@ class RoomView(View):
 		context = {}
 		dorm = Dormitory.objects.get(pk=pk)
 		context["floors"] = dorm.dormitory.all()
-		return render(request, "dorm/all-room.html", context)
+		return render(request, "dorm/room.html", context)

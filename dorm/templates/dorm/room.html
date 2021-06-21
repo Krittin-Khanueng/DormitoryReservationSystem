@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}ห้องพักทั้งหมด{% endblock %}
+{% block css_style %}
+    <style>
+        .card {
+            background: #fff;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
+            transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
+            border: 0;
+            border-radius: 1rem
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06)
+        }
+
+
+    </style>
+{% endblock %}
+{% block content %}
+
+    <div class="container ">
+
+        <p class="text-dark  h1 py-2"> เลือกห้องพัก</p>
+        {% for floor in floors %}
+            <h2 class="mb-2 mt-4 ">ชั้นที่:{{ floor.number }}</h2>
+            <div class="d-flex flex-row flex-wrap mb-5 ">
+                {% for room in floor.floor.all %}
+                    <div class="col-lg-2 col-md-3 col-4  mt-2">
+                        <div class="card w-75 sm-w-100 text-center {% if room.amount == 0 %}bg-danger disabled{% endif %}">
+                            <form method="POST" action="{% url 'confirm' %}" id="{{ room.id }}">
+                                {% csrf_token %}
+                                <input type="hidden" name="room_id" value="{{ room.id }}">
+
+                                <div class="card-body" onclick="submitform({{ room.id }})">
+                                    <h5 class="card-title">{{ room.room_id }}</h5>
+                                    <p class="card-text">({{ room.amount }})</p>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+    </div>
+
+    {#    #ใช้axios ในการส่งค่าไปหลังบ้าน#}
+    <script>
+        function submitform(form_id) {
+            document.getElementById(form_id).submit();
+        }
+    </script>
+
+
+{% endblock %}

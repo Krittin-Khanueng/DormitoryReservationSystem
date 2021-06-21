@@ -21,46 +21,26 @@
     <!-- icon -->
     <link href="{% static  'css/carousel.css' %}" rel="stylesheet">
 
+    <!-- sweetalert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- css -->
-    {% block css_file %} {% endblock %}
-
+    {% block css_style %} {% endblock %}
     <style>
-        html {
-            position: relative;
-            min-height: 100%;
-        }
-
         body {
             font-family: 'Kanit', sans-serif;
             /* Margin bottom by footer height */
-            margin-bottom: 40px;
         }
-         .footer {
-            position: absolute;
-            font-size: 12px;
-            bottom: 0;
-            width: 100%;
-            /* Set the fixed height of the footer here */
-            height: 40px;
-            line-height: 40px; /* Vertically center the text there */
-            background-color: #f5f5f5;
-        }
-
-
     </style>
-
 </head>
-<body>
+<body class="p-0">
 <!-- navbar -->
 {% include "include/navbar.html" %}
 
 <!-- Begin page content -->
-
-<main role="main" class="container p-3" style="z-index: 1;">
-
     {% block content %}
+
     {% endblock %}
-</main>
+
 
 
 <!-- Footer -->

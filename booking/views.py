@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
@@ -32,3 +33,9 @@ class BookingRoomView(View):
         if user:
             return user
         return None
+
+
+class ConfirmRoomView(View):
+    def post(self, request):
+        room_id = request.POST.get('room_id')
+        return render(request, 'booking/booking_confirm.html')
