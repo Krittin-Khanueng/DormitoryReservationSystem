@@ -16,17 +16,22 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06)
         }
 
+        #room {
+            height: 224px;
+            overflow: auto;
+            background: #fff;
+        }
 
     </style>
 {% endblock %}
 {% block content %}
 
-    <div class="container ">
+    <div class="container  ">
 
         <p class="text-dark  h1 py-2"> เลือกห้องพัก</p>
         {% for floor in floors %}
             <h2 class="mb-2 mt-4 ">ชั้นที่:{{ floor.number }}</h2>
-            <div class="d-flex flex-row flex-wrap mb-5 ">
+            <div class="d-flex flex-row flex-wrap mb-5" id="room">
                 {% for room in floor.floor.all %}
                     <div class="col-lg-2 col-md-3 col-4  mt-2">
                         <div class="card w-75 sm-w-100 text-center {% if room.amount == 0 %}bg-danger disabled{% endif %}">
@@ -46,7 +51,6 @@
                 {% endfor %}
             </div>
         {% endfor %}
-
     </div>
 
     {#    #ใช้axios ในการส่งค่าไปหลังบ้าน#}
