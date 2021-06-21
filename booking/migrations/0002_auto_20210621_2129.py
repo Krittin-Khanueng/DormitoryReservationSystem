@@ -5,19 +5,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-	dependencies = [
-		migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-		('booking', '0001_initial'),
-	]
+    dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('booking', '0001_initial'),
+    ]
 
-	operations = [
-		migrations.RemoveField(
-			model_name='booking',
-			name='user',
-		),
-		migrations.AddField(
-			model_name='booking',
-			name='user',
-			field=models.ManyToManyField(to=settings.AUTH_USER_MODEL),
-		),
-	]
+    operations = [
+        migrations.RemoveField(
+            model_name='booking',
+            name='user',
+        ),
+        migrations.AddField(
+            model_name='booking',
+            name='user',
+            field=models.ManyToManyField(to=settings.AUTH_USER_MODEL),
+        ),
+    ]
