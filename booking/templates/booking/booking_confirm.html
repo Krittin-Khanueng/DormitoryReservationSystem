@@ -5,7 +5,7 @@
 {% block content %}
     <div class="d-flex flex-column align-items-center m-5">
         <h2 class="text fw-bold ">จองหอพักภาคการศึกษาที่ 2/2564</h2>
-        <h3 class="text fw-bold ">ชื่อ-นามสกุล:{{ booking.user }}</h3>
+        <h3 class="text fw-bold ">ชื่อ-นามสกุล:{{ user.get_full_name }}</h3>
         <h3 class="text fw-bold ">หอพัก:{{ room.floor.dorm_name }}</h3>
         <h3 class="text fw-bold">ชั้น:{{ room.floor.number }}</h3>
         <h3 class="text fw-bold">ห้อง:{{ room.room_id }}</h3>

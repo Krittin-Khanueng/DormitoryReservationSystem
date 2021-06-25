@@ -39,9 +39,9 @@ class ConfirmRoomView(View):
 	def post(self, request):
 		user = User.objects.get(id=request.user.id)
 		room = Room.objects.get(id=request.POST.get('room_id'))
-		booking = get_object_or_404(Booking, user=user, room=room)
+
 		context = {
 			"room": room,
-			"booking": booking
+			"user": user
 		}
 		return render(request, 'booking/booking_confirm.html', context)

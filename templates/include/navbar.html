@@ -1,5 +1,5 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+<nav class="navbar navbar-expand-lg navbar-light ">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'index' %}">
                 <img src="{% static 'images/pic/medpsu.png' %}" alt=""  height="40">
@@ -37,14 +37,15 @@
                     </li>
 
                 </ul>
-                <form class="d-flex form-inline mt-2 mt-md-0">
+                <ul class="navbar-nav mb-2 mb-lg-0">
                     {% if request.user.is_authenticated %}
-                        <p>{{ request.user }}</p>
+                        <li class="nav-item"><a class="nav-link" href="#">{{ request.user }}</a></li>
                         <a href="{% url 'logout' %}" class="btn btn-outline-danger me-2 my-sm-0" type="button">ออกจากระบบ</a>
                     {% else %}
-                    <a href="{% url 'login' %}" class="btn btn-outline-success me-2 my-sm-0" type="button">เข้าสู่ระบบ</a> &nbsp;
+                        <a href="{% url 'login' %}" class="btn btn-outline-success me-2 my-sm-0" type="button">เข้าสู่ระบบ</a>
+                        &nbsp;
                     {% endif %}
-                </form>
+                </ul>
             </div>
-        </div>
-    </nav>
+    </div>
+</nav>
