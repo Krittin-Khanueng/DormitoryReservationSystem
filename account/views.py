@@ -8,8 +8,8 @@ from django.shortcuts import render, redirect
 
 
 class LoginView(LoginView):
-	template_name = "account/login.html"
+    template_name = "account/login.html"
 
 
 class LogoutView(LogoutView):
-	next_page = 'index'
+    next_page = 'index'
