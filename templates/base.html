@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Home{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
@@ -24,31 +24,32 @@
     <!-- sweetalert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- css -->
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
     {% block css_style %} {% endblock %}
-    <style>
-        html * {
-            font-family: 'Kanit', sans-serif !important;
-            /* Margin bottom by footer height */
-        }
-    </style>
+
 </head>
 <body class="p-0">
 <!-- navbar -->
-{% include "include/navbar.html" %}
+
 
 <!-- Begin page content -->
-    {% block content %}
-
-    {% endblock %}
-
+<div id="page-container">
+    <div id="content-wrap">
+        {% include "include/navbar.html" %}
+        {% block content %}
+        {% endblock %}
+    </div>
+    {% include "include/footer.html" %}
+</div>
 
 
 <!-- Footer -->
-{% include "include/footer.html" %}
 
 
 <!--axios -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
