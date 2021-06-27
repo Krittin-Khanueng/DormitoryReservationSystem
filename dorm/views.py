@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from django.views.generic import ListView, DetailView
+
 
 from .models import Dormitory, Room
 
@@ -9,7 +9,9 @@ from .models import Dormitory, Room
 # Create your views here.
 
 
-class DormView(View):
+class DormView(LoginRequiredMixin, View):
+	login_url = "login"
+
 	def get(self, request):
 		dorm = Dormitory.objects.all()
 		context = {
@@ -19,7 +21,9 @@ class DormView(View):
 		return render(request, 'dorm/dorm.html', context)
 
 
-class RoomView(View):
+class RoomView(LoginRequiredMixin, View):
+	login_url = "login"
+
 	def get(self, request, pk):
 		context = {}
 		dorm = Dormitory.objects.get(pk=pk)

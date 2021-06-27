@@ -5,7 +5,7 @@
 
 {% block content %}
     <section>
-        <div class="container mt-4 justify-content-center">
+        <div class="container mt-4">
             {% if dormitorys %}
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     {% for dormitory in dormitorys %}
@@ -13,26 +13,24 @@
                         <div class="col">
                             <div class="card h-100">
                                 {% if dormitory.images %}
-                                    <img src="{{ dormitory.images.url }}" class="card-img-top w-100" alt="..."
-                                         style="width: 100%; height: 230px;">
+                                    <img src="{{ dormitory.images.url }}" class="card-img-top " alt="..."
+                                         style="width: 100%; height: 10em;">
                                 {% endif %}
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ dormitory.name }}</h5>
-                                    <p class="card-text d-none d-sm-block">{{ dormitory.description }}</p>
-                                    <div class="card-footer bg-transparent border-success">
-                                        จำนวนห้องที่ว่าง:
-                                        <button type="button"
-                                                class="btn btn-outline-success">{{ dormitory.room_not_full }}</button>
+                                    <h5 class="card-title">{{ dormitory.name }} </h5>
+                                    <div class="card-footer bg-transparent border-success text-center">
+                                        ห้องว่าง:<span
+                                            class="badge bg-success">{{ dormitory.room_not_full }} </span>
                                     </div>
-                                    <a href="{% url "room-name" dormitory.id %}" class="btn btn-primary">กดเลือก</a>
+                                    <a href="{% url "room-name" dormitory.id %}" class="stretched-link"></a>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
                 </div>
-        {% else %}
-            ไม่มีข้อมูลในขณะนี้
-        {% endif %}
+            {% else %}
+                ไม่มีข้อมูลในขณะนี้
+            {% endif %}
         </div>
     </section>
 {% endblock %}
