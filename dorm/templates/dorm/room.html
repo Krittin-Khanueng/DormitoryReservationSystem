@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}ห้องพักทั้งหมด{% endblock %}
 {% block css_style %}
@@ -26,32 +27,62 @@
 {% endblock %}
 {% block content %}
 
-    <div class="container ">
+    <section id="room">
+        <div class="container ">
+            <p class="text-dark  h1 py-2"> เลือกห้องพัก <span>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                     <i class="bi bi-pin-map"></i>
+                 </button></span>
+            </p>
+            {% for floor in floors %}
+                <h2 class="mb-2 mt-4">ชั้นที่:{{ floor.number }}</h2>
+                <div class="d-flex flex-row flex-wrap mb-5">
+                    {% for room in floor.floor.all %}
+                        <div class="col-lg-2 col-md-3 col-4  mt-2 ">
+                            <div class="card w-75 sm-w-100 text-center lead {% if room.amount == 0 %}bg-danger text-light{% endif %}">
+                                <form method="POST" action="{% url 'confirm' %}" id="{{ room.id }}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="room_id" value="{{ room.id }}">
 
-        <p class="text-dark  h1 py-2"> เลือกห้องพัก</p>
-        {% for floor in floors %}
-            <h2 class="mb-2 mt-4">ชั้นที่:{{ floor.number }}</h2>
-            <div class="d-flex flex-row flex-wrap mb-5">
-                {% for room in floor.floor.all %}
-                    <div class="col-lg-2 col-md-3 col-4  mt-2 ">
-                        <div class="card w-75 sm-w-100 text-center lead {% if room.amount == 0 %}bg-danger text-light{% endif %}">
-                            <form method="POST" action="{% url 'confirm' %}" id="{{ room.id }}">
-                                {% csrf_token %}
-                                <input type="hidden" name="room_id" value="{{ room.id }}">
+                                    <div class="card-body" onclick="submitform({{ room.id }})">
+                                        <h5 class="card-title">{{ room.room_id }}</h5>
+                                        <p class="card-text">({{ room.amount }})</p>
+                                    </div>
 
-                                <div class="card-body" onclick="submitform({{ room.id }})">
-                                    <h5 class="card-title">{{ room.room_id }}</h5>
-                                    <p class="card-text">({{ room.amount }})</p>
-                                </div>
+                                </form>
+                            </div>
+                        </div>
 
-                            </form>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+        </div>
+        <div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-sm ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">แผนผังห้องพัก</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="{% static  "images/pic/room_plan.png" %}" alt="room plan" class="img-fluid"
+                                 style="width:100%; height:auto;">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
-
-                {% endfor %}
+                </div>
             </div>
-        {% endfor %}
-    </div>
+        </div>
+    </section>
+
 
     {#    #ใช้axios ในการส่งค่าไปหลังบ้าน#}
     <script>
