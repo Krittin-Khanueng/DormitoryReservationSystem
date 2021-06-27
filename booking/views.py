@@ -15,16 +15,19 @@ class BookingRoomView(View):
 		user = self.get_user(request)
 		room = self.get_room(request)
 		if room:
-			try:
-				booking = Booking.objects.get(room=room)
-			except:
-				booking = Booking(room=room)
-			booking.save()
-			booking.user.add(user)
-			booking.room.amount -= 1
-			booking.room.save()
-			booking.save()
-			return render(request, 'booking/booking_success.html')
+			booking, created = Booking.objects.get_or_create(room=room)
+			if created:
+				booking.save()
+
+			if user not in booking.user.all():
+				booking.user.add(user)
+				booking.room.amount -= 1
+				booking.room.save()
+				booking.save()
+				return render(request, 'booking/booking_success.html')
+			else:
+				messages.warning(request, 'คุณได้จองหอพักแล้ว กรุณารอยืนยัน')
+				return HttpResponseRedirect(reverse("dorm"))
 		else:
 			messages.warning(request, 'หอพักที่คุณจองเต็มแล้ว กรุณาจองห้องใหม่')
 			return HttpResponseRedirect(reverse("dorm"))
