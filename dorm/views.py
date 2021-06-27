@@ -10,22 +10,22 @@ from .models import Dormitory, Room
 
 
 class DormView(LoginRequiredMixin, View):
-	login_url = "login"
+    login_url = "login"
 
-	def get(self, request):
-		dorm = Dormitory.objects.all()
-		context = {
-			"dormitorys": dorm,
+    def get(self, request):
+        dorm = Dormitory.objects.all()
+        context = {
+            "dormitorys": dorm,
 
-		}
-		return render(request, 'dorm/dorm.html', context)
+        }
+        return render(request, 'dorm/dorm.html', context)
 
 
 class RoomView(LoginRequiredMixin, View):
-	login_url = "login"
+    login_url = "login"
 
-	def get(self, request, pk):
-		context = {}
-		dorm = Dormitory.objects.get(pk=pk)
-		context["floors"] = dorm.dormitory.all()
-		return render(request, "dorm/room.html", context)
+    def get(self, request, pk):
+        context = {}
+        dorm = Dormitory.objects.get(pk=pk)
+        context["floors"] = dorm.dormitory.all()
+        return render(request, "dorm/room.html", context)
