@@ -1,0 +1,26 @@
+#jumbotron {
+    height: 350px;
+    position: relative;
+    background-image: url("../images/pic/MED_5270_1.jpg");
+
+    text-align: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+    color: white;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+}
+
+.news_text {
+    text-decoration: none;
+}
