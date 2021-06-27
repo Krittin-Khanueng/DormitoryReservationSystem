@@ -44,7 +44,8 @@
                                     {% csrf_token %}
                                     <input type="hidden" name="room_id" value="{{ room.id }}">
 
-                                    <div class="card-body" onclick="submitform({{ room.id }})">
+                                    <div class="card-body"
+                                            {% if room.amount != 0 %} onclick="submitform({{ room.id }}) {% endif %}">
                                         <h5 class="card-title">{{ room.room_id }}</h5>
                                         <p class="card-text">({{ room.amount }})</p>
                                     </div>

@@ -14,7 +14,3 @@ class Booking(models.Model):
     def __str__(self):
         return f"{self.room}"
 
-    def add_to_room(self):
-        self.room.amount -= 1
-        self.room.save()
-
