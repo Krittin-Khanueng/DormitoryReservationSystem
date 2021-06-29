@@ -28,11 +28,13 @@ class BookingRoomView(View):
                 messages.warning(request, 'คุณได้จองหอพักแล้ว กรุณารอยืนยัน')
                 return HttpResponseRedirect(reverse("dorm"))
         else:
-            messages.warning(request, 'หอพักที่คุณจองเต็มแล้ว กรุณาจองห้องใหม่')
+            messages.warning(
+                request, 'หอพักที่คุณจองเต็มแล้ว กรุณาจองห้องใหม่')
             return HttpResponseRedirect(reverse("dorm"))
 
     def get_room(self, request):
-        room = Room.objects.filter(room_id__exact=request.POST.get('room_id'), amount__gt=0, is_status=True).first()
+        room = Room.objects.filter(room_id__exact=request.POST.get(
+            'room_id'), amount__gt=0, is_status=True).first()
         if room:
             return room
         return None
