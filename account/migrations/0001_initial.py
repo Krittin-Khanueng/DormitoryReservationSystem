@@ -16,18 +16,21 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Account',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('phone_number', models.CharField(blank=True, max_length=10, null=True, verbose_name='เบอร์โทรศัพท์')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('phone_number', models.CharField(blank=True,
+                 max_length=10, null=True, verbose_name='เบอร์โทรศัพท์')),
                 ('gender',
                  models.CharField(blank=True, choices=[('ผู้ชาย', 'ผู้ชาย'), ('ผู้หญิง', 'ผู้หญิง')], max_length=7,
                                   null=True, verbose_name='เพศ')),
                 ('image', models.ImageField(null=True, upload_to='students/')),
                 ('current_state', models.CharField(blank=True, choices=[('ไม่มีสิทธิ์จอง', 'ไม่มีสิทธิ์จอง'),
-                                                                        ('มีสิทธิ์จอง', 'มีสิทธิ์จอง'),
+                                                                        ('มีสิทธิ์จอง',
+                                                                         'มีสิทธิ์จอง'),
                                                                         ('รอยืนยัน', 'รอยืนยัน'), ('ยืนยัน', 'ยืนยัน')],
                                                    max_length=14, null=True, verbose_name='สถานะ')),
                 (
-                'user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                    'user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]
