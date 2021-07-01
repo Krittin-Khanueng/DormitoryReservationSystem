@@ -14,7 +14,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Opening_booking',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('opening_day', models.DateTimeField(verbose_name='เวลาเปิดจอง')),
                 ('closed_day', models.DateTimeField(verbose_name='เวลาปิดจอง')),
                 ('group',
