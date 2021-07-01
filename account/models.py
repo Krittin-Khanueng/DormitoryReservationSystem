@@ -16,8 +16,8 @@ class Account(models.Model):
                               blank=True)
     image = models.ImageField(upload_to="students/", blank=True)
     current_state = models.CharField(verbose_name='สถานะ', max_length=14,
-                                     choices=[('ไม่มีสิทธิ์จอง', 'ไม่มีสิทธิ์จอง'), ('มีสิทธิ์จอง', 'มีสิทธิ์จอง'),
-                                              ('รอยืนยัน', 'รอยืนยัน'), ('ยืนยัน', 'ยืนยัน')], default='ไม่มีสิทธิ์จอง')
+                                     choices=[('ไม่มีสิทธิ์จอง', 'ไม่มีสิทธิ์จอง'), ('มีสิทธิ์จอง', 'มีสิทธิ์จอง')],
+                                     default='ไม่มีสิทธิ์จอง')
 
     room_number = models.CharField(verbose_name="เลขห้อง", max_length=10, null=True, blank=True)
 

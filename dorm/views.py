@@ -6,9 +6,6 @@ from django.views import View
 from .models import Dormitory, Room
 
 
-# Create your views here.
-
-
 class DormView(LoginRequiredMixin, View):
 	login_url = "login"
 
@@ -29,3 +26,4 @@ class RoomView(LoginRequiredMixin, View):
 		dorm = Dormitory.objects.get(pk=pk)
 		context["floors"] = dorm.dormitory.all()
 		return render(request, "dorm/room.html", context)
+

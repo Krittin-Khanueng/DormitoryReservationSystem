@@ -7,12 +7,24 @@ from dorm.models import Room
 
 class Booking(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, related_name='booking_room')
-    user = models.ManyToManyField(User)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, related_name='booking_room',
+                             verbose_name="เลขห้อง")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="booking_user", null=True,
+                             verbose_name="คนจอง")
+
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.room}"
+        return f"{self.user.username} ห้อง:{self.room.room_id}"
+
+
+class Room_confirmation(models.Model):
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE, related_name="booking_confirm", null=True)
+    is_confirmation = models.BooleanField(null=True, verbose_name="สถานะการยืนยัน")
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.booking.user.username} ห้อง:{self.booking.room.room_id} สถานะการยืนยัน:{self.is_confirmation}"
 
 
 class Opening_booking(models.Model):
