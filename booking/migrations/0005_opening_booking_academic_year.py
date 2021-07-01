@@ -12,7 +12,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='opening_booking',
             name='academic_year',
-            field=models.CharField(default=0.000390015600624025, max_length=10, verbose_name='ปีการศึกษา'),
+            field=models.CharField(
+                default=0.000390015600624025, max_length=10, verbose_name='ปีการศึกษา'),
             preserve_default=False,
         ),
     ]
