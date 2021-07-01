@@ -12,6 +12,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='dormitory',
             name='images_room_plan',
-            field=models.ImageField(blank=True, null=True, upload_to='images/dorm/room_plan/'),
+            field=models.ImageField(
+                blank=True, null=True, upload_to='images/dorm/room_plan/'),
         ),
     ]
