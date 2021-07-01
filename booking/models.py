@@ -14,3 +14,9 @@ class Booking(models.Model):
     def __str__(self):
         return f"{self.room}"
 
+
+# class Dormitory_opening(models.Model):
+#     opening_day = models.DateTimeField()
+#     closed_day = models.DateTimeField()
+
+
