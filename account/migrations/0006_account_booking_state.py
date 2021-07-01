@@ -12,6 +12,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='account',
             name='booking_state',
-            field=models.BooleanField(default=False, verbose_name='สถานะการจอง'),
+            field=models.BooleanField(
+                default=False, verbose_name='สถานะการจอง'),
         ),
     ]
