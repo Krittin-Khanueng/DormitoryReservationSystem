@@ -19,8 +19,10 @@ class Booking(models.Model):
 
 
 class Room_confirmation(models.Model):
-    booking = models.ForeignKey(Booking, on_delete=models.CASCADE, related_name="booking_confirm", null=True)
-    is_confirmation = models.BooleanField(null=True, verbose_name="สถานะการยืนยัน")
+    booking = models.ForeignKey(
+        Booking, on_delete=models.CASCADE, related_name="booking_confirm", null=True)
+    is_confirmation = models.BooleanField(
+        null=True, verbose_name="สถานะการยืนยัน")
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -29,7 +31,8 @@ class Room_confirmation(models.Model):
 
 class Opening_booking(models.Model):
     academic_year = models.CharField("ปีการศึกษา", max_length=10)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="group")
+    group = models.ForeignKey(
+        Group, on_delete=models.CASCADE, related_name="group")
     opening_day = models.DateTimeField("เวลาเปิดจอง")
     closed_day = models.DateTimeField("เวลาปิดจอง")
     is_status = models.BooleanField(default=True)
