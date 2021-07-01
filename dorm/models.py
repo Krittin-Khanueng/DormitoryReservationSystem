@@ -8,7 +8,8 @@ class Dormitory(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True)
     images = models.ImageField(upload_to="images/dorm/", blank=True, null=True)
-    images_room_plan = models.ImageField(upload_to="images/dorm/room_plan/", blank=True, null=True)
+    images_room_plan = models.ImageField(
+        upload_to="images/dorm/room_plan/", blank=True, null=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -32,8 +33,10 @@ class Room(models.Model):
     TYPE_IN_ROOM = [('MALE', 'ผู้ชาย'), ('FEMALE', 'ผู้หญิง')]
     floor = models.ForeignKey(Floor, on_delete=models.PROTECT, related_name="floor", related_query_name="floor",
                               verbose_name="ชั้น")
-    room_id = models.CharField(max_length=10, blank=True, null=True, unique=True, verbose_name="เลขห้อง")
-    room_type = models.CharField(max_length=10, choices=TYPE_IN_ROOM, verbose_name="ประเภทห้องพัก")
+    room_id = models.CharField(
+        max_length=10, blank=True, null=True, unique=True, verbose_name="เลขห้อง")
+    room_type = models.CharField(
+        max_length=10, choices=TYPE_IN_ROOM, verbose_name="ประเภทห้องพัก")
     amount = models.PositiveIntegerField(default=3, verbose_name="จำนวน")
     is_status = models.BooleanField(default=True, verbose_name="สถานะของห้อง")
 
