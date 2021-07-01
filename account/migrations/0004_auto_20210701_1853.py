@@ -15,21 +15,25 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='account',
             name='bank_account',
-            field=models.CharField(blank=True, max_length=20, null=True, verbose_name='บัญชีธนาคาร'),
+            field=models.CharField(
+                blank=True, max_length=20, null=True, verbose_name='บัญชีธนาคาร'),
         ),
         migrations.AddField(
             model_name='account',
             name='car_registration',
-            field=models.CharField(blank=True, max_length=15, null=True, verbose_name='ป้ายทะเบียนยนต์'),
+            field=models.CharField(
+                blank=True, max_length=15, null=True, verbose_name='ป้ายทะเบียนยนต์'),
         ),
         migrations.AddField(
             model_name='account',
             name='motorcycle_registration',
-            field=models.CharField(blank=True, max_length=15, null=True, verbose_name='ป้ายทะเบียนรถจักรยานยนต์'),
+            field=models.CharField(
+                blank=True, max_length=15, null=True, verbose_name='ป้ายทะเบียนรถจักรยานยนต์'),
         ),
         migrations.AddField(
             model_name='account',
             name='room_number',
-            field=models.CharField(blank=True, max_length=10, null=True, verbose_name='เลขห้อง'),
+            field=models.CharField(
+                blank=True, max_length=10, null=True, verbose_name='เลขห้อง'),
         ),
     ]
