@@ -9,6 +9,7 @@ class Dormitory(models.Model):
     description = models.TextField(blank=True)
     images = models.ImageField(upload_to="images/dorm/", blank=True, null=True)
     images_room_plan = models.ImageField(upload_to="images/dorm/room_plan/", blank=True, null=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name

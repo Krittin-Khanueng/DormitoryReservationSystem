@@ -18,7 +18,7 @@ class Account(models.Model):
     current_state = models.CharField(verbose_name='สถานะ', max_length=14,
                                      choices=[('ไม่มีสิทธิ์จอง', 'ไม่มีสิทธิ์จอง'), ('มีสิทธิ์จอง', 'มีสิทธิ์จอง')],
                                      default='ไม่มีสิทธิ์จอง')
-
+    booking_state = models.BooleanField(verbose_name="สถานะการจอง", default=False)
     room_number = models.CharField(verbose_name="เลขห้อง", max_length=10, null=True, blank=True)
 
     def __str__(self):
