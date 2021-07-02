@@ -11,7 +11,7 @@ class Room_confirmationAdmin(admin.ModelAdmin):
 
 
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('room', 'user', 'date')
+    list_display = ('room', 'date')
 
 
 admin.site.register(Booking, BookingAdmin)

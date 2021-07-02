@@ -28,7 +28,7 @@ class BookingRoomView(View):
                 messages.warning(request, 'คุณได้จองหอพักแล้ว กรุณารอยืนยัน')
                 return HttpResponseRedirect(reverse("dorm"))
         else:
-            messages.warning(request, 'หอพักที่คุณจองเต็มแล้ว กรุณาจองห้องใหม่')
+            messages.warning(request, 'ห้องพักที่คุณจองเต็มแล้ว กรุณาจองห้องใหม่')
             return HttpResponseRedirect(reverse("dorm"))
 
     def get_room(self, request):
@@ -38,7 +38,7 @@ class BookingRoomView(View):
         return None
 
     def get_user(self, request):
-        user = get_object_or_404(User, id=request.user.id)
+        user = get_object_or_404(User, id=request.user.id, account__is_booking_state=False)
         if user:
             return user
         return None
