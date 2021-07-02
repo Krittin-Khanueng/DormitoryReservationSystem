@@ -3,7 +3,8 @@ from .models import Booking, Opening_booking, Room_confirmation
 
 
 class Opening_bookingAdmin(admin.ModelAdmin):
-    list_display = ('academic_year', 'group', 'opening_day', 'closed_day', 'is_status')
+    list_display = ('academic_year', 'group', 'opening_day',
+                    'closed_day', 'is_status')
 
 
 class Room_confirmationAdmin(admin.ModelAdmin):
