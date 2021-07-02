@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='booking',
             name='user',
-            field=models.ManyToManyField(to=settings.AUTH_USER_MODEL, verbose_name='คนจอง'),
+            field=models.ManyToManyField(
+                to=settings.AUTH_USER_MODEL, verbose_name='คนจอง'),
         ),
     ]
