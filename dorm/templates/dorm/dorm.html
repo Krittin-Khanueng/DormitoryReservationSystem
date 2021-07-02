@@ -4,34 +4,43 @@
 {% block title %}หอพัก{% endblock %}
 
 {% block content %}
-    <section>
-        <div class="container mt-4">
-            {% if dormitorys %}
-                <div class="row row-cols-1 row-cols-md-3 g-4">
-                    {% for dormitory in dormitorys %}
-
-                        <div class="col">
-                            <div class="card h-100">
-                                {% if dormitory.images %}
-                                    <img src="{{ dormitory.images.url }}" class="card-img-top " alt="..."
-                                         style="width: 100%; height: 10em;">
-                                {% endif %}
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ dormitory.name }} </h5>
-                                    <div class="card-footer bg-transparent border-success text-center">
-                                        ห้องว่าง:<span
-                                            class="badge bg-success">{{ dormitory.room_not_full }} </span>
-                                    </div>
-                                    <a href="{% url "room-name" dormitory.id %}" class="stretched-link"></a>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% else %}
-                ไม่มีข้อมูลในขณะนี้
-            {% endif %}
-
+    {#    {{ request.user.groups.all.0 }}#}
+    {#    {% if request.user.groups.all.0 == "61" %}#}
+    {#        <p> what: {{ request.user.groups.all.0 }}</p>#}
+    {#    {% endif %}#}
+    {% if request.user.account.is_booking_state %}
+        <div class="alert alert-danger" role="alert">
+            <h2 class=" justify-content-center">คุณได้ทำการจองห้องพักไปแล้ว กรุณารอการยืนยัน</h2>
         </div>
-    </section>
+    {% elif dormitorys %}
+        <section>
+        <div class="container mt-4">
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for dormitory in dormitorys %}
+
+                <div class="col">
+                    <div class="card h-100">
+                        {% if dormitory.images %}
+                            <img src="{{ dormitory.images.url }}" class="card-img-top " alt="..."
+                                 style="width: 100%; height: 10em;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ dormitory.name }} </h5>
+                            <div class="card-footer bg-transparent border-success text-center">
+                                ห้องว่าง:<span
+                                    class="badge bg-success">{{ dormitory.room_not_full }} </span>
+                            </div>
+                            <a href="{% url "room-name" dormitory.id %}" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        ไม่มีข้อมูลในขณะนี้
+    {% endif %}
+
+</div>
+</section>
 {% endblock %}
