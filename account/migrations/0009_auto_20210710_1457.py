@@ -15,7 +15,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='account',
             name='created_at',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
+            field=models.DateTimeField(
+                auto_now_add=True, default=django.utils.timezone.now),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -26,6 +27,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='account',
             name='image',
-            field=models.ImageField(blank=True, upload_to=account.models.path_and_rename),
+            field=models.ImageField(
+                blank=True, upload_to=account.models.path_and_rename),
         ),
     ]
