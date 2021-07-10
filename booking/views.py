@@ -27,7 +27,7 @@ class BookingRoomView(View):
                 # เปลี่ยนสถานะการจองของผู้ใช้เป็นว่าจองแล้ว
                 user.account.is_booking_state = True
                 user.account.save()
-                return render(request, 'booking/booking_success.html')
+                return HttpResponseRedirect(reverse('booking-success'))
 
 
         else:
@@ -56,3 +56,9 @@ class ConfirmRoomView(View):
             "user": user
         }
         return render(request, 'booking/booking_confirm.html', context)
+
+#get you for request
+
+class BookingSuccessView(View):
+    def get(self, request):
+        return render(request, 'booking/booking_success.html')

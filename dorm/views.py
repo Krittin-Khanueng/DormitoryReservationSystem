@@ -25,3 +25,5 @@ class RoomView(LoginRequiredMixin, View):
         dorm = get_object_or_404(Dormitory, pk=pk, is_active=True)
         context["floors"] = dorm.dormitory.all()
         return render(request, "dorm/room.html", context)
+
+
