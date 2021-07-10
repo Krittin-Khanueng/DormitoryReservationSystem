@@ -62,3 +62,4 @@ class ConfirmRoomView(View):
 class BookingSuccessView(View):
     def get(self, request):
         return render(request, 'booking/booking_success.html')
+
