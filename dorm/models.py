@@ -10,13 +10,17 @@ class Dormitory(models.Model):
     images = models.ImageField(upload_to="images/dorm/", blank=True, null=True)
     images_room_plan = models.ImageField(upload_to="images/dorm/room_plan/", blank=True, null=True)
     is_active = models.BooleanField(default=True)
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)   
     def __str__(self):
         return self.name
+
 
     def room_not_full(self):
         return Floor.objects.filter(dorm_name=self, floor__amount__gt=0).count()
 
+
+  
 
 class Floor(models.Model):
     dorm_name = models.ForeignKey(Dormitory, on_delete=models.PROTECT, related_name='dormitory',
@@ -39,3 +43,5 @@ class Room(models.Model):
 
     def __str__(self):
         return f"หอพัก:{self.floor.dorm_name} ชั้น:{self.floor.number} ห้อง:{self.room_id} จำนวน:{self.amount}"
+
+
