@@ -17,8 +17,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Booking_confirmation',
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('is_confirmed', models.BooleanField(null=True, verbose_name='สถานะการยืนยัน')),
+                ('id', models.UUIDField(default=uuid.uuid4,
+                 editable=False, primary_key=True, serialize=False)),
+                ('is_confirmed', models.BooleanField(
+                    null=True, verbose_name='สถานะการยืนยัน')),
                 ('confirm_date', models.DateTimeField(auto_now_add=True)),
             ],
         ),
@@ -34,7 +36,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='booking',
             name='user',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='booking_user', to=settings.AUTH_USER_MODEL, verbose_name='คนจอง'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='booking_user', to=settings.AUTH_USER_MODEL, verbose_name='คนจอง'),
         ),
         migrations.DeleteModel(
             name='Room_confirmation',
@@ -42,6 +45,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='booking_confirmation',
             name='booking',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='booking_confirmation', to='booking.booking', verbose_name='การจอง'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='booking_confirmation', to='booking.booking', verbose_name='การจอง'),
         ),
     ]
