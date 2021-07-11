@@ -13,7 +13,10 @@
                         <a class="nav-link active" aria-current="page" href="{% url 'index' %}">หน้าแรก</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'dorm' %}">หอพัก</a>
+                        <a class="nav-link" href="{% url 'dorm' %}">จองหอพัก</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" >ประวัติการจองหอพัก</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -22,9 +25,18 @@
                         </a>
 
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                           
                             {% for dorm in dorms %}
 
-                            <li><a class="dropdown-item" href="#">{{ dorm.name }}</a></li>
+                                <li><a class="dropdown-item" href="#">{{ dorm.name }} &raquo;</a>
+                                <ul class="dropdown-menu dropdown-submenu">
+                                    <li><a class="dropdown-item" href="#">เบอร์ติดต่อหอพัก</a></li>
+                                    <li><a class="dropdown-item" href="#">ข้อมูลหอพัก</a></li>
+                                    <li><a class="dropdown-item" href="#">ระเบียบหอพัก</a></li>
+                                    <li><a class="dropdown-item" href="#">เจ้าหน้าที่หอพัก</a></li>
+                                </ul>   
+                                   
+                                </li>
                             {% endfor %}
                         </ul>
                     </li>
