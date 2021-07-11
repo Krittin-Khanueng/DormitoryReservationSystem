@@ -19,7 +19,7 @@ class BookingRoomView(View):
             if created:
                 booking.save()
             if not user.account.is_booking_state:  # เช็กว่าผู้ใช้เคยจองห้องพักแล้วหรือไม
-                ##เอาผู้ใช้เข้าห้องพัก
+                # เอาผู้ใช้เข้าห้องพัก
                 booking.user = user
                 booking.room.amount -= 1
                 booking.room.save()
@@ -30,21 +30,23 @@ class BookingRoomView(View):
                 user.account.save()
                 return HttpResponseRedirect(reverse('booking-success'))
 
-
         else:
-            messages.warning(request, 'ห้องพักที่คุณจองเต็มแล้ว กรุณาจองห้องใหม่')
+            messages.warning(
+                request, 'ห้องพักที่คุณจองเต็มแล้ว กรุณาจองห้องใหม่')
             return HttpResponseRedirect(reverse("dorm"))
 
+    # get room from models where amount greater than 0
 
-    #get room from models where amount greater than 0
     def get_room_from_models(self, request):
-        room = get_object_or_404(Room, id=request.POST.get('room_pk'), is_status=True, amount__gt=0)
+        room = get_object_or_404(Room, id=request.POST.get(
+            'room_pk'), is_status=True, amount__gt=0)
         if room:
             return room
         return None
 
     def get_user_from_models(self, request):
-        user = get_object_or_404(User, id=request.user.id, account__is_booking_state=False)
+        user = get_object_or_404(
+            User, id=request.user.id, account__is_booking_state=False)
         if user:
             return user
         return None
@@ -60,9 +62,9 @@ class ConfirmRoomView(View):
         }
         return render(request, 'booking/booking_confirm.html', context)
 
-#get you for request
+# get you for request
+
 
 class BookingSuccessView(View):
     def get(self, request):
         return render(request, 'booking/booking_success.html')
-
