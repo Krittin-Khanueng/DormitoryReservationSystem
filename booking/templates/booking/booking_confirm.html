@@ -12,7 +12,7 @@
         <div class="d-flex justify-content-center mt-4">
             <form method="post" action="{% url "booking" %}">
                 {% csrf_token %}
-                <input type="hidden" name="room_id" value="{{ room.room_id }}">
+                <input type="hidden" name="room_pk" value="{{ room.id }}">
                 <button class="btn btn-success m-2" type="submit">ยืนยัน</button>
             </form>
             <a href="{% url "index" %}" class="btn btn-danger m-2" type="button">ยกเลิก</a>
