@@ -1,139 +1,49 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}โปรไฟล์{% endblock %}
+{%block css_style%}
+<link rel="stylesheet" href="{% static "css/profile.css" %}">
+ {%endblock %}
 
 {% block content %}
-    <div class="container-">
-        <div class="row ">
-                <div class="row">
-                    <div class="col-12 col-sm-auto mb-3">
-                        <div class="mx-auto" style="width: 140px;">
-                            <div class="d-flex justify-content-center align-items-center rounded"
-                                 style="height: 140px; background-color: rgb(233, 236, 239);">
-                                <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
-                        <div class="text-center text-sm-left mb-2 mb-sm-0">
-                            <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">John Smith</h4>
-                            <div class="text-muted"><small>Last seen 2 hours ago</small></div>
-                            <div class="mt-2">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fa fa-fw fa-camera"></i>
-                                    <span>Change Photo</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-content pt-3">
-                        <div class="tab-pane active">
-                            <form class="form" novalidate="">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="row">
-                                            <div class="col">
-                                                <p class="text-dark h5">รหัสนักศึกษา </p>
-                                                <p> 6110210013</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col" -2><p class="text-dark h5">
-                                                คำนำหน้า </p>
-                                                <p> นาย</p></div>
-                                            <div class="col-5">
-                                                <div class="form-group">
-                                                    <label>ชื่อ (ภาษาไทย)</label>
-                                                    <input class="form-control" type="text"
-                                                           name="name"
-                                                           placeholder="สมมุติ"
-                                                           value="สมมุติ">
-                                                </div>
-                                            </div>
-                                            <div class="col-5">
-                                                <div class="form-group">
-                                                    <label>นามสกุล (ภาษาไทย)</label>
-                                                    <input class="form-control" type="text"
-                                                           name="username" placeholder="ไม่มีจริง"
-                                                           value="ไม่มีจริง">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col" -2><p class="text-dark h5">Name
-                                                Title </p>
-                                                <p> Mr.</p></div>
-                                            <div class="col-5">
-                                                <div class="form-group">
-                                                    <label>Firstname</label>
-                                                    <input class="form-control" type="text"
-                                                           name="name"
-                                                           placeholder="John Smith"
-                                                           value="John Smith">
-                                                </div>
-                                            </div>
-                                            <div class="col-5">
-                                                <div class="form-group">
-                                                    <label>Lastname</label>
-                                                    <input class="form-control" type="text"
-                                                           name="username" placeholder="johnny.s"
-                                                           value="johnny.s">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-5">
-                                                <div class="form-group">
-                                                    <label>วัน/เดือน/ปีเกิด</label>
-                                                    <input class="form-control  " type="date"
-                                                           value="2011-08-19"
-                                                           id="example-date-input">
-                                                </div>
-                                            </div>
-                                            <div class="col" -2><p class="text-dark h5">เพศ </p>
-                                                <p> ชาย</p></div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <label>เบอร์โทรศัพท์</label>
-                                            <input type="text" class="form-control" id="name"
-                                                   placeholder="0633920820"
-                                                   style="height:30px;">
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label>บัญชีธนาคาร</label>
-                                                <input type="text" class="form-control" id="name"
-                                                       placeholder="123-223-3333-3"
-                                                       style="height:30px;">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row mt-3 ">
-                                        <div class="col  ">
-                                            <input type="submit" style="padding-top: 2px;"
-                                                   class="btn btn-primary fw-bold py-2 me-5 "
-                                                   value="บันทึก">
-
-                                            <input type="submit" style="padding-top: 2px;"
-                                                   class="btn btn-secondary fw-bold py-2 me-5 "
-                                                   value="ยกเลิก">
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-
-
+    <div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value=""></div>
+                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname"></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
+                    <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div>
+                    <div class="col-md-12"><label class="labels">Address Line 2</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
+                    <div class="col-md-12"><label class="labels">Postcode</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
+                    <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
+                    <div class="col-md-12"><label class="labels">Area</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
+                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
+                    <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value=""></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
+                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
+                </div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br>
+                <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text" class="form-control" placeholder="experience" value=""></div> <br>
+                <div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value=""></div>
+            </div>
         </div>
     </div>
+</div>
 {% endblock %}

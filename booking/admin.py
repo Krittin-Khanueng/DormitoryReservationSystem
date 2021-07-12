@@ -1,22 +1,39 @@
+# -*- coding: utf-8 -*-
 from django.contrib import admin
-from .models import Booking, Opening_booking, Booking_confirmation
+
+from .models import Booking, Booking_confirmation, Opening_booking
 
 
-class Opening_bookingAdmin(admin.ModelAdmin):
-    list_display = ('academic_year', 'group', 'opening_day', 'closed_day', 'is_status')
-
-
-
-class Booking_confirmationAdmin(admin.ModelAdmin):
-        list_display = ('booking', 'is_confirmed', 'confirm_date')
-
-
-
+@admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('room', 'booking_at')
+    list_display = ('id', 'room', 'user', 'booking_at')
+    list_filter = ('room', 'user', 'booking_at')
 
 
-admin.site.register(Booking, BookingAdmin)
-admin.site.register(Opening_booking, Opening_bookingAdmin)
-admin.site.register(Booking_confirmation, Booking_confirmationAdmin)
+@admin.register(Booking_confirmation)
+class Booking_confirmationAdmin(admin.ModelAdmin):
+    list_display = ('id', 'booking', 'is_confirmed', 'confirm_date')
+    list_filter = ('booking', 'is_confirmed', 'confirm_date')
+
+
+@admin.register(Opening_booking)
+class Opening_bookingAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'academic_year',
+        'group',
+        'opening_day',
+        'closed_day',
+        'is_status',
+        'created_at',
+    )
+    list_filter = (
+        'group',
+        'opening_day',
+        'closed_day',
+        'is_status',
+        'created_at',
+    )
+    date_hierarchy = 'created_at'
+
 
