@@ -14,8 +14,9 @@ class LogoutView(LogoutView):
 
 class ProfileView(LoginRequiredMixin, View):
     login_url = "login"
+
     def get(self, request):
-        #get request user and account
+        # get request user and account
         user = request.user
         account = user.account
-        return render(request, 'account/profile.html', {'account':account})
+        return render(request, 'account/profile.html', {'account': account})
