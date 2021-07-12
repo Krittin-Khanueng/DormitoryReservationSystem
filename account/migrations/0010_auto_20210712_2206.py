@@ -23,11 +23,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='account',
             name='first_name_en',
-            field=models.CharField(max_length=100, null=True, verbose_name='ชื่อภาษาอังกฤษ'),
+            field=models.CharField(
+                max_length=100, null=True, verbose_name='ชื่อภาษาอังกฤษ'),
         ),
         migrations.AddField(
             model_name='account',
             name='last_name_en',
-            field=models.CharField(max_length=100, null=True, verbose_name='นามสกุลภาษาอังกฤษ'),
+            field=models.CharField(
+                max_length=100, null=True, verbose_name='นามสกุลภาษาอังกฤษ'),
         ),
     ]
