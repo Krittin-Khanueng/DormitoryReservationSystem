@@ -7,4 +7,3 @@ class LoginView(LoginView):
 
 class LogoutView(LogoutView):
     next_page = 'index'
-
