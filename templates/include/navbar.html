@@ -2,62 +2,75 @@
 <nav class="navbar navbar-expand-lg navbar-light ">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'index' %}">
-                <img src="{% static 'images/pic/medpsu.png' %}" alt=""  height="40">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'index' %}">หน้าแรก</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'dorm' %}">จองหอพัก</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" >ประวัติการจองหอพัก</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            รายละเอียดหอพัก
-                        </a>
+            <img src="{% static 'images/pic/medpsu.png' %}" alt="" height="40">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">หน้าแรก</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dorm' %}">จองหอพัก</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ประวัติการจองหอพัก</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        รายละเอียดหอพัก
+                    </a>
 
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           
-                            {% for dorm in dorms %}
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                                <li><a class="dropdown-item" href="#">{{ dorm.name }} &raquo;</a>
-                                <ul class="dropdown-menu dropdown-submenu">
-                                    <li><a class="dropdown-item" href="#">เบอร์ติดต่อหอพัก</a></li>
-                                    <li><a class="dropdown-item" href="#">ข้อมูลหอพัก</a></li>
-                                    <li><a class="dropdown-item" href="#">ระเบียบหอพัก</a></li>
-                                    <li><a class="dropdown-item" href="#">เจ้าหน้าที่หอพัก</a></li>
-                                </ul>   
-                                   
-                                </li>
-                            {% endfor %}
+                        {% for dorm in dorms %}
+
+                        <li><a class="dropdown-item" href="#">{{ dorm.name }} &raquo;</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li><a class="dropdown-item" href="#">เบอร์ติดต่อหอพัก</a></li>
+                                <li><a class="dropdown-item" href="#">ข้อมูลหอพัก</a></li>
+                                <li><a class="dropdown-item" href="#">ระเบียบหอพัก</a></li>
+                                <li><a class="dropdown-item" href="#">เจ้าหน้าที่หอพัก</a></li>
+                            </ul>
+
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">เกี่ยวกับ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ติดต่อ</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <button class="btn btn-outline dropdown-toggle" type="button" id="dropdownMenuUser"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{request.user.username}}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuUser">
+                            <li><a class="dropdown-item" href="{% url 'profile'%}">โปรไฟล์</a></li>
+                            <li><a class="dropdown-item" href="#">ประวัติการจองห้องพัก</a></li>
                         </ul>
-                    </li>
+                    </div>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">เกี่ยวกับ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">ติดต่อ</a>
-                    </li>
-
-                </ul>
-                <ul class="navbar-nav mb-2 mb-lg-0">
-                    {% if request.user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="#">{{ request.user }}</a></li>
-                        <a href="{% url 'logout' %}" class="btn btn-outline-danger me-2 my-sm-0" type="button">ออกจากระบบ</a>
-                    {% else %}
-                        <a href="{% url 'login' %}" class="btn btn-outline-success me-2 my-sm-0" type="button">เข้าสู่ระบบ</a>
-                        &nbsp;
-                    {% endif %}
-                </ul>
-            </div>
+                </li>
+                <a href="{% url 'logout' %}" class="btn btn-outline-danger me-2 my-sm-0" type="button">ออกจากระบบ</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn btn-outline-success me-2 my-sm-0" type="button">เข้าสู่ระบบ</a>
+                &nbsp;
+                {% endif %}
+            </ul>
+        </div>
     </div>
 </nav>
