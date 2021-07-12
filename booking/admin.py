@@ -35,5 +35,3 @@ class Opening_bookingAdmin(admin.ModelAdmin):
         'created_at',
     )
     date_hierarchy = 'created_at'
-
-
