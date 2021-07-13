@@ -34,10 +34,11 @@
                      <i class="bi bi-pin-map"></i>
                  </button></span>
             </p>
-            {% for floor in floors %}
-                <h2 class="mb-2 mt-4">ชั้นที่:{{ floor.number }}</h2>
+            {% for floor, rooms in dormitory.items %}
+            
+                <h2 class="mb-2 mt-4">ชั้นที่:{{ floor }}</h2>
                 <div class="d-flex flex-row flex-wrap mb-5">
-                    {% for room in floor.floor.all %}
+                    {% for room in rooms%}
                         <div class="col-lg-2 col-md-3 col-4  mt-2 ">
                             <div class="card w-75 sm-w-100 text-center lead {% if room.amount == 0 %}bg-danger text-light{% endif %}">
                                 <form method="POST" action="{% url 'confirm' %}" id="{{ room.id }}">
@@ -53,7 +54,6 @@
                                 </form>
                             </div>
                         </div>
-
                     {% endfor %}
                 </div>
             {% endfor %}
