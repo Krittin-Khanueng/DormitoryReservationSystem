@@ -7,6 +7,8 @@
 
 {% block content %}
 <div class="container rounded bg-white mt-5 mb-5 justify-content-center">
+    <!--disabled form-->
+    <fieldset disabled>
     <div class="row">
         <div class="col-md-5 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -84,10 +86,13 @@
                     <div class="col-md-6"><label class="labels">เพศ</label><input type="text" class="form-control"
                             placeholder="เพศ" value="{{account.gender}}"></div>
                 </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button"
-                        type="button">แก้ไข</button></div>
+
+                
             </div>
         </div>
     </div>
+    </fieldset>
+    <div class="mt-5 text-center"><a href="{%url 'profile_edit' %}" class="btn btn-primary profile-button"
+                        type="button">แก้ไข</a></div>
 </div>
 {% endblock %}

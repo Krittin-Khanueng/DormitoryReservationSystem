@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}โปรไฟล์{% endblock %}
+{%block css_style%}
+<link rel="stylesheet" href="{% static "css/profile.css" %}">
+{%endblock %}
+
+{% block content %}
+<div class="container rounded bg-white mt-5 mb-5 justify-content-center">
+    <form method="POST" action="{% url 'profile_edit' %}">
+    {% csrf_token %}
+        <div class=" row">
+            <div class="col-md-5 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    {%if account.image %}
+                    <img class="img-fluid rounded-circle mt-5" width="300px" src="{{ account.image.url }}"
+                        alt="{{ account.name }}">
+                    {%else%}
+                    <img class="rounded-circle mt-5" width="150px"
+                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                    {%endif%}
+                    <span class="font-weight-bold">{{request.user.username}}</span>
+                </div>
+
+            </div>
+            <div class="col-md-6 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">โปรไฟล์</h4>
+                    </div>
+                    <div class="row mt-2">
+                        {% comment %} ชื่อภาษาไทย {% endcomment %}
+                        <div class="col-md-6"><label class="labels">ชื่อ(ภาษาไทย)</label><input type="text"
+                                class="form-control" placeholder="first name" value="{{request.user.first_name}}"
+                                id="first_name_th" name="first_name_th"></div>
+                        <div class="col-md-6"><label class="labels">นามสกุล(ภาษาไทย)</label><input type="text"
+                                class="form-control" value="{{request.user.last_name}}" placeholder="surname"
+                                id="last_name_th" name="last_name_th"></div>
+
+                        {% comment %} ชื่อภาษาอังกฤษ {% endcomment %}
+                        <div class="col-md-6"><label class="labels">ชื่อ(ภาษาอังกฤษ</label><input type="text"
+                                class="form-control" placeholder="first name" value="{{account.first_name_en | upper}}"
+                                id="first_name_en" name="first_name_en"></div>
+                        <div class="col-md-6"><label class="labels">นามสกุล(ภาษาอังกฤษ)</label><input type="text"
+                                class="form-control" value="{{account.last_name_en |upper}}" placeholder="surname"
+                                id="last_name_en" name="last_name_en"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <!--Datepicker-->
+                        <div class="col-md-6">
+                            <label class="labels">วันเกิด</label>
+                            <div class="input-group date" id="datepicker">
+                                <input type="date" class="form-control" placeholder="dd/mm/yyyy"
+                                    value="{{account.birthday|date:"Y"}}-{{account.birthday|date:"m"}}-{{account.birthday|date:"d"}}" id="birth_date" name="birth_date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+
+                        <!--phone number-->
+                        <div class="col-md-6">
+                            <label class="labels">เบอร์โทรศัพท์</label>
+                            <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์"
+                                value="{{account.phone_number}}" id="phone_number" name="phone_number" maxlength="10">
+                        </div>
+
+                        <!--address-->
+                        <div class="col-md-12"><label class="labels">ที่อยู่</label><input type="text" class="form-control"
+                                placeholder="enter address line" value="{{account.address}}" id="address" name="address"></div>
+
+                        <!--email-->
+
+                        <div class="col-md-12"><label class="labels">อีเมล์</label><input type="text" class="form-control"
+                                placeholder="enter email" value="{{request.user.email}}" id="email" name="email"></div>
+
+                        <div class="col-md-12"><label class="labels">ป้ายทะเบียนรถจักรยานยนต์</label><input type="text"
+                                class="form-control" placeholder="ป้ายทะเบียนรถจักรยานยนต์"
+                                value="{{account.motorcycle_registration}}" id="motorcycle_registration" name="motorcycle_registration"></div>
+
+                        <div class="col-md-12"><label class="labels">ป้ายทะเบียนยนต์</label><input type="text"
+                                class="form-control" placeholder="ป้ายทะเบียนยนต์" value="{{account.car_registration}}"
+                                id="car_registration" name="car_registration"></div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">เพศ</label><input type="text" class="form-control"
+                                placeholder="เพศ" value="{{account.gender}}" disabled></div>
+                    </div>
+                    <div class="row mt-3 ">
+                        <div class="col text-center"><button class="btn btn-success" type="submit">บันทึก</button>
+                        </div>
+                        <div class="col text-center"><button class="btn btn-danger" type="button">ยกเลิก</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
