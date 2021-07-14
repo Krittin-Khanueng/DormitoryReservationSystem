@@ -13,7 +13,6 @@ class DormView(LoginRequiredMixin, View):
         # get request user groups
         user_groups = request.user.groups.values_list('name', flat=True)[0]
 
-
         # get all dorms
         dorm = Dormitory.objects.filter(is_active=True)
         # get open booking filter with user group
@@ -37,7 +36,8 @@ class RoomView(LoginRequiredMixin, View):
         # get user gender
         gender = request.user.account.gender
         # get dorm
-        floors = Floor.objects.select_related("dorm_name").filter(dorm_name__name=dorm_name, dorm_name__is_active=True)
+        floors = Floor.objects.select_related("dorm_name").filter(
+            dorm_name__name=dorm_name, dorm_name__is_active=True)
         # get room filter type
         for floor in floors:
             # QuerySet to list
