@@ -58,7 +58,6 @@ class Account(models.Model):
         return self.user.username
 
     # ressize_image
-
     def save(self, *args, **kwargs):
         super(Account, self).save(*args, **kwargs)
         img = Image.open(self.image.path)

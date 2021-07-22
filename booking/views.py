@@ -6,7 +6,9 @@ from django.urls import reverse
 from django.views import View
 
 from dorm.models import Room
-from .models import Booking
+from .models import Booking, Booking_confirmation
+
+
 
 
 class BookingRoomView(View):
@@ -19,7 +21,8 @@ class BookingRoomView(View):
             if created:
                 booking.save()
             if not user.account.is_booking_state:  # เช็กว่าผู้ใช้เคยจองห้องพักแล้วหรือไม
-                ##เอาผู้ใช้เข้าห้องพัก
+                #add user to booking
+    
                 booking.user = user
                 booking.room.amount -= 1
                 booking.room.save()
@@ -66,3 +69,30 @@ class BookingSuccessView(View):
     def get(self, request):
         return render(request, 'booking/booking_success.html')
 
+#booking confirm
+class ConfirmToBookView(View):
+    def get(self, request):
+        #get booking in current user
+        booking = Booking.objects.filter(user_id=request.user.id).latest('booking_at')
+        context = {
+            "booking": booking
+        }
+        return render(request, 'booking/booking_confirm_to_book.html',context)
+    
+    
+    def post(self, request):
+        #get user from models
+
+        #get booking in current user one objects
+
+        booking = Booking.objects.filter(user_id=request.user.id).latest('booking_at')
+        print(booking)
+        data = request.POST.copy()
+        
+        if (data.get('is_confirmed') == 'true'):
+            confirmation = Booking_confirmation(booking=booking, is_confirmed=True )
+        else:
+            confirmation = Booking_confirmation(booking=booking, is_confirmed=False )
+
+        confirmation.save()
+        return render(request, 'booking/booking_success.html')
