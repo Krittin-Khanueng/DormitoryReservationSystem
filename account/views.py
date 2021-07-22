@@ -14,8 +14,6 @@ class LoginView(LoginView):
     redirect_field_name = "next"
 
 
-
-
 class LogoutView(LogoutView):
     next_page = 'index'
 
@@ -30,8 +28,6 @@ class ProfileView(LoginRequiredMixin, View):
         return render(request, 'account/profile.html', {'account': account})
 
 
-
-    
 class ProfileEditView(LoginRequiredMixin, View):
     login_url = "login"
 
