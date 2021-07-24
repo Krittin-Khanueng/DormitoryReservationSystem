@@ -18,22 +18,35 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Account',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name_en', models.CharField(max_length=100, null=True, verbose_name='ชื่อภาษาอังกฤษ')),
-                ('last_name_en', models.CharField(max_length=100, null=True, verbose_name='นามสกุลภาษาอังกฤษ')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('first_name_en', models.CharField(max_length=100,
+                 null=True, verbose_name='ชื่อภาษาอังกฤษ')),
+                ('last_name_en', models.CharField(max_length=100,
+                 null=True, verbose_name='นามสกุลภาษาอังกฤษ')),
                 ('birthday', models.DateField(null=True, verbose_name='วันเกิด')),
-                ('address', models.CharField(max_length=200, null=True, verbose_name='ที่อยู่')),
-                ('phone_number', models.CharField(blank=True, max_length=10, null=True, verbose_name='เบอร์โทรศัพท์')),
-                ('bank_account', models.CharField(blank=True, max_length=20, null=True, verbose_name='บัญชีธนาคาร')),
-                ('motorcycle_registration', models.CharField(blank=True, max_length=15, null=True, verbose_name='ป้ายทะเบียนรถจักรยานยนต์')),
-                ('car_registration', models.CharField(blank=True, max_length=15, null=True, verbose_name='ป้ายทะเบียนยนต์')),
-                ('gender', models.CharField(blank=True, choices=[('ผู้ชาย', 'ผู้ชาย'), ('ผู้หญิง', 'ผู้หญิง')], max_length=7, null=True, verbose_name='เพศ')),
-                ('image', models.ImageField(blank=True, upload_to=account.models.path_and_rename)),
-                ('current_state', models.CharField(choices=[('ไม่มีสิทธิ์จอง', 'ไม่มีสิทธิ์จอง'), ('มีสิทธิ์จอง', 'มีสิทธิ์จอง')], default='ไม่มีสิทธิ์จอง', max_length=14, verbose_name='สถานะ')),
-                ('is_booking_state', models.BooleanField(default=False, verbose_name='สถานะการจอง')),
+                ('address', models.CharField(
+                    max_length=200, null=True, verbose_name='ที่อยู่')),
+                ('phone_number', models.CharField(blank=True,
+                 max_length=10, null=True, verbose_name='เบอร์โทรศัพท์')),
+                ('bank_account', models.CharField(blank=True,
+                 max_length=20, null=True, verbose_name='บัญชีธนาคาร')),
+                ('motorcycle_registration', models.CharField(
+                    blank=True, max_length=15, null=True, verbose_name='ป้ายทะเบียนรถจักรยานยนต์')),
+                ('car_registration', models.CharField(blank=True,
+                 max_length=15, null=True, verbose_name='ป้ายทะเบียนยนต์')),
+                ('gender', models.CharField(blank=True, choices=[
+                 ('ผู้ชาย', 'ผู้ชาย'), ('ผู้หญิง', 'ผู้หญิง')], max_length=7, null=True, verbose_name='เพศ')),
+                ('image', models.ImageField(blank=True,
+                 upload_to=account.models.path_and_rename)),
+                ('current_state', models.CharField(choices=[('ไม่มีสิทธิ์จอง', 'ไม่มีสิทธิ์จอง'), (
+                    'มีสิทธิ์จอง', 'มีสิทธิ์จอง')], default='ไม่มีสิทธิ์จอง', max_length=14, verbose_name='สถานะ')),
+                ('is_booking_state', models.BooleanField(
+                    default=False, verbose_name='สถานะการจอง')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='account', to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='account', to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]
