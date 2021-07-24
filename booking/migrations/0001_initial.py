@@ -20,31 +20,40 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Booking',
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ('id', models.UUIDField(default=uuid.uuid4,
+                 editable=False, primary_key=True, serialize=False)),
                 ('booking_at', models.DateTimeField(auto_now_add=True)),
-                ('room', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='booking_room', to='dorm.room', verbose_name='เลขห้อง')),
-                ('user', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='booking_user', to=settings.AUTH_USER_MODEL, verbose_name='คนจอง')),
+                ('room', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE,
+                 related_name='booking_room', to='dorm.room', verbose_name='เลขห้อง')),
+                ('user', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE,
+                 related_name='booking_user', to=settings.AUTH_USER_MODEL, verbose_name='คนจอง')),
             ],
         ),
         migrations.CreateModel(
             name='Opening_booking',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('academic_year', models.CharField(max_length=10, verbose_name='ปีการศึกษา')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('academic_year', models.CharField(
+                    max_length=10, verbose_name='ปีการศึกษา')),
                 ('opening_day', models.DateTimeField(verbose_name='เวลาเปิดจอง')),
                 ('closed_day', models.DateTimeField(verbose_name='เวลาปิดจอง')),
                 ('is_status', models.BooleanField(default=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('group', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='group', to='auth.group')),
+                ('group', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, related_name='group', to='auth.group')),
             ],
         ),
         migrations.CreateModel(
             name='Booking_confirmation',
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('is_confirmed', models.BooleanField(null=True, verbose_name='สถานะการยืนยัน')),
+                ('id', models.UUIDField(default=uuid.uuid4,
+                 editable=False, primary_key=True, serialize=False)),
+                ('is_confirmed', models.BooleanField(
+                    null=True, verbose_name='สถานะการยืนยัน')),
                 ('confirm_date', models.DateTimeField(auto_now_add=True)),
-                ('booking', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='booking_confirmation', to='booking.booking', verbose_name='การจอง')),
+                ('booking', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE,
+                 related_name='booking_confirmation', to='booking.booking', verbose_name='การจอง')),
             ],
         ),
     ]
