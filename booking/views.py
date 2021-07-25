@@ -9,8 +9,6 @@ from dorm.models import Room
 from .models import Booking, Booking_confirmation
 
 
-
-
 class BookingRoomView(View):
     def post(self, request):
 
@@ -22,8 +20,8 @@ class BookingRoomView(View):
             if created:
                 booking.save()
             if not user.account.is_booking_state:  # เช็กว่าผู้ใช้เคยจองห้องพักแล้วหรือไม
-                #add user to booking
-    
+                # add user to booking
+
                 booking.user = user
                 booking.room.amount -= 1
                 booking.room.save()
@@ -34,21 +32,23 @@ class BookingRoomView(View):
                 user.account.save()
                 return HttpResponseRedirect(reverse('booking_success'))
 
-
         else:
-            messages.warning(request, 'ห้องพักที่คุณจองเต็มแล้ว กรุณาจองห้องใหม่')
+            messages.warning(
+                request, 'ห้องพักที่คุณจองเต็มแล้ว กรุณาจองห้องใหม่')
             return HttpResponseRedirect(reverse("dorm"))
 
+    # get room from models where amount greater than 0
 
-    #get room from models where amount greater than 0
     def get_room_from_models(self, request):
-        room = get_object_or_404(Room, id=request.POST.get('room_pk'), is_status=True, amount__gt=0)
+        room = get_object_or_404(Room, id=request.POST.get(
+            'room_pk'), is_status=True, amount__gt=0)
         if room:
             return room
         return None
 
     def get_user_from_models(self, request):
-        user = get_object_or_404(User, id=request.user.id, account__is_booking_state=False)
+        user = get_object_or_404(
+            User, id=request.user.id, account__is_booking_state=False)
         if user:
             return user
         return None
@@ -64,36 +64,42 @@ class ConfirmRoomView(View):
         }
         return render(request, 'booking/booking_confirm.html', context)
 
-#get you for request
+# get you for request
+
 
 class BookingSuccessView(View):
     def get(self, request):
         return render(request, 'booking/booking_success.html')
 
-#booking confirm
+# booking confirm
+
+
 class ConfirmToBookView(View):
     def get(self, request):
-        #get booking in current user
-        booking = Booking.objects.filter(user_id=request.user.id).latest('booking_at')
+        # get booking in current user
+        booking = Booking.objects.filter(
+            user_id=request.user.id).latest('booking_at')
         context = {
             "booking": booking
         }
-        return render(request, 'booking/booking_confirm_to_book.html',context)
-    
-    
+        return render(request, 'booking/booking_confirm_to_book.html', context)
+
     def post(self, request):
-        #get user from models
+        # get user from models
 
-        #get booking in current user one objects
+        # get booking in current user one objects
 
-        booking = Booking.objects.filter(user_id=request.user.id).latest('booking_at')
+        booking = Booking.objects.filter(
+            user_id=request.user.id).latest('booking_at')
         print(booking)
         data = request.POST.copy()
-        
+
         if (data.get('is_confirmed') == 'true'):
-            confirmation = Booking_confirmation(booking=booking, is_confirmed=True )
+            confirmation = Booking_confirmation(
+                booking=booking, is_confirmed=True)
         else:
-            confirmation = Booking_confirmation(booking=booking, is_confirmed=False )
+            confirmation = Booking_confirmation(
+                booking=booking, is_confirmed=False)
 
         confirmation.save()
         return render(request, 'booking/booking_success.html')
