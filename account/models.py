@@ -44,7 +44,7 @@ class Account(models.Model):
                               null=True,
                               blank=True)
 
-    image = models.ImageField(upload_to=path_and_rename, blank=True)
+    image = models.ImageField(upload_to=path_and_rename, blank=True, null=True)
     current_state = models.CharField(verbose_name='สถานะ', max_length=14,
                                      choices=[
                                          ('ไม่มีสิทธิ์จอง', 'ไม่มีสิทธิ์จอง'), ('มีสิทธิ์จอง', 'มีสิทธิ์จอง')],

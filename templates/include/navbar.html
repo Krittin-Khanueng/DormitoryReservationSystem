@@ -64,7 +64,9 @@
                 </li>
                 <a href="{% url 'logout' %}" class="btn btn-outline-danger me-2 my-sm-0" type="button">ออกจากระบบ</a>
                 {% else %}
-                <a href="{% url 'login' %}" class="btn btn-outline-success me-2 my-sm-0" type="button">เข้าสู่ระบบ</a>
+                {% comment %} <a href="{% url 'login' %}" class="btn btn-outline-success me-2 my-sm-0" type="button">เข้าสู่ระบบ</a> {% endcomment %}
+                <a class="btn btn-primary"
+                   href="https://oauth.psu.ac.th/?oauth=authorize&client_id=oauthpsu823&response_type=code&state=55ba8fa8a83fce7ca120ec14058f8a4a&redirect_uri=http://localhost:8080/psupassport/callback">Login</a>
                 &nbsp;
                 {% endif %}
             </ul>

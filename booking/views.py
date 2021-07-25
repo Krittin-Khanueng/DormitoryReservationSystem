@@ -16,6 +16,7 @@ class BookingRoomView(View):
 
         user = self.get_user_from_models(request)
         room = self.get_room_from_models(request)
+
         if user and room:  # เช็กว่าห้องเต็มแล้วหรือไหม
             booking, created = Booking.objects.get_or_create(room=room)
             if created:
@@ -31,7 +32,7 @@ class BookingRoomView(View):
                 # เปลี่ยนสถานะการจองของผู้ใช้เป็นว่าจองแล้ว
                 user.account.is_booking_state = True
                 user.account.save()
-                return HttpResponseRedirect(reverse('booking-success'))
+                return HttpResponseRedirect(reverse('booking_success'))
 
 
         else:

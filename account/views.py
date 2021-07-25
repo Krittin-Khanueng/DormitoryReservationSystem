@@ -1,11 +1,12 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 from datetime import datetime
+
 
 
 class LoginView(LoginView):
@@ -68,3 +69,5 @@ class ProfileEditView(LoginRequiredMixin, View):
         user.save()
 
         return HttpResponseRedirect(reverse('profile'))
+
+
