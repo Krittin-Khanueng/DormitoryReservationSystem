@@ -8,13 +8,10 @@ from django.contrib.auth.models import Group, User
 from datetime import datetime
 
 
-
 class LoginView(LoginView):
     template_name = "account/login.html"
     redirect_authenticated_user = True
     redirect_field_name = "next"
-
-
 
 
 class LogoutView(LogoutView):
@@ -31,8 +28,6 @@ class ProfileView(LoginRequiredMixin, View):
         return render(request, 'account/profile.html', {'account': account})
 
 
-
-    
 class ProfileEditView(LoginRequiredMixin, View):
     login_url = "login"
 
@@ -69,5 +64,3 @@ class ProfileEditView(LoginRequiredMixin, View):
         user.save()
 
         return HttpResponseRedirect(reverse('profile'))
-
-
