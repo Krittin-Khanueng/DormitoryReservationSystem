@@ -53,7 +53,11 @@ class CallBackView(View):
 		description = profile_response['description']
 		email = profile_response['user_email']
 
-		print(user_login+email+displayname)
+
+
+
+
+
 		user, created = User.objects.get_or_create(
 			username=user_login)
 		if created:
@@ -65,6 +69,24 @@ class CallBackView(View):
 			# user create account
 			Account(user=user, first_name_en=displayname.split(' ')[
 					0], last_name_en=displayname.split(' ')[1]).save()
+
+			#check groups
+			if self.check_groups(user_login[:2]):
+				print("Yes")
+				group = Group.objects.get(name=user_login[:2])
+				user = User.objects.get(username=user_login)
+				user.groups.add(group)
+				user.save()
+			else:
+				print("No")
+				#create Groups
+				Group(name=user_login[:2]).save()
+				group = Group.objects.get(name=user_login[:2])
+				user = User.objects.get(username=user_login)
+				user.groups.add(group)
+				user.save()
+
+			# user login
 			login(request, user)
 			return redirect('index')
 		else:
@@ -75,3 +97,14 @@ class CallBackView(View):
 				messages.warning(request, 'กรุณา login ใหม่อีกครั้ง')
 				return redirect('index')
 		return redirect('index')
+
+		#check groups
+	def check_groups(self,first_two_codes):
+		groups = Group.objects.all()
+		for group in groups:
+			print("groups",groups)
+			if group.name == first_two_codes:
+				return True
+			else:
+				return False
+				

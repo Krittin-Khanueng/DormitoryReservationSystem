@@ -20,6 +20,8 @@ def path_and_rename(instance, filename):
     # return the whole path to the file
     return os.path.join(path, filename)
 
+    
+
 
 class Account(models.Model):
     user = models.OneToOneField(
@@ -60,8 +62,10 @@ class Account(models.Model):
     # ressize_image
     def save(self, *args, **kwargs):
         super(Account, self).save(*args, **kwargs)
-        img = Image.open(self.image.path)
-        if img.height > 500 or img.width > 500:
-            output_size = (500, 500)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
+        #check image
+        if self.image:
+            img = Image.open(self.image.path)
+            if img.height > 500 or img.width > 500:
+                output_size = (500, 500)
+                img.thumbnail(output_size)
+                img.save(self.image.path)
