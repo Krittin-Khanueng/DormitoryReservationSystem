@@ -4,6 +4,8 @@ from django.views import View
 
 from .models import Dormitory, Room, Floor
 from booking.models import Opening_booking
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 class DormView(LoginRequiredMixin, View):
@@ -11,22 +13,30 @@ class DormView(LoginRequiredMixin, View):
 
     def get(self, request):
         # get request user groups
-        user_groups = request.user.groups.values_list('name', flat=True)[0]
+        try:
+            user_groups = request.user.groups.values_list('name', flat=True)[0]
+        except IndexError:
+            user_groups = None
 
+        if user_groups:
+            # get all dorms
+            dorm = Dormitory.objects.filter(is_active=True)
+            # get open booking filter with user group
+            try:
+                opening_booking = Opening_booking.objects.filter(
+                    group__name=user_groups, is_status=True).latest("created_at")
+            except Opening_booking.DoesNotExist:
+                opening_booking = None
+                
+            context = {
+                "dormitorys": dorm,
+                "opening_booking": opening_booking,
+                "user_is_booking_state": request.user.account.is_booking_state
 
-        # get all dorms
-        dorm = Dormitory.objects.filter(is_active=True)
-        # get open booking filter with user group
-        opening_booking = Opening_booking.objects.filter(
-            group__name=user_groups, is_status=True).latest("created_at")
-        context = {
-            "dormitorys": dorm,
-            "opening_booking": opening_booking,
-            "user_is_booking_state": request.user.account.is_booking_state
-
-        }
-        return render(request, 'dorm/dorm.html', context)
-
+            }
+            return render(request, 'dorm/dorm.html', context)
+        else:
+            return HttpResponseRedirect(reverse('index'))
 
 class RoomView(LoginRequiredMixin, View):
     login_url = "login"
