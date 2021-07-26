@@ -6,10 +6,11 @@
     <div class="container justify-content-center">
         <form method="POST" action="{{ booking_confirm}}">
         {% csrf_token%}
-        <p>ชื่อ: {{booking.user.get_full_name}}</p>
-        <p>หอ: {{booking.room.floor.dorm_name}}</p>
-        <p>ห้อง: {{booking.room.room_id}}
-        <p>จองเมื่อวันที่ {{booking.booking_at}}</p>
+        
+            <p>ชื่อ: {{booking.user.get_full_name}}</p>
+            <p>หอ: {{booking.room.floor.dorm_name}}</p>
+            <p>ห้อง: {{booking.room.room_id}}
+            <p>จองเมื่อวันที่ {{booking.booking_at}}</p>
         <p>คุณต้องการจองห้องพักนี้หรือไม่?</p>
         <div>
         <div class="form-check form-check-inline">

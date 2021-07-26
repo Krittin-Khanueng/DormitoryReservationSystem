@@ -4,11 +4,13 @@
 
 {% block content %}
     <div class="d-flex flex-column align-items-center m-5">
-        <h2 class="text fw-bold text-center">จองหอพักภาคการศึกษาที่ 2/2564</h2>
-        <h3 class="text fw-bold text-sm-center">ชื่อ-นามสกุล:{{ user.get_full_name }}</h3>
-        <h3 class="text fw-bold ">หอพัก:{{ room.floor.dorm_name }}</h3>
-        <h3 class="text fw-bold">ชั้น:{{ room.floor.number }}</h3>
-        <h3 class="text fw-bold">ห้อง:{{ room.room_id }}</h3>
+        <h2 class="text fw-bold text-center">ยืนยันการจองห้องพัก</h2>
+        <span class="rounded bg-light p-3">
+            <h3 class="text fw-bold text-sm-center">ชื่อ-นามสกุล: <span class="fw-bold">{{ user.get_full_name }}</span></h3>
+            <h3 class="text fw-bold ">หอพัก: <span class="fw-bold">{{ room.floor.dorm_name }}</span> </h3>
+            <h3 class="text fw-bold">ชั้น: <span class="fw-bold">{{ room.floor.number }}</span></h3>
+            <h3 class="text fw-bold">ห้อง: <span class="fw-bold">{{ room.room_id }}</span></h3>
+        </span>
         <div class="d-flex justify-content-center mt-4">
             <form method="post" action="{% url "booking" %}">
                 {% csrf_token %}
