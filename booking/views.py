@@ -97,3 +97,13 @@ class ConfirmToBookView(View):
 
         confirmation.save()
         return render(request, 'booking/booking_success.html')
+
+
+
+class HistoryView(View):
+    def get(self, request):
+        bookings = Booking.objects.filter(user_id=request.user.id).order_by("-booking_at")
+        context = {
+            "bookings": bookings
+        }
+        return render(request, "booking/booking_history.html", context)

@@ -1,0 +1,15 @@
+﻿{% extends 'base.html' %}
+{% block title %}ประวัติการจองหอพัก{% endblock %}
+
+{% block content %}
+    <h1>ประวัติการจองห้องพัก</h1>
+    {% if bookings %}
+        {% for booking in bookings %}
+            <h2>วันที่:{{ booking.booking_at }}</h2>
+            <h2>ห้อง: {{ booking.room }}</h2>
+            <br>
+        {% endfor %}
+    {% else %}
+        <h2 class="text text-danger text-center mt-5">ไม่มีข้อมูลในขนาดนี้</h2>
+    {% endif %}
+{% endblock %}
