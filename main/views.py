@@ -72,13 +72,11 @@ class CallBackView(View):
 
 			#check groups
 			if self.check_groups(user_login[:2]):
-				print("Yes")
 				group = Group.objects.get(name=user_login[:2])
 				user = User.objects.get(username=user_login)
 				user.groups.add(group)
 				user.save()
 			else:
-				print("No")
 				#create Groups
 				Group(name=user_login[:2]).save()
 				group = Group.objects.get(name=user_login[:2])
@@ -100,11 +98,7 @@ class CallBackView(View):
 
 		#check groups
 	def check_groups(self,first_two_codes):
-		groups = Group.objects.all()
-		for group in groups:
-			print("groups",groups)
-			if group.name == first_two_codes:
-				return True
-			else:
-				return False
+	    groups = Group.objects.all()
+	    for group in groups:
+	        return group.name == first_two_codes
 				

@@ -44,9 +44,6 @@ class Opening_booking(models.Model):
     #Check the current time and the opening and closing times.
     def is_open(self):
         now = datetime.datetime.now()
-        if self.opening_day < now < self.closed_day:
-            return True
-        else:
-            return False
+        return self.opening_day < now < self.closed_day
     
     

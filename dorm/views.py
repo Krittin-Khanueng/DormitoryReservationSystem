@@ -43,15 +43,14 @@ class RoomView(LoginRequiredMixin, View):
 
     def get(self, request, dorm_name):
         context = {}
-        dormitory = {}
         # get user gender
         gender = request.user.account.gender
         # get dorm and floors
         floors = Floor.objects.select_related("dorm_name").filter(dorm_name__name=dorm_name, dorm_name__is_active=True)
-        # get room filter type
-        for floor in floors:
-            # QuerySet to list
-            dormitory[floor.number] = list(floor.get_room_type(gender))
+        dormitory = {
+            floor.number: list(floor.get_room_type(gender)) for floor in floors
+        }
+
         context["dormitory"] = dormitory
         return render(request, "dorm/room.html", context)
 

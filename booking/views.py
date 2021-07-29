@@ -22,22 +22,24 @@ class BookingRoomView(View):
             if created:
                 booking.save()
             if not user.account.is_booking_state:  # เช็กว่าผู้ใช้เคยจองห้องพักแล้วหรือไม
-                #add user to booking
-    
-                booking.user = user
-                booking.room.amount -= 1
-                booking.room.save()
-                booking.save()
-
-                # เปลี่ยนสถานะการจองของผู้ใช้เป็นว่าจองแล้ว
-                user.account.is_booking_state = True
-                user.account.save()
-                return HttpResponseRedirect(reverse('booking_success'))
-
-
+                return self.booking_room(booking, user)
         else:
             messages.warning(request, 'ห้องพักที่คุณจองเต็มแล้ว กรุณาจองห้องใหม่')
             return HttpResponseRedirect(reverse("dorm"))
+
+
+    def booking_room(self, booking, user):
+        #add user to booking
+
+        booking.user = user
+        booking.room.amount -= 1
+        booking.room.save()
+        booking.save()
+
+        # เปลี่ยนสถานะการจองของผู้ใช้เป็นว่าจองแล้ว
+        user.account.is_booking_state = True
+        user.account.save()
+        return HttpResponseRedirect(reverse('booking_success'))
 
 
     #get room from models where amount greater than 0
