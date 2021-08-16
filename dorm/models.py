@@ -17,17 +17,17 @@ class Dormitory(models.Model):
     def __str__(self):
         return self.name
 
-    #check room amount > 0 and is_status  in floor
+    # check room amount > 0 and is_status  in floor
     def is_room_available(self):
-        return Floor.objects.filter(dorm_name=self, floor__amount__gt=0, floor__is_status=True).count() 
+        return Floor.objects.filter(dorm_name=self, floor__amount__gt=0, floor__is_status=True).count()
 
-    #get all floor in dorm
+    # get all floor in dorm
     def get_floor_list(self):
         return Floor.objects.filter(dorm_name=self)
 
-class Dormitory_details(models.Model):
-    #Dormitory_details
 
+class Dormitory_details(models.Model):
+    # Dormitory_details
 
 
 class Floor(models.Model):
@@ -38,8 +38,6 @@ class Floor(models.Model):
 
     def __str__(self):
         return f"หอพัก:{self.dorm_name.name} ชั้น:{self.number}"
-
-
 
     def get_room_type(self, type_room):
         if type_room == "ผู้ชาย":
@@ -64,9 +62,7 @@ class Room(models.Model):
     def __str__(self):
         return f"หอพัก:{self.floor.dorm_name} ชั้น:{self.floor.number} ห้อง:{self.room_id} จำนวน:{self.amount}"
 
+    # check room amount > 0 and is_status = True
 
-    #check room amount > 0 and is_status = True
     def room_not_full(self):
         return self.amount > 0 and self.is_status
-
-        
