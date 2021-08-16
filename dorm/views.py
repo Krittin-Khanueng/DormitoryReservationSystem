@@ -54,4 +54,12 @@ class RoomView(LoginRequiredMixin, View):
         context["dormitory"] = dormitory
         return render(request, "dorm/room.html", context)
 
-    
+class DormDetailsView(View):
+    #show dorm details for current
+    def get(self, request, dorm_name):
+        dorm = get_object_or_404(Dormitory, name=dorm_name)
+        context = {
+            "dorm": dorm,
+        }
+        return render(request, "dorm/dorm_details.html", context)
+

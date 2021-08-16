@@ -25,6 +25,10 @@ class Dormitory(models.Model):
     def get_floor_list(self):
         return Floor.objects.filter(dorm_name=self)
 
+class Dormitory_details(models.Model):
+    #Dormitory_details
+
+
 
 class Floor(models.Model):
     dorm_name = models.ForeignKey(Dormitory, on_delete=models.PROTECT, related_name='dormitory',
