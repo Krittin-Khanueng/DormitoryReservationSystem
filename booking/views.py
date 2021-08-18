@@ -109,4 +109,6 @@ class HistoryView(View):
         context = {
             "bookings": bookings_list
         }
+        
         return render(request, "booking/booking_history.html", context)
+        
