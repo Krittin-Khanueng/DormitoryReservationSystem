@@ -8,10 +8,8 @@ from django.contrib.auth.models import Group, User
 from datetime import datetime
 
 
-
 class Login_by_PSUPASSPORTView(LoginRequiredMixin):
-     login_url = "https://oauth.psu.ac.th/?oauth=authorize&client_id=oauthpsu823&response_type=code&state=55ba8fa8a83fce7ca120ec14058f8a4a&redirect_uri=http://localhost:8080/psupassport/callback"
-
+    login_url = "https://oauth.psu.ac.th/?oauth=authorize&client_id=oauthpsu823&response_type=code&state=55ba8fa8a83fce7ca120ec14058f8a4a&redirect_uri=http://localhost:8080/psupassport/callback"
 
 
 class LogoutView(LogoutView):
@@ -26,8 +24,6 @@ class ProfileView(Login_by_PSUPASSPORTView, View):
         return render(request, 'account/profile.html', {'account': account})
 
 
-
-    
 class ProfileEditView(Login_by_PSUPASSPORTView, View):
 
     def get(self, request):
@@ -63,5 +59,3 @@ class ProfileEditView(Login_by_PSUPASSPORTView, View):
         user.save()
 
         return HttpResponseRedirect(reverse('profile'))
-
-
