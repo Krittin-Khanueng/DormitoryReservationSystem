@@ -6,10 +6,10 @@ from .models import Dormitory, Room, Floor
 from booking.models import Opening_booking
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from account.views import Login_by_PSUPASSPORTView
 
 
-class DormView(LoginRequiredMixin, View):
-    login_url = "login"
+class DormView(Login_by_PSUPASSPORTView, View):
 
     def get(self, request):
         # get request user groups
@@ -38,8 +38,7 @@ class DormView(LoginRequiredMixin, View):
         else:
             return HttpResponseRedirect(reverse('index'))
 
-class RoomView(LoginRequiredMixin, View):
-    login_url = "login"
+class RoomView(Login_by_PSUPASSPORTView, View):
 
     def get(self, request, dorm_name):
         context = {}

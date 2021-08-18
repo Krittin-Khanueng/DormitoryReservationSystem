@@ -7,11 +7,11 @@ from django.views import View
 
 from dorm.models import Room
 from .models import Booking, Booking_confirmation
+from account.views import Login_by_PSUPASSPORTView
 
 
 
-
-class BookingRoomView(View):
+class BookingRoomView(Login_by_PSUPASSPORTView,View):
     def post(self, request):
 
         user = self.get_user_from_models(request)
@@ -56,7 +56,7 @@ class BookingRoomView(View):
         return None
 
 
-class ConfirmRoomView(View):
+class ConfirmRoomView(Login_by_PSUPASSPORTView,View):
     def post(self, request):
         user = User.objects.get(id=request.user.id)
         room = Room.objects.get(id=request.POST.get('room_id'))
@@ -68,12 +68,12 @@ class ConfirmRoomView(View):
 
 #get you for request
 
-class BookingSuccessView(View):
+class BookingSuccessView(Login_by_PSUPASSPORTView, View):
     def get(self, request):
         return render(request, 'booking/booking_success.html')
 
 #booking confirm
-class ConfirmToBookView(View):
+class ConfirmToBookView(Login_by_PSUPASSPORTView, View):
     def get(self, request):
         #get booking in current user
         booking = Booking.objects.filter(user_id=request.user.id).latest('booking_at')
@@ -102,7 +102,7 @@ class ConfirmToBookView(View):
 
 
 
-class HistoryView(View):
+class HistoryView(Login_by_PSUPASSPORTView, View):
     def get(self, request):
         
         bookings_list = Booking.objects.filter(user_id=request.user.id).order_by("-booking_at")

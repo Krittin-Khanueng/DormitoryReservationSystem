@@ -9,11 +9,8 @@ from datetime import datetime
 
 
 
-class LoginView(LoginView):
-    template_name = "account/login.html"
-    redirect_authenticated_user = True
-    redirect_field_name = "next"
-
+class Login_by_PSUPASSPORTView(LoginRequiredMixin):
+     login_url = "https://oauth.psu.ac.th/?oauth=authorize&client_id=oauthpsu823&response_type=code&state=55ba8fa8a83fce7ca120ec14058f8a4a&redirect_uri=http://localhost:8080/psupassport/callback"
 
 
 
@@ -21,9 +18,7 @@ class LogoutView(LogoutView):
     next_page = 'index'
 
 
-class ProfileView(LoginRequiredMixin, View):
-    login_url = "login"
-
+class ProfileView(Login_by_PSUPASSPORTView, View):
     def get(self, request):
         # get request user and account
         user = request.user
@@ -33,8 +28,7 @@ class ProfileView(LoginRequiredMixin, View):
 
 
     
-class ProfileEditView(LoginRequiredMixin, View):
-    login_url = "login"
+class ProfileEditView(Login_by_PSUPASSPORTView, View):
 
     def get(self, request):
         # get request user and account
