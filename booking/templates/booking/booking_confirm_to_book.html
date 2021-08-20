@@ -4,56 +4,56 @@
 
 {% block content %}
     <div class="container">
-       <div class="row">
-        <form method="POST" action="{{ booking_confirm}}">
-        {% csrf_token%}
-        <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">ยืนยันการจองห้องพัก</h3>
+        <!-- div center -->
+
+        <div class="row">
+            <form method="POST" action="{{ booking_confirm }}">
+                {% csrf_token %}
+                <div class="col-md-12 col-md-offset-3 d-flex justify-content-center ">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">ยืนยันการจองห้องพัก</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group mt-2">
+                                <label for="room_num" class="fw-bold">ชื่อ-นามสกุล:</label>
+                                <input type="text" class="form-control w-auto" id="room_num" name="room_num"
+                                       value="{{ booking.user.get_full_name }}" readonly>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="room_num" class="fw-bold">หอที่จอง:</label>
+                                <input type="text" class="form-control  w-auto" id="room_num" name="room_num"
+                                       value="{{ booking.room.floor.dorm_name }}" readonly>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="room_type" class="fw-bold">ห้องที่จอง:</label>
+                                <input type="text" class="form-control  w-auto" id="room_type" name="room_type"
+                                       value="{{ booking.room.room_id }}" readonly>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="room_date" class="fw-bold">วันที่จอง:</label>
+                                <input type="text" class="form-control  w-auto" id="room_date" name="room_date"
+                                       value="{{ booking.booking_at|date:"d-m-Y" }}" readonly>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="room_time" class="fw-bold">เวลาที่จอง:</label>
+                                <input type="text" class="form-control  w-auto" id="room_time" name="room_time"
+                                       value="{{ booking.booking_at|time:"H:i" }}" readonly>
+                            </div>
+
+
+                        </div>
+
+                        <div class="panel-footer mt-3 d-flex justify-content-center">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success">ยืนยัน</button>
+                                <a href="{{ booking_cancel }}" class="btn btn-danger">ยกเลิก</a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <label for="room_num">ชื่อ</label>
-                        <input type="text" class="form-control" id="room_num" name="room_num" value="{{booking.user.get_full_name}}" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="room_num">หอที่จอง</label>
-                        <input type="text" class="form-control" id="room_num" name="room_num" value="{{booking.room.floor.dorm_name}}" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="room_type">ห้องที่จอง</label>
-                        <input type="text" class="form-control" id="room_type" name="room_type" value="{{booking.room.room_id}}" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="room_date">วันที่จอง</label>
-                        <input type="text" class="form-control" id="room_date" name="room_date" value="{{booking.booking_at|date:"d-m-Y"}}" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="room_time">เวลาที่จอง</label>
-                        <input type="text" class="form-control" id="room_time" name="room_time" value="{{booking.booking_at|time:"H:i"}}" readonly>
-                    </div>
-            </div>
-            
-
-
- 
-        <p>คุณต้องการจองห้องพักนี้หรือไม่?</p>
-        <div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="is_confirmed" id="inlineRadio1" value="true">
-            <label class="form-check-label" for="inlineRadio1">ยืนยัน</label>
+            </form>
         </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="is_confirmed" id="inlineRadio2" value="false">
-            <label class="form-check-label" for="inlineRadio2">ยกเลิก</label>
-        </div>
-        </div>
-        
-        <button type="submit" class="btn btn-success mt-4 justify-content-center" >ตกลง</button>
-       </form>
-    </div>
     </div>
 {% endblock %}
-
-
