@@ -112,3 +112,10 @@ class HistoryView(Login_by_PSUPASSPORTView, View):
         
         return render(request, "booking/booking_history.html", context)
         
+class ConfirmListView(Login_by_PSUPASSPORTView, View):
+    def get(self, request):
+        bookings_list = Booking_confirmation.objects.filter(booking__user_id=request.user.id).order_by("-booking__booking_at")
+        context = {
+            "bookings": bookings_list
+        }
+        return render(request, "booking/booking_confirm_list.html", context)

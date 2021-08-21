@@ -5,9 +5,9 @@ urlpatterns = [
     path("", views.BookingRoomView.as_view(), name="booking"),
     path("confirm/", views.ConfirmRoomView.as_view(), name="confirm"),
     path("success/", views.BookingSuccessView.as_view(), name="booking_success"),
-    path("confirm/booking/", views.ConfirmToBookView.as_view(),
-         name="booking_confirm"),
-    path("history/", views.HistoryView.as_view(), name="booking_history")
+    path("history/", views.HistoryView.as_view(), name="booking_history"),
+    path("confirm/list/", views.ConfirmListView.as_view(), name="booking_confirm_list"),
+    path("confirm/booking/", views.ConfirmToBookView.as_view(), name="booking_confirm"),
 
 
 ]

@@ -2,25 +2,25 @@
 {% block title %}ประวัติการจองหอพัก{% endblock %}
 
 {% block content %}
-    <h1 class="m-2">ประวัติการจองห้องพัก</h1>
-    {% if bookings %}
-      <ul class="list-group">
-        {% for booking in bookings %}
+<h1 class="m-2">ประวัติการจองห้องพัก</h1>
+{% if bookings %}
+<ul class="list-group">
+    {% for booking in bookings %}
 
-      
-            <li class="list-group-item list-group-item-action w-25 mt-1 m-2">
-                <div class="d-flex flex-column justify-content-center">
-                    <p class="text-center">วันที่:{{ booking.booking_at }}</p>
-                    <p class="text-center">หอพัก:{{booking.room.floor.dorm_name}}</p>
-                    <p class="text-center">ห้องพัก:{{ booking.room.room_id }}</p>
-                </div>
-            </li>
 
-    
+    <li class="list-group-item list-group-item-action w-25 mt-1 m-2">
+        <div class="d-flex flex-column justify-content-center">
+            <p class="text-center">วันที่:{{ booking.booking_at }}</p>
+            <p class="text-center">หอพัก:{{booking.room.floor.dorm_name}}</p>
+            <p class="text-center">ห้องพัก:{{ booking.room.room_id }}</p>
+        </div>
+    </li>
 
-        {% endfor %}
-            </ul>
-    {% else %}
-        <h2 class="text text-danger text-center mt-5">ไม่มีข้อมูลในขนาดนี้</h2>
-    {% endif %}
+
+
+    {% endfor %}
+</ul>
+{% else %}
+<h2 class="text text-danger text-center mt-5">ไม่มีข้อมูลในขนาดนี้</h2>
+{% endif %}
 {% endblock %}

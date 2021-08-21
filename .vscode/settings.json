@@ -10,4 +10,9 @@
       "**/templates/**/*": "django-txt",
       "**/requirements{/**,*}.{txt,in}": "pip-requirements"
     },
+    "beautify.language": {
+      "html": [
+          "htm", "html", "django-html"
+      ]
+  },
   }

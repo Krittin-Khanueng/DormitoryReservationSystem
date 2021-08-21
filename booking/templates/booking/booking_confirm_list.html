@@ -1,0 +1,19 @@
+﻿{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}หน้ายืนยันการจองห้องพัก{% endblock %}
+{% block content %}
+{% comment %} ทำเป็นlist {% endcomment %}
+<p class="mt-3 h5">รายการยืนยันห้องพัก</p>
+<div class="list-group">
+
+
+    {% for booking in bookings%}
+    <a href="#"
+        class="list-group-item list-group-item-action {% if booking.is_confirmed%}list-group-item-success {%elif booking.is_confirmed == False %}list-group-item-danger{%endif%}">
+        <span class="text-muted pr-3">หอพัก:{{booking.booking.room.floor.dorm_name}}
+            ชั้น:{{booking.booking.room.floor.number}} ห้องพัก: {{booking.booking.room.room_id}} </span></a>
+    {% endfor %}
+
+
+</div>
+{% endblock content%}

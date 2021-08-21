@@ -8,7 +8,7 @@
 {% block content %}
 <div class="container rounded bg-white mt-5 mb-5 justify-content-center">
     <form method="POST" action="{% url 'profile_edit' %}">
-    {% csrf_token %}
+        {% csrf_token %}
         <div class=" row">
             <div class="col-md-5 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -51,7 +51,8 @@
                             <label class="labels">วันเกิด</label>
                             <div class="input-group date" id="datepicker">
                                 <input type="date" class="form-control" placeholder="dd/mm/yyyy"
-                                    value="{{account.birthday|date:"Y"}}-{{account.birthday|date:"m"}}-{{account.birthday|date:"d"}}" id="birth_date" name="birth_date">
+                                    value="{{account.birthday|date:"Y"}}-{{account.birthday|date:"m"}}-{{account.birthday|date:"d"}}"
+                                    id="birth_date" name="birth_date">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
@@ -64,17 +65,20 @@
                         </div>
 
                         <!--address-->
-                        <div class="col-md-12"><label class="labels">ที่อยู่</label><input type="text" class="form-control"
-                                placeholder="enter address line" value="{{account.address}}" id="address" name="address"></div>
+                        <div class="col-md-12"><label class="labels">ที่อยู่</label><input type="text"
+                                class="form-control" placeholder="enter address line" value="{{account.address}}"
+                                id="address" name="address"></div>
 
                         <!--email-->
 
-                        <div class="col-md-12"><label class="labels">อีเมล์</label><input type="text" class="form-control"
-                                placeholder="enter email" value="{{request.user.email}}" id="email" name="email"></div>
+                        <div class="col-md-12"><label class="labels">อีเมล์</label><input type="text"
+                                class="form-control" placeholder="enter email" value="{{request.user.email}}" id="email"
+                                name="email"></div>
 
                         <div class="col-md-12"><label class="labels">ป้ายทะเบียนรถจักรยานยนต์</label><input type="text"
                                 class="form-control" placeholder="ป้ายทะเบียนรถจักรยานยนต์"
-                                value="{{account.motorcycle_registration}}" id="motorcycle_registration" name="motorcycle_registration"></div>
+                                value="{{account.motorcycle_registration}}" id="motorcycle_registration"
+                                name="motorcycle_registration"></div>
 
                         <div class="col-md-12"><label class="labels">ป้ายทะเบียนยนต์</label><input type="text"
                                 class="form-control" placeholder="ป้ายทะเบียนยนต์" value="{{account.car_registration}}"
