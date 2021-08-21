@@ -118,5 +118,3 @@ class HistoryView(Login_by_PSUPASSPORTView, View):
         }
 
         return render(request, "booking/booking_history.html", context)
-
-
