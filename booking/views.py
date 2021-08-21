@@ -10,8 +10,7 @@ from .models import Booking, Booking_confirmation
 from account.views import Login_by_PSUPASSPORTView
 
 
-
-class BookingRoomView(Login_by_PSUPASSPORTView,View):
+class BookingRoomView(Login_by_PSUPASSPORTView, View):
     def post(self, request):
 
         user = self.get_user_from_models(request)
@@ -24,12 +23,12 @@ class BookingRoomView(Login_by_PSUPASSPORTView,View):
             if not user.account.is_booking_state:  # เช็กว่าผู้ใช้เคยจองห้องพักแล้วหรือไม
                 return self.booking_room(booking, user)
         else:
-            messages.warning(request, 'ห้องพักที่คุณจองเต็มแล้ว กรุณาจองห้องใหม่')
+            messages.warning(
+                request, 'ห้องพักที่คุณจองเต็มแล้ว กรุณาจองห้องใหม่')
             return HttpResponseRedirect(reverse("dorm"))
 
-
     def booking_room(self, booking, user):
-        #add user to booking
+        # add user to booking
 
         booking.user = user
         booking.room.amount -= 1
@@ -41,22 +40,24 @@ class BookingRoomView(Login_by_PSUPASSPORTView,View):
         user.account.save()
         return HttpResponseRedirect(reverse('booking_success'))
 
+    # get room from models where amount greater than 0
 
-    #get room from models where amount greater than 0
     def get_room_from_models(self, request):
-        room = get_object_or_404(Room, id=request.POST.get('room_pk'), is_status=True, amount__gt=0)
+        room = get_object_or_404(Room, id=request.POST.get(
+            'room_pk'), is_status=True, amount__gt=0)
         if room:
             return room
         return None
 
     def get_user_from_models(self, request):
-        user = get_object_or_404(User, id=request.user.id, account__is_booking_state=False)
+        user = get_object_or_404(
+            User, id=request.user.id, account__is_booking_state=False)
         if user:
             return user
         return None
 
 
-class ConfirmRoomView(Login_by_PSUPASSPORTView,View):
+class ConfirmRoomView(Login_by_PSUPASSPORTView, View):
     def post(self, request):
         user = User.objects.get(id=request.user.id)
         room = Room.objects.get(id=request.POST.get('room_id'))
@@ -66,56 +67,56 @@ class ConfirmRoomView(Login_by_PSUPASSPORTView,View):
         }
         return render(request, 'booking/booking_confirm.html', context)
 
-#get you for request
+# get you for request
+
 
 class BookingSuccessView(Login_by_PSUPASSPORTView, View):
     def get(self, request):
         return render(request, 'booking/booking_success.html')
 
-#booking confirm
+# booking confirm
+
+
 class ConfirmToBookView(Login_by_PSUPASSPORTView, View):
     def get(self, request):
-        #get booking in current user
-        booking = Booking.objects.filter(user_id=request.user.id).latest('booking_at')
+        # get booking in current user
+        booking = Booking.objects.filter(
+            user_id=request.user.id).latest('booking_at')
         context = {
             "booking": booking
         }
-        return render(request, 'booking/booking_confirm_to_book.html',context)
-    
-    
+        return render(request, 'booking/booking_confirm_to_book.html', context)
+
     def post(self, request):
-        #get user from models
+        # get user from models
 
-        #get booking in current user one objects
+        # get booking in current user one objects
 
-        booking = Booking.objects.filter(user_id=request.user.id).latest('booking_at')
+        booking = Booking.objects.filter(
+            user_id=request.user.id).latest('booking_at')
         print(booking)
         data = request.POST.copy()
-        
+
         if (data.get('is_confirmed') == 'true'):
-            confirmation = Booking_confirmation(booking=booking, is_confirmed=True )
+            confirmation = Booking_confirmation(
+                booking=booking, is_confirmed=True)
         else:
-            confirmation = Booking_confirmation(booking=booking, is_confirmed=False )
+            confirmation = Booking_confirmation(
+                booking=booking, is_confirmed=False)
 
         confirmation.save()
         return render(request, 'booking/booking_success.html')
 
 
-
 class HistoryView(Login_by_PSUPASSPORTView, View):
     def get(self, request):
-        
-        bookings_list = Booking.objects.filter(user_id=request.user.id).order_by("-booking_at")
+
+        bookings_list = Booking.objects.filter(
+            user_id=request.user.id).order_by("-booking_at")
         context = {
             "bookings": bookings_list
         }
-        
+
         return render(request, "booking/booking_history.html", context)
-        
-class ConfirmListView(Login_by_PSUPASSPORTView, View):
-    def get(self, request):
-        bookings_list = Booking_confirmation.objects.filter(booking__user_id=request.user.id).order_by("-booking__booking_at")
-        context = {
-            "bookings": bookings_list
-        }
-        return render(request, "booking/booking_confirm_list.html", context)
+
+
