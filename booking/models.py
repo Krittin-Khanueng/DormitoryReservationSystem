@@ -22,7 +22,7 @@ class Booking(models.Model):
 
 class Booking_confirmation(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)       
-    booking = models.ForeignKey(Booking, on_delete=models.CASCADE, related_name="booking_confirmation", null=True, verbose_name="การจอง")
+    booking = models.OneToOneField(Booking, on_delete=models.CASCADE, related_name="booking_confirmation", null=True, verbose_name="การจอง")
     is_confirmed = models.BooleanField(null=True, verbose_name="สถานะการยืนยัน")
     confirm_date = models.DateTimeField(auto_now_add=True)
 

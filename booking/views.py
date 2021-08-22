@@ -82,10 +82,17 @@ class ConfirmToBookView(Login_by_PSUPASSPORTView, View):
         # get booking in current user
         booking = Booking.objects.filter(
             user_id=request.user.id).latest('booking_at')
-        context = {
-            "booking": booking
-        }
-        return render(request, 'booking/booking_confirm_to_book.html', context)
+        try:
+            Booking_confirmation.objects.get(
+                booking=booking, is_confirmed__isnull=False)
+            msg = 'คุณได้ทำการยืนยันการจองห้องพักแล้ว'
+            messages.success(request, msg)
+            return HttpResponseRedirect(reverse('booking_success'))
+        except Booking_confirmation.DoesNotExist:
+            context = {
+                "booking": booking
+            }
+            return render(request, 'booking/booking_confirm_to_book.html', context)
 
     def post(self, request):
         # get user from models
@@ -94,9 +101,8 @@ class ConfirmToBookView(Login_by_PSUPASSPORTView, View):
 
         booking = Booking.objects.filter(
             user_id=request.user.id).latest('booking_at')
-        print(booking)
         data = request.POST.copy()
-
+        print(data.get('is_confirmed'))
         if (data.get('is_confirmed') == 'true'):
             confirmation = Booking_confirmation(
                 booking=booking, is_confirmed=True)
@@ -118,5 +124,3 @@ class HistoryView(Login_by_PSUPASSPORTView, View):
         }
 
         return render(request, "booking/booking_history.html", context)
-
-
