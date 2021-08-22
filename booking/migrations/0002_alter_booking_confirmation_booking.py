@@ -14,6 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='booking_confirmation',
             name='booking',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='booking_confirmation', to='booking.booking', verbose_name='การจอง'),
+            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE,
+                                       related_name='booking_confirmation', to='booking.booking', verbose_name='การจอง'),
         ),
     ]
