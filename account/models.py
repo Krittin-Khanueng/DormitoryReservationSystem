@@ -20,7 +20,20 @@ def path_and_rename(instance, filename):
     # return the whole path to the file
     return os.path.join(path, filename)
 
-    
+
+def path_upload_bill(instance, filename):
+    today = datetime.datetime.today()
+    path = os.path.join('account', 'bill',
+                        today.strftime('%Y'), today.strftime('%m'))
+    ext = filename.split('.')[-1]
+    # get filename
+    if instance.pk:
+        filename = '{}.{}'.format(instance.user.username, ext)
+    else:
+        # set filename as random string
+        filename = '{}.{}'.format(uuid4().hex, ext)
+    # return the whole path to the file
+    return os.path.join(path, filename)
 
 
 class Account(models.Model):
@@ -36,8 +49,12 @@ class Account(models.Model):
         verbose_name="ที่อยู่", max_length=200, null=True)
     phone_number = models.CharField(
         verbose_name='เบอร์โทรศัพท์', max_length=10, null=True, blank=True)
-    bank_account = models.CharField(
+    bank_account_number = models.CharField(
         verbose_name='บัญชีธนาคาร', max_length=20, null=True, blank=True)
+    bank_account = models.CharField(
+        verbose_name="ธนาคาร", max_length=30, null=True, blank=True)
+    bill_number = models.CharField(
+        verbose_name="เลขที่บิล", max_length=30, null=True, blank=True)
     motorcycle_registration = models.CharField(verbose_name="ป้ายทะเบียนรถจักรยานยนต์", max_length=15, null=True,
                                                blank=True)
     car_registration = models.CharField(
@@ -46,7 +63,10 @@ class Account(models.Model):
                               null=True,
                               blank=True)
 
-    image = models.ImageField(upload_to=path_and_rename, blank=True, null=True)
+    image_profile = models.ImageField(
+        upload_to=path_and_rename, blank=True, null=True)
+    image_bill = models.ImageField(
+        upload_to=path_upload_bill, blank=True, null=True)
     current_state = models.CharField(verbose_name='สถานะ', max_length=14,
                                      choices=[
                                          ('ไม่มีสิทธิ์จอง', 'ไม่มีสิทธิ์จอง'), ('มีสิทธิ์จอง', 'มีสิทธิ์จอง')],
@@ -60,12 +80,12 @@ class Account(models.Model):
         return self.user.username
 
     # ressize_image
-    def save(self, *args, **kwargs):
-        super(Account, self).save(*args, **kwargs)
-        #check image
-        if self.image:
-            img = Image.open(self.image.path)
-            if img.height > 500 or img.width > 500:
-                output_size = (500, 500)
-                img.thumbnail(output_size)
-                img.save(self.image.path)
+    # def save(self, *args, **kwargs):
+    #     super(Account, self).save(*args, **kwargs)
+    #     # check image
+    #     if self.image:
+    #         img = Image.open(self.image.path)
+    #         if img.height > 500 or img.width > 500:
+    #             output_size = (500, 500)
+    #             img.thumbnail(output_size)
+    #             img.save(self.image.path)

@@ -9,6 +9,7 @@ from dorm.models import Room
 from .models import Booking, Booking_confirmation
 from account.views import Login_by_PSUPASSPORTView
 from booking.models import Opening_booking
+from django.core.files.storage import FileSystemStorage
 
 
 class BookingRoomView(Login_by_PSUPASSPORTView, View):
@@ -145,3 +146,33 @@ class HistoryView(Login_by_PSUPASSPORTView, View):
         }
 
         return render(request, "booking/booking_history.html", context)
+
+
+class ConfirmToBookFormView(Login_by_PSUPASSPORTView, View):
+    def get(self, request):
+        return render(request, 'booking/booking_confirm_to_book_form.html')
+
+    def post(self, request):
+        # get data from request
+        data = request.POST.copy()
+        # get file form data
+        bill_image = request.FILES.get('bill_image')
+        profile_image = request.FILES.get('profile_image')
+        # get user from models
+        user = User.objects.get(id=request.user.id)
+        # get account from models
+        account = user.account
+        account.motorcycle_registration = data.get('motorcycle_registration')
+        account.car_registration = data.get('car_registration')
+        account.phone_number = data.get('tel')
+        account.bank_account_number = data.get('bank_account_number')
+        account.bill_number = data.get('bill_number')
+        # upload image to models
+        fss = FileSystemStorage()
+        if bill_image:
+            account.bill_image = fss.save(bill_image.name, bill_image)
+            
+            
+        account.save()
+
+        return render(request, 'booking/booking_confirm_to_book_form.html')

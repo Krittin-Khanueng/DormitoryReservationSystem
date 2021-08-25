@@ -7,6 +7,7 @@ urlpatterns = [
     path("success/", views.BookingSuccessView.as_view(), name="booking_success"),
     path("history/", views.HistoryView.as_view(), name="booking_history"),
     path("confirm/booking/", views.ConfirmToBookView.as_view(), name="booking_confirm"),
+    path("confirm/boking/form/", views.ConfirmToBookFormView.as_view(), name="booking_confirm_form"),
 
 
 ]

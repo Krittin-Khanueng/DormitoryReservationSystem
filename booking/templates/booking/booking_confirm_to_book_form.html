@@ -1,0 +1,84 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}ฟอร์มกรอกข้อมูล{% endblock %}
+
+{% block content %}
+<div class="container justify-content-center">
+    <!-- แบบฟอร์ม -->
+    <div class="card">
+        <div class="card-header">
+            <h3>ฟอร์มกรอกข้อมูล</h3>
+        </div>
+        <div class="card-body">
+            <form action="{%url 'booking_confirm_form'%}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+
+                    <label for="tel">เบอร์โทร</label>
+                    <input type="text" maxlength="10" class="form-control" id="tel" name="tel" placeholder="เบอร์โทร">
+                </div>
+
+                <div class="form-group">
+                    <label for="car_registration">ทะเบียนรถยนต์</label>
+                    <input type="text" class="form-control" id="car_registration" name="car_registration"
+                        placeholder="ทะเบียนรถยนต์">
+                </div>
+                <div class="form-group">
+                    <label for="motorcycle_registration">ทะเบียนจักรยานยนต์</label>
+                    <input type="text" class="form-control" id="motorcycle_registration" name="motorcycle_registration"
+                        placeholder="ทะเบียนจักรยานยนต์">
+                </div>
+                <!--เลขที่บัญชีธนาคาร-->
+                <div class="form-group">
+                    <label for="bank_account_number">เลขที่บัญชีธนาคาร</label>
+                    <input type="text" class="form-control" id="bank_account_number" name="bank_account_number"
+                        placeholder="เลขที่บัญชีธนาคาร">
+                </div>
+                <!--เลขที่บิล-->
+                <div class="form-group">
+                    <label for="bill_number">เลขที่บิล</label>
+                    <input type="text" class="form-control" id="bill_number" name="bill_number" placeholder="เลขที่บิล">
+                </div>
+                <!--อัพโหลดรูปบิล-->
+                <div class="form-group mt-2">
+                    <label for="bill_image">อัพโหลดรูปบิล</label>
+                    <input type="file" class="form-control-file" id="bill_image" name="bill_image">
+                </div>
+                <!--อัพโหลดรูปโปรไฟล์-->
+                <div class="form-group mt-2">
+                    <label for="profile_image">อัพโหลดรูปโปรไฟล์</label>
+                    <input type="file" class="form-control-file" id="profile_image" name="profile_image">
+                </div>
+                <!--ปุ่มส่ง-->
+                <button type="submit" class="btn btn-primary">ส่ง</button>
+            </form>
+        </div>
+
+    </div>
+
+
+    <script>
+        <!--phone validation
+        -->
+        var
+        tel
+        =
+        document.getElementById('tel');
+        tel.addEventListener('input',
+        function
+        (e)
+        {
+        var
+        x
+        =
+        e.target.value.replace(/[^0-9]/g,
+        '').slice(0,
+        10);
+        e.target.value
+        =
+        x;
+        });
+    </script>
+
+
+    {% endblock %}
