@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -8,6 +8,7 @@ from django.views import View
 from dorm.models import Room
 from .models import Booking, Booking_confirmation
 from account.views import Login_by_PSUPASSPORTView
+from booking.models import Opening_booking
 
 
 class BookingRoomView(Login_by_PSUPASSPORTView, View):
@@ -15,9 +16,12 @@ class BookingRoomView(Login_by_PSUPASSPORTView, View):
 
         user = self.get_user_from_models(request)
         room = self.get_room_from_models(request)
+        group = self.get_group_from_models(request)
+        opening_booking = self.get_opening_booking_from_models(group)
 
         if user and room:  # เช็กว่าห้องเต็มแล้วหรือไหม
-            booking, created = Booking.objects.get_or_create(room=room)
+            booking, created = Booking.objects.get_or_create(
+                room=room, open_booking=opening_booking)
             if created:
                 booking.save()
             if not user.account.is_booking_state:  # เช็กว่าผู้ใช้เคยจองห้องพักแล้วหรือไม
@@ -56,6 +60,20 @@ class BookingRoomView(Login_by_PSUPASSPORTView, View):
             return user
         return None
 
+    def get_group_from_models(self, request):
+        group = get_object_or_404(
+            Group, id=request.user.groups.all()[0].id)
+        if group:
+            return group
+        return None
+
+    def get_opening_booking_from_models(self, group):
+        opening_booking = Opening_booking.objects.filter(
+            group=group, is_status=True).latest('created_at')
+        if opening_booking:
+            return opening_booking
+        return None
+
 
 class ConfirmRoomView(Login_by_PSUPASSPORTView, View):
     def post(self, request):
@@ -80,8 +98,11 @@ class BookingSuccessView(Login_by_PSUPASSPORTView, View):
 class ConfirmToBookView(Login_by_PSUPASSPORTView, View):
     def get(self, request):
         # get booking in current user
-        booking = Booking.objects.filter(
-            user_id=request.user.id).latest('booking_at')
+        try:
+            booking = Booking.objects.filter(
+                user_id=request.user.id).latest('booking_at')
+        except Booking.DoesNotExist:
+            booking = None
         try:
             Booking_confirmation.objects.get(
                 booking=booking, is_confirmed__isnull=False)

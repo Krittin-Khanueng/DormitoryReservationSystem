@@ -3,7 +3,9 @@
 {% block title %}ยืนยันการจองห้องพัก{% endblock %}
 
 {% block content %}
+
 <div class="container">
+    {%if booking%}
     <div class="row">
         <form method="POST" action="{{ booking_confirm }}">
             {% csrf_token %}
@@ -55,5 +57,10 @@
             </div>
         </form>
     </div>
+
 </div>
+{%else%}
+<h1 class="text text-danger text-center mt-5">ไม่มีข้อมูลในขณะนี้</h1>
+{%endif%}
+
 {% endblock %}
