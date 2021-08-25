@@ -1,5 +1,5 @@
 ﻿{% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block title %}ฟอร์มกรอกข้อมูล{% endblock %}
 
 {% block content %}
@@ -39,18 +39,9 @@
                     <label for="bill_number">เลขที่บิล</label>
                     <input type="text" class="form-control" id="bill_number" name="bill_number" placeholder="เลขที่บิล">
                 </div>
-                <!--อัพโหลดรูปบิล-->
-                <div class="form-group mt-2">
-                    <label for="bill_image">อัพโหลดรูปบิล</label>
-                    <input type="file" class="form-control-file" id="bill_image" name="bill_image">
-                </div>
-                <!--อัพโหลดรูปโปรไฟล์-->
-                <div class="form-group mt-2">
-                    <label for="profile_image">อัพโหลดรูปโปรไฟล์</label>
-                    <input type="file" class="form-control-file" id="profile_image" name="profile_image">
-                </div>
+                {{form|crispy}}
                 <!--ปุ่มส่ง-->
-                <button type="submit" class="btn btn-primary">ส่ง</button>
+                <button type="submit" class="btn btn-primary mt-5">ส่ง</button>
             </form>
         </div>
 

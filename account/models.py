@@ -28,7 +28,8 @@ def path_upload_bill(instance, filename):
     ext = filename.split('.')[-1]
     # get filename
     if instance.pk:
-        filename = '{}.{}'.format(instance.user.username, ext)
+        filename = '{}.{}.{}.{}.{}'.format(instance.user.username,  today.strftime(
+            '%Y'), today.strftime('%m'), today.strftime('%d'), ext)
     else:
         # set filename as random string
         filename = '{}.{}'.format(uuid4().hex, ext)
