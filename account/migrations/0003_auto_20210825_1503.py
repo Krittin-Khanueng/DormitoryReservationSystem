@@ -19,21 +19,25 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='account',
             name='bank_account_number',
-            field=models.CharField(blank=True, max_length=20, null=True, verbose_name='บัญชีธนาคาร'),
+            field=models.CharField(
+                blank=True, max_length=20, null=True, verbose_name='บัญชีธนาคาร'),
         ),
         migrations.AddField(
             model_name='account',
             name='bill_number',
-            field=models.CharField(blank=True, max_length=30, null=True, verbose_name='เลขที่บิล'),
+            field=models.CharField(
+                blank=True, max_length=30, null=True, verbose_name='เลขที่บิล'),
         ),
         migrations.AddField(
             model_name='account',
             name='image_bill',
-            field=models.ImageField(blank=True, null=True, upload_to=account.models.path_upload_bill),
+            field=models.ImageField(
+                blank=True, null=True, upload_to=account.models.path_upload_bill),
         ),
         migrations.AlterField(
             model_name='account',
             name='bank_account',
-            field=models.CharField(blank=True, max_length=30, null=True, verbose_name='ธนาคาร'),
+            field=models.CharField(
+                blank=True, max_length=30, null=True, verbose_name='ธนาคาร'),
         ),
     ]

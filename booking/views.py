@@ -171,8 +171,7 @@ class ConfirmToBookFormView(Login_by_PSUPASSPORTView, View):
         fss = FileSystemStorage()
         if bill_image:
             account.bill_image = fss.save(bill_image.name, bill_image)
-            
-            
+
         account.save()
 
         return render(request, 'booking/booking_confirm_to_book_form.html')
