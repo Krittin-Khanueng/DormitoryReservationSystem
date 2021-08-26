@@ -30,10 +30,11 @@ class FloorAdmin(admin.ModelAdmin):
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'floor',
         'room_id',
         'room_type',
         'amount',
         'is_status',
     )
-    list_filter = ('is_status', 'room_type', 'amount',)
+    list_filter = ('floor', 'is_status')
