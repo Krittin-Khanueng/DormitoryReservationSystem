@@ -118,23 +118,19 @@ class ConfirmToBookView(Login_by_PSUPASSPORTView, View):
             return render(request, 'booking/booking_confirm_to_book.html', context)
 
     def post(self, request):
-        # get user from models
-
-        # get booking in current user one objects
-
         booking = Booking.objects.filter(
             user_id=request.user.id).latest('booking_at')
         data = request.POST.copy()
-        print(data.get('is_confirmed'))
         if (data.get('is_confirmed') == 'true'):
             confirmation = Booking_confirmation(
                 booking=booking, is_confirmed=True)
-        else:
+            confirmation.save()
+            return HttpResponseRedirect(reverse('booking_confirm_form'))
+        elif (data.get('is_confirmed') == 'false'):
             confirmation = Booking_confirmation(
                 booking=booking, is_confirmed=False)
-
-        confirmation.save()
-        return render(request, 'booking/booking_success.html')
+            confirmation.save()
+            return HttpResponseRedirect(reverse('booking_success'))
 
 
 class HistoryView(Login_by_PSUPASSPORTView, View):
@@ -176,4 +172,4 @@ class ConfirmToBookFormView(Login_by_PSUPASSPORTView, View):
         # upload image to models
         account.save()
 
-        return render(request, 'booking/booking_confirm_to_book_form.html')
+        return HttpResponseRedirect(reverse('index'))
