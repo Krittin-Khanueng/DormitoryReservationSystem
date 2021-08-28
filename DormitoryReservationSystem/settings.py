@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'main',
     'account',
     'booking',
+    'administer',
     'crispy_forms',
     'django_extensions',
     'debug_toolbar',
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'DormitoryReservationSystem.urls'
@@ -100,6 +102,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        
     }
 }
 # Password validation
