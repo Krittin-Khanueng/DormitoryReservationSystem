@@ -58,8 +58,9 @@
     <!--Container Main start-->
     <div class="height-100">
         <div class="container-fluid">
-            {% block main%}
 
+            {% include 'include/messages.html'%}
+            {% block main%}
             {% endblock main %}
         </div>
     </div>
