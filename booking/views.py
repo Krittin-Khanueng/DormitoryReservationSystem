@@ -13,13 +13,37 @@ from booking.forms import AccountForm
 from account.models import Account
 
 
+def get_opening_booking_from_models(group):
+    opening_booking = Opening_booking.objects.filter(
+        group=group, is_status=True).latest('created_at')
+    if opening_booking:
+        return opening_booking
+    return None
+
+
+def get_user_from_models(request):
+    user = get_object_or_404(
+        User, id=request.user.id, account__is_booking_state=False)
+    if user:
+        return user
+    return None
+
+
+def get_room_from_models(request):
+    room = get_object_or_404(Room, id=request.POST.get(
+        'room_pk'), is_status=True, amount__gt=0)
+    if room:
+        return room
+    return None
+
+
 class BookingRoomView(Login_by_PSUPASSPORTView, View):
     def post(self, request):
 
-        user = self.get_user_from_models(request)
-        room = self.get_room_from_models(request)
+        user = get_user_from_models(request)
+        room = get_room_from_models(request)
         group = self.get_group_from_models(request)
-        opening_booking = self.get_opening_booking_from_models(group)
+        opening_booking = get_opening_booking_from_models(group)
 
         if user and room:  # เช็กว่าห้องเต็มแล้วหรือไหม
             booking, created = Booking.objects.get_or_create(
@@ -33,7 +57,8 @@ class BookingRoomView(Login_by_PSUPASSPORTView, View):
                 request, 'ห้องพักที่คุณจองเต็มแล้ว กรุณาจองห้องใหม่')
             return HttpResponseRedirect(reverse("dorm"))
 
-    def booking_room(self, booking, user):
+    @staticmethod
+    def booking_room(booking, user):
         # add user to booking
 
         booking.user = user
@@ -48,32 +73,12 @@ class BookingRoomView(Login_by_PSUPASSPORTView, View):
 
     # get room from models where amount greater than 0
 
-    def get_room_from_models(self, request):
-        room = get_object_or_404(Room, id=request.POST.get(
-            'room_pk'), is_status=True, amount__gt=0)
-        if room:
-            return room
-        return None
-
-    def get_user_from_models(self, request):
-        user = get_object_or_404(
-            User, id=request.user.id, account__is_booking_state=False)
-        if user:
-            return user
-        return None
-
-    def get_group_from_models(self, request):
+    @staticmethod
+    def get_group_from_models(request):
         group = get_object_or_404(
             Group, id=request.user.groups.all()[0].id)
         if group:
             return group
-        return None
-
-    def get_opening_booking_from_models(self, group):
-        opening_booking = Opening_booking.objects.filter(
-            group=group, is_status=True).latest('created_at')
-        if opening_booking:
-            return opening_booking
         return None
 
 
@@ -86,8 +91,6 @@ class ConfirmRoomView(Login_by_PSUPASSPORTView, View):
             "user": user
         }
         return render(request, 'booking/booking_confirm.html', context)
-
-# get you for request
 
 
 class BookingSuccessView(Login_by_PSUPASSPORTView, View):
@@ -121,16 +124,16 @@ class ConfirmToBookView(Login_by_PSUPASSPORTView, View):
         booking = Booking.objects.filter(
             user_id=request.user.id).latest('booking_at')
         data = request.POST.copy()
-        if (data.get('is_confirmed') == 'true'):
-            confirmation = Booking_confirmation(
-                booking=booking, is_confirmed=True)
-            confirmation.save()
-            return HttpResponseRedirect(reverse('booking_confirm_form'))
-        elif (data.get('is_confirmed') == 'false'):
-            confirmation = Booking_confirmation(
-                booking=booking, is_confirmed=False)
-            confirmation.save()
-            return HttpResponseRedirect(reverse('booking_success'))
+        if data.get('is_confirmed') == 'true':
+            return self.save_booking_confirm(booking, True, 'booking_confirm_form')
+        elif data.get('is_confirmed') == 'false':
+            return self.save_booking_confirm(booking, False, 'booking_success')
+
+    def save_booking_confirm(self, booking, is_confirmed, redirect):
+        confirmation = Booking_confirmation(
+            booking=booking, is_confirmed=is_confirmed)
+        confirmation.save()
+        return HttpResponseRedirect(reverse(redirect))
 
 
 class HistoryView(Login_by_PSUPASSPORTView, View):
