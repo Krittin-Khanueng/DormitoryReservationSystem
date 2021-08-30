@@ -1,0 +1,110 @@
+﻿{% extends 'administer/base_admin_page.html' %}
+{% load static %}
+
+{% block title%}เพิ่มห้องพัก{% endblock%}
+
+{% block main%}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">เพิ่มห้องพัก</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="#" method="POST" class="form-horizontal" role="form">
+                        {% csrf_token %}
+                        {{form}}
+                        <div>
+                            <button class="btn btn-primary mt-2" type="submit">บันทึก</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--ห้องทั้งหมด-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">ห้องทั้งหมด</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>ชั้น</th>
+                                <th>เลขห้อง</th>
+                                <th>ประเภทห้อง</th>
+                                <th>จำนวนคน</th>
+                                <th>สถานะ</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for room in rooms %}
+                            <tr>
+                                <td>{{room.floor}}</td>
+                                <td>{{room.room_id}}</td>
+                                <td>{% if room.room_type == "MALE"%}ผู้ชาย {% elif  room.room_type == "FMALE"%}
+                                    ผู้หญิง{% endif %}</td>
+                                <td>{{room.amount}}</td>
+                                <td>{% if room.is_status%}พร้อมใช้งาน {% else%}ไม่พร้อมใช้งาน{% endif %}</td>
+                                <td>
+                                    <a class="btn btn-primary" href="{%url 'management_room_edit' room.id %}">แก้ไข</a>
+                                    <button class="btn btn-danger" onclick="delete_room_id({{room.id}})">ลบ</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- pagination -->
+                    <nav aria-label="pagination">
+                        {% if rooms.paginator.num_pages > 1 %}
+                        <ul class="pagination">
+                            {% for page_number in rooms.paginator.page_range %}
+                            <li class="page-item
+                            {% if rooms.number == page_number %}
+                                 active
+                            {% endif %}
+                            "><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block script %}
+<script>
+    function delete_room_id(id) {
+        if (confirm("คุณต้องการลบหอพักนี้หรือไม่ ?")) {
+            let data = new FormData();
+            data.append("csrfmiddlewaretoken", '{{csrf_token}}')
+            data.append("id", id)
+            axios.post("{% url 'management_room_delete'%}", data)
+                .then(response => {
+                    if (response.data.status == 'success') {
+                        alert("ลบหอห้องสำเร็จ")
+                        window.location.reload()
+                    } else {
+                        alert("ลบห้องไม่สำเร็จ")
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+    }
+</script>
+{% endblock script%}
+
+
+{% endblock %}

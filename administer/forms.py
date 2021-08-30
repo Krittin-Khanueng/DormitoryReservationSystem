@@ -1,5 +1,5 @@
 ﻿from django import forms
-from dorm.models import Dormitory
+from dorm.models import Dormitory, Floor, Room
 
 
 class DormitoryForm(forms.ModelForm):
@@ -21,3 +21,43 @@ class DormitoryForm(forms.ModelForm):
         # required fields
         self.fields['name'].required = True
         self.fields['images'].required = True
+
+
+class FloorForm(forms.ModelForm):
+    class Meta:
+        model = Floor
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(FloorForm, self).__init__(*args, **kwargs)
+        self.fields['dorm_name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['number'].widget.attrs.update({'class': 'form-control'})
+        self.fields['dorm_name'].label = 'ชื่อหอพัก'
+        self.fields['number'].label = 'เลขชั้น'
+
+        # required fields
+        self.fields['dorm_name'].required = True
+        self.fields['number'].required = True
+
+
+class RoomForm(forms.ModelForm):
+    class Meta:
+        model = Room
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(RoomForm, self).__init__(*args, **kwargs)
+        self.fields['floor'].widget.attrs.update({'class': 'form-control'})
+        self.fields['room_id'].widget.attrs.update({'class': 'form-control'})
+
+        self.fields['room_type'].widget.attrs.update({'class': 'form-control'})
+        self.fields['amount'].widget.attrs.update({'class': 'form-control'})
+        # is_status boolen fields
+
+
+        # label
+        self.fields['floor'].label = 'ชั้น'
+        self.fields['room_id'].label = 'เลขห้อง'
+        self.fields['room_type'].label = 'ประเภทห้อง'
+        self.fields['amount'].label = 'จำนวนคน'
+        self.fields['is_status'].label = 'สถานะ'

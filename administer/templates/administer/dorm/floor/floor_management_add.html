@@ -1,0 +1,33 @@
+﻿{% extends 'administer/base_admin_page.html' %}
+{% load static %}
+
+{% block title%}เพิ่มชั้นห้องพัก{% endblock%}
+
+{% block main%}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">เพิ่มชั้นห้องพัก</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{% url 'management_floor_add'%}" method="POST" class="form-horizontal" role="form">
+                        {% csrf_token %}
+                        {{form}}
+                        <button class="btn btn-primary  mt-2 " type="submit">บันทึก</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+
+
+
+
+{% endblock %}
