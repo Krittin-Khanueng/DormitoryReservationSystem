@@ -54,7 +54,6 @@ class RoomForm(forms.ModelForm):
         self.fields['amount'].widget.attrs.update({'class': 'form-control'})
         # is_status boolen fields
 
-
         # label
         self.fields['floor'].label = 'ชั้น'
         self.fields['room_id'].label = 'เลขห้อง'
