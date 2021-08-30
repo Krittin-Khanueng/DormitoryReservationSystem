@@ -6,6 +6,8 @@ from dorm.models import Dormitory
 from django.views import View
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from django.http import HttpResponseRedirect, JsonResponse
+from django.urls import reverse
 
 
 class administerView(View):
@@ -45,9 +47,40 @@ class administerdormView(View):
         if form.is_valid():
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
-            return render(request, "administer/dorm_management.html")
+            return HttpResponseRedirect(reverse("management_dorm"))
         else:
             context = {
                 "form": form
             }
             return render(request, "administer/dorm_management.html", context)
+
+
+class administerdorm_editView(View):
+    def get(self, request, id):
+        dorm = Dormitory.objects.get(id=id)
+        context = {
+            "form": DormitoryForm(instance=dorm),
+            "dorm": dorm
+        }
+        return render(request, "administer/dorm_management_edit.html", context)
+
+    def post(self, request, id):
+        dorm = Dormitory.objects.get(id=id)
+        form = DormitoryForm(request.POST, request.FILES, instance=dorm)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "บันทึกสำเร็จ")
+            return HttpResponseRedirect(reverse("management_dorm"))
+        else:
+            context = {
+                "form": form
+            }
+            return render(request, "administer/dorm_management_edit.html", context)
+
+
+class administerdorm_deleteView(View):
+    def post(self, request):
+        id = request.POST.get("id")
+        dorm = Dormitory.objects.get(id=id)
+        dorm.delete()
+        return JsonResponse({"status": 'success'})
