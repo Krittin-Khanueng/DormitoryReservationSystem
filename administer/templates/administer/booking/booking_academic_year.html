@@ -1,0 +1,48 @@
+﻿{% extends 'administer/base_admin_page.html' %}
+
+
+{% block title %}หน้าดูประวัติการจองห้องพักตามปีการศึกษา{% endblock %}
+
+{% block main %}
+
+<!--ดูประวัติตามปีการศึกษา-->
+
+<div class="container">
+    {% if bookings %}
+    {% include 'administer/booking/table_academic_year.html'%}
+    {% else %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">ดูประวัติการจองห้องพักตามปีการศึกษา</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" method="POST" action="{% url 'booking_academic_year'%}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="year" class="col-md-2 control-label">ปีการศึกษา</label>
+                            <div class="col-md-4">
+                                <select class="form-control" name="academic_year" id="academic_year">
+                                    {% for academic_year in academic_years %}
+                                    <option value="{{ academic_year.id }}">{{ academic_year.academic_year }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary">ค้นหา</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+
+
+{% endblock %}

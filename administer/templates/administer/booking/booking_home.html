@@ -1,0 +1,39 @@
+﻿{% extends 'administer/base_admin_page.html' %}
+
+
+{% block title %}หน้าดูประวัติการจองห้องพัก{% endblock %}
+
+{% block main %}
+
+
+
+<div class="container">
+    <h2>หน้าดูประวัติการจองห้องพัก</h2>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card text-center">
+                <div class=" card-body">
+                    <h5 class="card-title ">ดูประวัติการจองห้องพัก</h5>
+                    <p class="card-description"><i class='bx bx-buildings' style="font-size: 2rem;"></i></p>
+                    <a href="{% url 'booking_view'%}" class="btn btn-primary ">เลือก</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card text-center">
+                <div class=" card-body">
+                    <h5 class="card-title">ดูประวัติการยืนยันห้องพัก</h5>
+                    <p class="card-description"><i class='bx bx-receipt' style="font-size: 2rem;"></i></p>
+                    <a href="#" class="btn btn-primary">เลือก</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    {% endblock %}

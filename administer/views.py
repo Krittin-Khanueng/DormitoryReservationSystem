@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
 
-from booking.models import Opening_booking
+from booking.models import Opening_booking, Booking, Booking_confirmation, Academic_year
 from dorm.models import Dormitory, Room
 from .forms import DormitoryForm, FloorForm, RoomForm, Opening_bookingForm
 
@@ -257,3 +257,47 @@ class open_dormitory_editView(View):
                 "form": form
             }
             return render(request, "administer/dorm/open_dormitory_edit.html", context)
+
+
+class booking_HomeView(View):
+    def get(self, request):
+        return render(request, "administer/booking/booking_home.html")
+
+    def post(self, request):
+        print("Yes")
+        return HttpResponseRedirect(reverse("booking_home"))
+
+
+class booking_View(View):
+    def get(self, request):
+
+        return render(request, "administer/booking/booking.html")
+
+
+class booking_academic_year_View(View):
+    def get(self, request):
+        academic_years = Academic_year.objects.all()
+        paginator = Paginator(academic_years, 3)
+        try:
+            page = int(request.GET.get('page', '1'))
+        except:
+            page = 1
+        try:
+            academic_yearsPage = paginator.page(page)
+        except (EmptyPage, InvalidPage):
+            academic_yearsPage = paginator.page(paginator.num_pages)
+        context = {
+            "academic_years": academic_yearsPage,
+        }
+        return render(request, "administer/booking/booking_academic_year.html", context)
+
+    def post(self, request):
+        academic_year = request.POST.get("academic_year")
+        bookings = Booking.objects.filter(
+            open_booking__academic_year=academic_year)
+        print(bookings)
+        context = {
+            "bookings": bookings,
+
+        }
+        return render(request, "administer/booking/booking_academic_year.html", context)

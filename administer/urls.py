@@ -27,6 +27,11 @@ urlpatterns = [
          views.open_dormitory_editView.as_view(), name="open_dormitory_edit"),
     path('dorm/open/dormitory/delete/',
          views.open_dormitory_deleteView.as_view(), name="open_dormitory_delete"),
+    path('booking/', views.booking_HomeView.as_view(), name="booking_home"),
+    path('booking/view/', views.booking_View.as_view(), name="booking_view"),
+    path('booking/view/academic-year/',
+         views.booking_academic_year_View.as_view(), name="booking_academic_year"),
+
 
 
 ]

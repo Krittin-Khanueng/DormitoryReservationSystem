@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from .models import Opening_booking, Booking, Booking_confirmation
+from .models import Opening_booking, Booking, Booking_confirmation, Academic_year
 
 
 @admin.register(Opening_booking)
@@ -35,3 +35,8 @@ class BookingAdmin(admin.ModelAdmin):
 class Booking_confirmationAdmin(admin.ModelAdmin):
     list_display = ('id', 'booking', 'is_confirmed', 'confirm_date')
     list_filter = ('booking', 'is_confirmed', 'confirm_date')
+
+
+@admin.register(Academic_year)
+class Academic_yearAdmin(admin.ModelAdmin):
+    list_display = ('id', 'academic_year',)

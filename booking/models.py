@@ -6,8 +6,16 @@ from dorm.models import Room
 import datetime
 
 
+class Academic_year(models.Model):
+    academic_year = models.CharField(max_length=10, unique=True)
+
+    def __str__(self):
+        return self.academic_year
+
+
 class Opening_booking(models.Model):
-    academic_year = models.CharField(verbose_name="ปีการศึกษา", max_length=10)
+    academic_year = models.ForeignKey(
+        Academic_year, on_delete=models.CASCADE, verbose_name="ปีการศึกษา")
     group = models.ForeignKey(
         Group, on_delete=models.CASCADE, related_name="group", verbose_name="กลุ่ม")
     opening_day = models.DateTimeField(verbose_name="เวลาเปิดจอง")
@@ -47,6 +55,9 @@ class Booking(models.Model):
     class Meta:
         verbose_name = "การจอง"
 
+    def get_academic_year_in_open_booking(self):
+        return self.open_booking.academic_year
+
 
 class Booking_confirmation(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -63,4 +74,3 @@ class Booking_confirmation(models.Model):
 
     def __str__(self):
         return f"{self.booking.user.username} ห้อง:{self.booking.room.room_id} สถานะการยืนยัน:{self.is_confirmed}"
-
