@@ -14,13 +14,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Academic_year',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('academic_year', models.CharField(max_length=10, unique=True)),
             ],
         ),
         migrations.AlterField(
             model_name='opening_booking',
             name='academic_year',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='booking.academic_year', verbose_name='ปีการศึกษา'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                    to='booking.academic_year', verbose_name='ปีการศึกษา'),
         ),
     ]
