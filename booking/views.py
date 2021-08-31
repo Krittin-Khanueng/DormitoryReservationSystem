@@ -83,7 +83,8 @@ class BookingRoomView(Login_by_PSUPASSPORTView, View):
 
 
 class ConfirmRoomView(Login_by_PSUPASSPORTView, View):
-    def post(self, request):
+    @staticmethod
+    def post(request):
         user = User.objects.get(id=request.user.id)
         room = Room.objects.get(id=request.POST.get('room_id'))
         context = {
@@ -94,14 +95,16 @@ class ConfirmRoomView(Login_by_PSUPASSPORTView, View):
 
 
 class BookingSuccessView(Login_by_PSUPASSPORTView, View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         return render(request, 'booking/booking_success.html')
 
 # booking confirm
 
 
 class ConfirmToBookView(Login_by_PSUPASSPORTView, View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         # get booking in current user
         try:
             booking = Booking.objects.filter(
@@ -129,7 +132,8 @@ class ConfirmToBookView(Login_by_PSUPASSPORTView, View):
         elif data.get('is_confirmed') == 'false':
             return self.save_booking_confirm(booking, False, 'booking_success')
 
-    def save_booking_confirm(self, booking, is_confirmed, redirect):
+    @staticmethod
+    def save_booking_confirm(booking, is_confirmed, redirect):
         confirmation = Booking_confirmation(
             booking=booking, is_confirmed=is_confirmed)
         confirmation.save()
@@ -137,7 +141,8 @@ class ConfirmToBookView(Login_by_PSUPASSPORTView, View):
 
 
 class HistoryView(Login_by_PSUPASSPORTView, View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
 
         bookings_list = Booking.objects.filter(
             user_id=request.user.id).order_by("-booking_at")
@@ -149,13 +154,15 @@ class HistoryView(Login_by_PSUPASSPORTView, View):
 
 
 class ConfirmToBookFormView(Login_by_PSUPASSPORTView, View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         context = {
             "form": AccountForm()
         }
         return render(request, 'booking/booking_confirm_to_book_form.html', context)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         # get account from models
         account = Account.objects.get(user_id=request.user.id)
         form = AccountForm(request.POST, request.FILES)

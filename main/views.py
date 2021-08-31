@@ -9,7 +9,8 @@ from django.contrib import messages
 
 
 class HomePageView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         return render(request, 'main/index.html')
 
 
@@ -97,7 +98,8 @@ class CallBackView(View):
 		return redirect('index')
 
 		#check groups
-	def check_groups(self,first_two_codes):
+	@staticmethod
+	def check_groups(first_two_codes):
 	    groups = Group.objects.all()
 	    for group in groups:
 	        return group.name == first_two_codes

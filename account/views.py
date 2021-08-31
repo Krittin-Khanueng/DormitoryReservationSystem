@@ -36,7 +36,8 @@ class ProfileEditView(Login_by_PSUPASSPORTView, View):
         account = get_user_account(self, request)
         return render(request, 'account/profile-edit.html', {'account': account})
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         # get all data from request
         data = request.POST.copy()
         user = User.objects.get(id=request.user.id)

@@ -11,7 +11,8 @@ from account.views import Login_by_PSUPASSPORTView
 
 class DormView(Login_by_PSUPASSPORTView, View):
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
         # get request user groups
         try:
             user_groups = request.user.groups.values_list('name', flat=True)[0]
@@ -40,7 +41,8 @@ class DormView(Login_by_PSUPASSPORTView, View):
 
 class RoomView(Login_by_PSUPASSPORTView, View):
 
-    def get(self, request, dorm_name):
+    @staticmethod
+    def get(request, dorm_name):
         context = {}
         # get user gender
         gender = request.user.account.gender
@@ -55,7 +57,8 @@ class RoomView(Login_by_PSUPASSPORTView, View):
 
 class DormDetailsView(View):
     #show dorm details for current
-    def get(self, request, dorm_name):
+    @staticmethod
+    def get(request, dorm_name):
         dorm = get_object_or_404(Dormitory, name=dorm_name)
         context = {
             "dorm": dorm,

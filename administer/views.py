@@ -11,17 +11,20 @@ from .forms import DormitoryForm, FloorForm, RoomForm, Opening_bookingForm
 
 
 class administerView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         return render(request, "administer/base_admin_page.html")
 
 
 class administerdashboardView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         return render(request, "administer/dashboard.html")
 
 
 class administerdorm_addView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         dorms = Dormitory.objects.all()
         paginator = Paginator(dorms, 3)
 
@@ -42,7 +45,8 @@ class administerdorm_addView(View):
         }
         return render(request, "administer/dorm/dorm_management_add.html", context)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         form = DormitoryForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
@@ -56,7 +60,8 @@ class administerdorm_addView(View):
 
 
 class administerdorm_editView(View):
-    def get(self, request, id):
+    @staticmethod
+    def get(request, id):
         dorm = Dormitory.objects.get(id=id)
         context = {
             "form": DormitoryForm(instance=dorm),
@@ -64,7 +69,8 @@ class administerdorm_editView(View):
         }
         return render(request, "administer/dorm/dorm_management_edit.html", context)
 
-    def post(self, request, id):
+    @staticmethod
+    def post(request, id):
         dorm = Dormitory.objects.get(id=id)
         form = DormitoryForm(request.POST, request.FILES, instance=dorm)
         if form.is_valid():
@@ -79,7 +85,8 @@ class administerdorm_editView(View):
 
 
 class administerdorm_deleteView(View):
-    def post(self, request):
+    @staticmethod
+    def post(request):
         id = request.POST.get("id")
         dorm = Dormitory.objects.get(id=id)
         dorm.delete()
@@ -87,18 +94,21 @@ class administerdorm_deleteView(View):
 
 
 class administerdormView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         return render(request, "administer/dorm/dorm_management.html")
 
 
 class administerfloor_addView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         context = {
             "form": FloorForm(),
         }
         return render(request, "administer/dorm/floor/floor_management_add.html", context)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         form = FloorForm(request.POST)
         if form.is_valid():
             form.save()
@@ -112,7 +122,8 @@ class administerfloor_addView(View):
 
 
 class administerroom_addView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         rooms = Room.objects.all()
         paginator = Paginator(rooms, 3)
 
@@ -132,7 +143,8 @@ class administerroom_addView(View):
         }
         return render(request, "administer/dorm/room/room_management_add.html", context)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         form = RoomForm(request.POST)
         if form.is_valid():
             form.save()
@@ -146,14 +158,16 @@ class administerroom_addView(View):
 
 
 class administerroom_editView(View):
-    def get(self, request, id):
+    @staticmethod
+    def get(request, id):
         room = Room.objects.get(id=id)
         context = {
             "form": RoomForm(instance=room),
         }
         return render(request, "administer/dorm/room/room_management_edit.html", context)
 
-    def post(self, request, id):
+    @staticmethod
+    def post(request, id):
         room = Room.objects.get(id=id)
         form = RoomForm(request.POST, instance=room)
         if form.is_valid():
@@ -168,7 +182,8 @@ class administerroom_editView(View):
 
 
 class administerroom_deleteView(View):
-    def post(self, request):
+    @staticmethod
+    def post(request):
         id = request.POST.get("id")
         room = Room.objects.get(id=id)
         room.delete()
@@ -176,7 +191,8 @@ class administerroom_deleteView(View):
 
 
 class open_dormitoryView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         open_days = Opening_booking.objects.all()
         paginator = Paginator(open_days, 3)
 
@@ -195,7 +211,8 @@ class open_dormitoryView(View):
             "open_days": open_daysPage}
         return render(request, "administer/dorm/open_dormitory.html", context)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         form = Opening_bookingForm(request.POST)
         if form.is_valid():
             form.save()
@@ -209,7 +226,8 @@ class open_dormitoryView(View):
 
 
 class open_dormitory_deleteView(View):
-    def post(self, request):
+    @staticmethod
+    def post(request):
         id = request.POST.get("id")
         open_day = Opening_booking.objects.get(id=id)
         open_day.delete()
@@ -217,7 +235,8 @@ class open_dormitory_deleteView(View):
 
 
 class open_dormitory_editView(View):
-    def get(self, request, id):
+    @staticmethod
+    def get(request, id):
         print("Hello world")
         open_day = Opening_booking.objects.get(id=id)
         context = {
@@ -226,7 +245,8 @@ class open_dormitory_editView(View):
         }
         return render(request, "administer/dorm/open_dormitory_edit.html", context)
 
-    def post(self, request, id):
+    @staticmethod
+    def post(request, id):
         open_day = Opening_booking.objects.get(id=id)
         form = Opening_bookingForm(request.POST, instance=open_day)
         if form.is_valid():

@@ -19,7 +19,8 @@ class ImageHelper:
 	Rezise image that came from front-end
 	"""
 
-	def compressImage(self, uploadedImage, width, height, quality):
+	@staticmethod
+	def compressImage(uploadedImage, width, height, quality):
 
 		"""read"""
 		image = Image.open(uploadedImage)
