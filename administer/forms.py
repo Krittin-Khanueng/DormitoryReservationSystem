@@ -69,7 +69,6 @@ class Opening_bookingForm(forms.ModelForm):
 
     closed_day = forms.DateTimeField(widget=forms.DateInput(
         attrs={'class': 'form-control', 'type': 'date'}))
-    
 
     class Meta:
         model = Opening_booking
@@ -80,7 +79,7 @@ class Opening_bookingForm(forms.ModelForm):
         self.fields['academic_year'].widget.attrs.update(
             {'class': 'form-control'})
         self.fields['group'].widget.attrs.update({'class': 'form-control'})
-        
+
         # label
         self.fields['academic_year'].label = 'ปีการศึกษา'
         self.fields['group'].label = 'กลุ่ม'
