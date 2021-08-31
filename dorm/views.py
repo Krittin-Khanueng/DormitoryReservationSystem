@@ -28,7 +28,7 @@ class DormView(Login_by_PSUPASSPORTView, View):
                     group__name=user_groups, is_status=True).latest("created_at")
             except Opening_booking.DoesNotExist:
                 opening_booking = None
-                
+
             context = {
                 "dormitorys": dorm,
                 "opening_booking": opening_booking,
@@ -39,6 +39,7 @@ class DormView(Login_by_PSUPASSPORTView, View):
         else:
             return HttpResponseRedirect(reverse('index'))
 
+
 class RoomView(Login_by_PSUPASSPORTView, View):
 
     @staticmethod
@@ -47,7 +48,8 @@ class RoomView(Login_by_PSUPASSPORTView, View):
         # get user gender
         gender = request.user.account.gender
         # get dorm and floors
-        floors = Floor.objects.select_related("dorm_name").filter(dorm_name__name=dorm_name, dorm_name__is_active=True)
+        floors = Floor.objects.select_related("dorm_name").filter(
+            dorm_name__name=dorm_name, dorm_name__is_active=True)
         dormitory = {
             floor.number: list(floor.get_room_type(gender)) for floor in floors
         }
@@ -55,8 +57,9 @@ class RoomView(Login_by_PSUPASSPORTView, View):
         context["dormitory"] = dormitory
         return render(request, "dorm/room.html", context)
 
+
 class DormDetailsView(View):
-    #show dorm details for current
+    # show dorm details for current
     @staticmethod
     def get(request, dorm_name):
         dorm = get_object_or_404(Dormitory, name=dorm_name)
@@ -64,4 +67,3 @@ class DormDetailsView(View):
             "dorm": dorm,
         }
         return render(request, "dorm/dorm_details.html", context)
-
