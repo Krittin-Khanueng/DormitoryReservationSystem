@@ -1,0 +1,122 @@
+﻿{% extends 'administer/base_admin_page.html' %}
+{% load static %}
+
+{% block title %}หน้าจัดการวันเปิดจองหอพัก{% endblock %}
+
+{% block main %}
+<!-- เพิ่มหอพัก-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">เพิ่มวันเปิด-ปิดหอพัก</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" action="{% url 'open_dormitory' %}" method="post">
+                        {% csrf_token %}
+                        {{ form }}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default   mt-3">บันทึก</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">รายการหอพักทั้งหมดในระบบ</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ปีการศึกษา</th>
+                                <th>กลุ่ม</th>
+                                <th>เวลาเปิดจอง</th>
+                                <th>เวลาปิดจอง</th>
+                                <th>สถานะการใช้งาน</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for open_day in open_days %}
+                            <tr>
+
+                                <td>{{open_day.academic_year}}</td>
+                                <td>{{open_day.group}}</td>
+                                <th>{{open_day.opening_day}}</th>
+                                <th>{{open_day.closed_day}}</th>
+                                <th>{% if open_day.is_status %} พร้อมใช้งาน {% else %} ไม่พร้อมใช้งาน {% endif %}</th>
+
+
+                                <td>
+                                    <a href="{% url 'open_dormitory_edit' open_day.id %}"
+                                        class="btn btn-warning">แก้ไข</a>
+                                    <button class="btn btn-danger"
+                                        onclick="delete_open_day_id({{open_day.id}})">ลบ</button>
+
+
+
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                    <!-- pagination -->
+                    <nav aria-label="pagination">
+                        {% if open_days.paginator.num_pages > 1 %}
+                        <ul class="pagination">
+                            {% for page_number in open_days.paginator.page_range %}
+                            <li class="page-item
+                            {% if open_days.number == page_number %}
+                                 active
+                            {% endif %}
+                            "><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </nav>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% block script %}
+<script>
+    function delete_open_day_id(id) {
+        if (confirm("คุณต้องการลบหอวันเปิด-ปิดหอพักหรือไม่ ?")) {
+            let data = new FormData();
+            data.append("csrfmiddlewaretoken", '{{csrf_token}}')
+            data.append("id", id)
+            axios.post("{% url 'open_dormitory_delete'%}", data)
+                .then(response => {
+                    if (response.data.status == 'success') {
+                        alert("ลบหอวันเปิด-ปิดหอพักสำเร็จ")
+                        window.location.reload()
+                    } else {
+                        alert("ลบหอวันเปิด-ปิดหอพักไม่สำเร็จ")
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+    }
+</script>
+{% endblock script%}
+
+
+{% endblock %}
