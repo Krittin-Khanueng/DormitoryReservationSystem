@@ -237,7 +237,6 @@ class open_dormitory_deleteView(View):
 class open_dormitory_editView(View):
     @staticmethod
     def get(request, id):
-        print("Hello world")
         open_day = Opening_booking.objects.get(id=id)
         context = {
             "form": Opening_bookingForm(instance=open_day),

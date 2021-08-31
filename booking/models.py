@@ -63,3 +63,4 @@ class Booking_confirmation(models.Model):
 
     def __str__(self):
         return f"{self.booking.user.username} ห้อง:{self.booking.room.room_id} สถานะการยืนยัน:{self.is_confirmed}"
+
