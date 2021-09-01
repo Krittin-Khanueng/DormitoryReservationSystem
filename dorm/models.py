@@ -32,6 +32,7 @@ class Dormitory(models.Model):
     def get_room_amount_total(self):
         return Room.objects.filter(floor__dorm_name=self).aggregate(Sum('amount'))
     # get all floor in dorm
+
     def get_floor_list(self):
         return Floor.objects.filter(dorm_name=self)
 
@@ -71,6 +72,6 @@ class Room(models.Model):
     # check room amount > 0 and is_status = True
     def get_amount(self):
         return self.amount
-    
+
     def room_not_full(self):
         return self.amount > 0 and self.is_status
