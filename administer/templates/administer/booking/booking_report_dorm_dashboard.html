@@ -1,0 +1,78 @@
+﻿{% extends 'administer/base_admin_page.html' %}
+{% load static %}
+
+{% block title %} หน้าแรก {% endblock %}
+
+{% block css_style %}
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+{% endblock %}
+
+{% block main %}
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+{% if room_available == 0 %}
+<!--ไม่มีข้อมูลในขณะนี้-->
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                <strong>ไม่มีข้อมูลในขณะนี้</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% else %}
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="panel panel-dark panel-colorful">
+                <div class="panel-body text-center">
+                    <p class="text-uppercase mar-btm text-sm">ห้องทั้งหมด</p>
+                    <i class="fa fa-building fa-5x"></i>
+                    <hr>
+                    <p class="h2 text-thin">{{all_room}}</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="panel panel-danger panel-colorful">
+                <div class="panel-body text-center">
+                    <p class="text-uppercase mar-btm text-sm">ห้องว่าง</p>
+                    <i class="fa fa-hotel fa-5x"></i>
+                    <hr>
+                    <p class="h2 text-thin">{{room_available}}</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="panel panel-primary panel-colorful">
+                <div class="panel-body text-center">
+                    <p class="text-uppercase mar-btm text-sm">ห้องที่ไม่ว่าง</p>
+                    <i class="fa fa-times fa-5x"></i>
+                    <hr>
+                    <p class="h2 text-thin">{{room_not_available}}</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="panel panel-info panel-colorful">
+                <div class="panel-body text-center">
+                    <p class="text-uppercase mar-btm text-sm">จำนวนที่เหลือทั้งหมด</p>
+                    <i class="fa fa-home fa-5x"></i>
+                    <hr>
+                    <p class="h2 text-thin">{{room_amount_total}}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

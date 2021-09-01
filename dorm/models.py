@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 
 
 # Create your models here.
@@ -22,9 +23,14 @@ class Dormitory(models.Model):
         return Floor.objects.filter(dorm_name=self, floor__amount__gt=0, floor__is_status=True).count()
 
     # check room amount < 0 and is_status  in floor
-    def is_room_not_available_floor(self, floor):
-        return Floor.objects.filter(dorm_name=self, floor=floor, floor__amount__lte=0, floor__is_status=True).count()
+    def is_room_not_available_floor(self):
+        return Floor.objects.filter(dorm_name=self, floor__amount__lte=0, floor__is_status=True).count()
 
+    def get_all_rooms(self):
+        return Room.objects.filter(floor__dorm_name=self).count()
+
+    def get_room_amount_total(self):
+        return Room.objects.filter(floor__dorm_name=self).aggregate(Sum('amount'))
     # get all floor in dorm
     def get_floor_list(self):
         return Floor.objects.filter(dorm_name=self)
@@ -63,6 +69,8 @@ class Room(models.Model):
         return f"หอพัก:{self.floor.dorm_name} ชั้น:{self.floor.number} ห้อง:{self.room_id} จำนวน:{self.amount}"
 
     # check room amount > 0 and is_status = True
-
+    def get_amount(self):
+        return self.amount
+    
     def room_not_full(self):
         return self.amount > 0 and self.is_status

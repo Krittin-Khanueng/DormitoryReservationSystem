@@ -1,0 +1,51 @@
+﻿{% extends 'administer/base_admin_page.html' %}
+
+
+{% block title %}รายงานตามหอพัก{% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">ดูประวัติการจองห้องพักตามหอพัก</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" method="POST" action="{% url 'booking_report_dorm'%}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="dorm" class="col-md-2 control-label">ปีการศึกษา</label>
+                            <div class="col-md-4">
+                                <select class="form-control" name="dorm" id="dorm">
+                                    {% for dorm in dorms %}
+                                    <option value="{{dorm.id}}">{{ dorm.name }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-2 mt-2">
+                                <button type="submit" class="btn btn-primary">ค้นหา</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button onclick="goBack()" class="btn btn-default">Go Back</button>
+
+
+
+
+{% block script%}
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+{% endblock %}
+
+{% endblock %}

@@ -347,3 +347,61 @@ class confirmation_view(View):
         }
         return render(request, "administer/booking/confirmation.html", context)
 
+
+class booking_reportView(View):
+    def get(self, request):
+        return render(request, "administer/booking/booking_report.html")
+
+
+class booking_reportDormView(View):
+    def get(self, request):
+        dorms = Dormitory.objects.all()
+        context = {
+            "dorms": dorms,
+        }
+        return render(request, "administer/booking/booking_report_dorm.html", context)
+
+    def post(self, request):
+        dorm = request.POST.get("dorm")
+        # get is_room_available_floor
+        dorm = Dormitory.objects.get(id=dorm)
+        if not dorm:
+            dorm = None
+        try:
+            room_available = dorm.is_room_available_floor()
+            room_not_available = dorm.is_room_not_available_floor()
+            all_room = room_available + room_not_available
+            room_amount_total = dorm.get_room_amount_total()['amount__sum']
+        except:
+            room_available = None
+            room_not_available = None
+            all_room = None
+            room_amount_total = None
+            dorm = None
+        print(room_available)
+        context = {
+            "dorm": dorm,
+            "room_available": room_available,
+            "room_not_available": room_not_available,
+            "all_room": all_room,
+            "room_amount_total": room_amount_total,
+        }
+
+        return render(request, "administer/booking/booking_report_dorm_dashboard.html", context)
+
+
+class booking_reportGroupView(View):
+    def get(self, request):
+        groups = Group.objects.all()
+        context = {
+            "groups": groups,
+        }
+
+        return render(request, "administer/booking/booking_report_group.html", context)
+
+    def post(self, request):
+        group = request.POST.get("group")
+        group = Group.objects.get(id=group)
+        # เอากลุ่มออกมาและมีการเช็คกลุ่มเช็คกลุ่มที่มีการเช็คกลุ่มแล้ว
+
+        return render(request, "administer/booking/booking_report_group_dashboard.html", context)
