@@ -31,7 +31,9 @@ urlpatterns = [
     path('booking/view/', views.booking_View.as_view(), name="booking_view"),
     path('booking/view/academic-year/',
          views.booking_academic_year_View.as_view(), name="booking_academic_year"),
-
+    path('booking/view/dorm/', views.booking_dorm_View.as_view(), name="booking_dorm"),
+    path('booking/view/group/',
+         views.booking_group_View.as_view(), name="booking_group"),
 
 
 ]

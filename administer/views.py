@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
-
+from django.contrib.auth.models import Group, User
 from booking.models import Opening_booking, Booking, Booking_confirmation, Academic_year
 from dorm.models import Dormitory, Room
 from .forms import DormitoryForm, FloorForm, RoomForm, Opening_bookingForm
@@ -276,18 +276,9 @@ class booking_View(View):
 
 class booking_academic_year_View(View):
     def get(self, request):
-        academic_years = Academic_year.objects.all()
-        paginator = Paginator(academic_years, 3)
-        try:
-            page = int(request.GET.get('page', '1'))
-        except:
-            page = 1
-        try:
-            academic_yearsPage = paginator.page(page)
-        except (EmptyPage, InvalidPage):
-            academic_yearsPage = paginator.page(paginator.num_pages)
+        academic_years = Academic_year.objects.all().values('academic_year', 'id')
         context = {
-            "academic_years": academic_yearsPage,
+            "academic_years": academic_years,
         }
         return render(request, "administer/booking/booking_academic_year.html", context)
 
@@ -295,9 +286,44 @@ class booking_academic_year_View(View):
         academic_year = request.POST.get("academic_year")
         bookings = Booking.objects.filter(
             open_booking__academic_year=academic_year)
-        print(bookings)
         context = {
             "bookings": bookings,
 
         }
         return render(request, "administer/booking/booking_academic_year.html", context)
+
+
+class booking_dorm_View(View):
+    def get(self, request):
+        dorms = Dormitory.objects.all()
+
+        context = {
+            "dorms": dorms,
+        }
+        return render(request, "administer/booking/booking_dorm.html", context)
+
+    def post(self, request):
+        id_dorm = request.POST.get("dorm")
+        try:
+            bookings = Booking.objects.filter(
+                room__floor__dorm_name__id=id_dorm)
+        except:
+            bookings = None
+
+        if not bookings:
+            messages.warning(request, "ไม่มีข้อมูลการจอง")
+            return HttpResponseRedirect(reverse("booking_dorm"))
+        context = {
+            "bookings": bookings,
+        }
+        return render(request, "administer/booking/booking_dorm.html", context)
+
+
+class booking_group_View(View):
+    def get(self, request):
+        users = User.objects.filter(is_staff=False, is_superuser=False)
+
+        context = {
+            "users": users,
+        }
+        return render(request, "administer/booking/booking_group.html", context)

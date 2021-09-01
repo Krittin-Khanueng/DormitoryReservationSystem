@@ -40,9 +40,18 @@
         </div>
     </div>
 </div>
+
+<button onclick="goBack()" class="btn btn-default">Go Back</button>
 {% endif %}
 
+{% block script%}
+<script>
+    function goBack() {
+        window.history.back();
 
+    }
+</script>
+{% endblock %}
 
 
 {% endblock %}

@@ -15,7 +15,7 @@ class Academic_year(models.Model):
 
 class Opening_booking(models.Model):
     academic_year = models.ForeignKey(
-        Academic_year, on_delete=models.CASCADE, verbose_name="ปีการศึกษา")
+        Academic_year, on_delete=models.CASCADE, verbose_name="ปีการศึกษา", related_name="opening_booking")
     group = models.ForeignKey(
         Group, on_delete=models.CASCADE, related_name="group", verbose_name="กลุ่ม")
     opening_day = models.DateTimeField(verbose_name="เวลาเปิดจอง")
@@ -32,6 +32,9 @@ class Opening_booking(models.Model):
     def is_open(self):
         now = datetime.datetime.now()
         return self.opening_day < now < self.closed_day
+
+    def get_academic_year_in_booking(self):
+        return self.academic_year
 
     class Meta:
         verbose_name = "เวลาเปิดจองห้องพัก"
