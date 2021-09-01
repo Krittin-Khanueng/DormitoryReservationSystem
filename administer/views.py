@@ -327,3 +327,23 @@ class booking_group_View(View):
             "users": users,
         }
         return render(request, "administer/booking/booking_group.html", context)
+
+
+class confirmation_view(View):
+    def get(self, request):
+        confirmations = Booking_confirmation.objects.all()
+        paginator = Paginator(confirmations, 5)
+        try:
+            page = int(request.GET.get('page', '1'))
+        except:
+            page = 1
+        try:
+            confirmationsPage = paginator.page(page)
+        except (EmptyPage, InvalidPage):
+            confirmationsPage = paginator.page(paginator.num_pages)
+
+        context = {
+            "confirmations": confirmationsPage,
+        }
+        return render(request, "administer/booking/confirmation.html", context)
+
