@@ -32,7 +32,8 @@ urlpatterns = [
     path('booking/view/academic-year/',
          views.booking_academic_year_View.as_view(), name="booking_academic_year"),
     path('booking/view/dorm/', views.booking_dorm_View.as_view(), name="booking_dorm"),
-     path('confirmation/view/', views.confirmation_view.as_view(), name="confirmation_view"),
+    path('confirmation/view/', views.confirmation_view.as_view(),
+         name="confirmation_view"),
 
 
 ]
