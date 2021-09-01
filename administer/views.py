@@ -346,4 +346,3 @@ class confirmation_view(View):
             "confirmations": confirmationsPage,
         }
         return render(request, "administer/booking/confirmation.html", context)
-
