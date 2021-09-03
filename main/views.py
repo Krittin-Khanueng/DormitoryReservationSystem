@@ -66,20 +66,14 @@ class CallBackView(View):
             Account(user=user, first_name_en=displayname.split(' ')[
                 0], last_name_en=displayname.split(' ')[1]).save()
 
-            # check groups
-            if self.check_groups(user_login[:2]):
-                group = Group.objects.get(name=user_login[:2])
-                user = User.objects.get(username=user_login)
-                user.groups.add(group)
-                user.save()
-            else:
+            if not self.check_groups(user_login[:2]):
                 # create Groups
                 Group(name=user_login[:2]).save()
-                group = Group.objects.get(name=user_login[:2])
-                user = User.objects.get(username=user_login)
-                user.groups.add(group)
-                user.save()
 
+            group = Group.objects.get(name=user_login[:2])
+            user = User.objects.get(username=user_login)
+            user.groups.add(group)
+            user.save()
             # user login
             login(request, user)
             return redirect('index')
