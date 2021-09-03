@@ -36,8 +36,7 @@ class DormView(Login_by_PSUPASSPORTView, View):
 
             }
             return render(request, 'dorm/dorm.html', context)
-        else:
-            return HttpResponseRedirect(reverse('index'))
+        return HttpResponseRedirect(reverse('index'))
 
 
 class RoomView(Login_by_PSUPASSPORTView, View):
