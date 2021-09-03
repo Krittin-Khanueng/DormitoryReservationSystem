@@ -10,6 +10,19 @@ from dorm.models import Dormitory, Room
 from .forms import DormitoryForm, FloorForm, RoomForm, Opening_bookingForm
 
 
+def paginate_list(request, list, num):
+    paginator = Paginator(list, num)
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+    try:
+        list = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        list = paginator.page(paginator.num_pages)
+    return list
+
+
 class administerView(View):
     @staticmethod
     def get(request):
@@ -26,17 +39,7 @@ class administerdorm_addView(View):
     @staticmethod
     def get(request):
         dorms = Dormitory.objects.all()
-        paginator = Paginator(dorms, 3)
-
-        try:
-            page = int(request.GET.get('page', '1'))
-        except:
-            page = 1
-
-        try:
-            dormPage = paginator.page(page)
-        except (EmptyPage, InvalidPage):
-            dormPage = paginator.page(paginator.num_pages)
+        dormPage = paginate_list(request, dorms, 3)
 
         context = {
             "form": DormitoryForm(),
@@ -125,17 +128,7 @@ class administerroom_addView(View):
     @staticmethod
     def get(request):
         rooms = Room.objects.all()
-        paginator = Paginator(rooms, 3)
-
-        try:
-            page = int(request.GET.get('page', '1'))
-        except:
-            page = 1
-
-        try:
-            roomPage = paginator.page(page)
-        except (EmptyPage, InvalidPage):
-            roomPage = paginator.page(paginator.num_pages)
+        roomPage = paginate_list(request, rooms, 3)
 
         context = {
             "form": RoomForm(),
@@ -194,21 +187,11 @@ class open_dormitoryView(View):
     @staticmethod
     def get(request):
         open_days = Opening_booking.objects.all()
-        paginator = Paginator(open_days, 3)
-
-        try:
-            page = int(request.GET.get('page', '1'))
-        except:
-            page = 1
-
-        try:
-            open_daysPage = paginator.page(page)
-        except (EmptyPage, InvalidPage):
-            open_daysPage = paginator.page(paginator.num_pages)
+        open_days_page = paginate_list(request, open_days, 3)
 
         context = {
             "form": Opening_bookingForm(),
-            "open_days": open_daysPage}
+            "open_days": open_days_page}
         return render(request, "administer/dorm/open_dormitory.html", context)
 
     @staticmethod
@@ -332,18 +315,10 @@ class booking_group_View(View):
 class confirmation_view(View):
     def get(self, request):
         confirmations = Booking_confirmation.objects.all()
-        paginator = Paginator(confirmations, 5)
-        try:
-            page = int(request.GET.get('page', '1'))
-        except:
-            page = 1
-        try:
-            confirmationsPage = paginator.page(page)
-        except (EmptyPage, InvalidPage):
-            confirmationsPage = paginator.page(paginator.num_pages)
+        confirmations_page = paginate_list(request, confirmations, 3)
 
         context = {
-            "confirmations": confirmationsPage,
+            "confirmations": confirmations_page,
         }
         return render(request, "administer/booking/confirmation.html", context)
 
@@ -404,4 +379,4 @@ class booking_reportGroupView(View):
         group = Group.objects.get(id=group)
         # เอากลุ่มออกมาและมีการเช็คกลุ่มเช็คกลุ่มที่มีการเช็คกลุ่มแล้ว
 
-        return render(request, "administer/booking/booking_report_group_dashboard.html", context)
+        return render(request, "administer/booking/booking_report_group_dashboard.html")
