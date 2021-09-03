@@ -83,14 +83,13 @@ class CallBackView(View):
             # user login
             login(request, user)
             return redirect('index')
+        user = authenticate(request, username=user_login,
+                            password=user_login+email+displayname)
+        if user is not None:
+            login(request, user)
         else:
-            user = authenticate(request, username=user_login,
-                                password=user_login+email+displayname)
-            if user is not None:
-                login(request, user)
-            else:
-                messages.warning(request, 'กรุณา login ใหม่อีกครั้ง')
-                return redirect('index')
+            messages.warning(request, 'กรุณา login ใหม่อีกครั้ง')
+            return redirect('index')
         return redirect('index')
 
         # check groups

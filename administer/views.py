@@ -52,11 +52,10 @@ class administerdorm_addView(View):
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
             return HttpResponseRedirect(reverse("management_dorm_add"))
-        else:
-            context = {
-                "form": form
-            }
-            return render(request, "administer/dorm/dorm_management_add.html", context)
+        context = {
+            "form": form
+        }
+        return render(request, "administer/dorm/dorm_management_add.html", context)
 
 
 class administerdorm_editView(View):
@@ -77,11 +76,10 @@ class administerdorm_editView(View):
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
             return HttpResponseRedirect(reverse("management_dorm_add"))
-        else:
-            context = {
-                "form": form
-            }
-            return render(request, "administer/dorm/dorm_management_edit.html", context)
+        context = {
+            "form": form
+        }
+        return render(request, "administer/dorm/dorm_management_edit.html", context)
 
 
 class administerdorm_deleteView(View):
@@ -114,11 +112,10 @@ class administerfloor_addView(View):
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
             return HttpResponseRedirect(reverse("management_floor_add"))
-        else:
-            context = {
-                "form": form
-            }
-            return render(request, "administer/dorm/floor/floor_management_add.html", context)
+        context = {
+            "form": form
+        }
+        return render(request, "administer/dorm/floor/floor_management_add.html", context)
 
 
 class administerroom_addView(View):
@@ -150,11 +147,10 @@ class administerroom_addView(View):
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
             return HttpResponseRedirect(reverse("management_room_add"))
-        else:
-            context = {
-                "form": form
-            }
-            return render(request, "administer/dorm/room/room_management_add.html", context)
+        context = {
+            "form": form
+        }
+        return render(request, "administer/dorm/room/room_management_add.html", context)
 
 
 class administerroom_editView(View):
@@ -174,11 +170,10 @@ class administerroom_editView(View):
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
             return HttpResponseRedirect(reverse("management_room_add"))
-        else:
-            context = {
-                "form": form
-            }
-            return render(request, "administer/dorm/room/room_management_edit.html", context)
+        context = {
+            "form": form
+        }
+        return render(request, "administer/dorm/room/room_management_edit.html", context)
 
 
 class administerroom_deleteView(View):
@@ -218,11 +213,10 @@ class open_dormitoryView(View):
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
             return HttpResponseRedirect(reverse("open_dormitory"))
-        else:
-            context = {
-                "form": form
-            }
-            return render(request, "administer/dorm/open_dormitory.html", context)
+        context = {
+            "form": form
+        }
+        return render(request, "administer/dorm/open_dormitory.html", context)
 
 
 class open_dormitory_deleteView(View):
@@ -252,11 +246,10 @@ class open_dormitory_editView(View):
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
             return HttpResponseRedirect(reverse("open_dormitory"))
-        else:
-            context = {
-                "form": form
-            }
-            return render(request, "administer/dorm/open_dormitory_edit.html", context)
+        context = {
+            "form": form
+        }
+        return render(request, "administer/dorm/open_dormitory_edit.html", context)
 
 
 class booking_HomeView(View):
