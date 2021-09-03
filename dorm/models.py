@@ -48,10 +48,9 @@ class Floor(models.Model):
     def get_room_type(self, type_room):
         if type_room == "ผู้ชาย":
             return Room.objects.filter(floor_id=self.id, room_type="MALE", is_status=True)
-        elif type_room == "ผู้หญิง":
+        if type_room == "ผู้หญิง":
             return Room.objects.filter(floor_id=self.id, room_type="FEMALE", is_status=True)
-        else:
-            return None
+        return None
 
 
 class Room(models.Model):

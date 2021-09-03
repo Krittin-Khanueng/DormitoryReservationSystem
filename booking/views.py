@@ -129,7 +129,7 @@ class ConfirmToBookView(Login_by_PSUPASSPORTView, View):
         data = request.POST.copy()
         if data.get('is_confirmed') == 'true':
             return self.save_booking_confirm(booking, True, 'booking_confirm_form')
-        elif data.get('is_confirmed') == 'false':
+        if data.get('is_confirmed') == 'false':
             return self.save_booking_confirm(booking, False, 'booking_success')
 
     @staticmethod

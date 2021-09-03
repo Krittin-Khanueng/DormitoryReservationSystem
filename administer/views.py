@@ -55,11 +55,10 @@ class administerdorm_addView(View):
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
             return HttpResponseRedirect(reverse("management_dorm_add"))
-        else:
-            context = {
-                "form": form
-            }
-            return render(request, "administer/dorm/dorm_management_add.html", context)
+        context = {
+            "form": form
+        }
+        return render(request, "administer/dorm/dorm_management_add.html", context)
 
 
 class administerdorm_editView(View):
@@ -80,11 +79,10 @@ class administerdorm_editView(View):
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
             return HttpResponseRedirect(reverse("management_dorm_add"))
-        else:
-            context = {
-                "form": form
-            }
-            return render(request, "administer/dorm/dorm_management_edit.html", context)
+        context = {
+            "form": form
+        }
+        return render(request, "administer/dorm/dorm_management_edit.html", context)
 
 
 class administerdorm_deleteView(View):
@@ -117,11 +115,10 @@ class administerfloor_addView(View):
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
             return HttpResponseRedirect(reverse("management_floor_add"))
-        else:
-            context = {
-                "form": form
-            }
-            return render(request, "administer/dorm/floor/floor_management_add.html", context)
+        context = {
+            "form": form
+        }
+        return render(request, "administer/dorm/floor/floor_management_add.html", context)
 
 
 class administerroom_addView(View):
@@ -143,11 +140,10 @@ class administerroom_addView(View):
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
             return HttpResponseRedirect(reverse("management_room_add"))
-        else:
-            context = {
-                "form": form
-            }
-            return render(request, "administer/dorm/room/room_management_add.html", context)
+        context = {
+            "form": form
+        }
+        return render(request, "administer/dorm/room/room_management_add.html", context)
 
 
 class administerroom_editView(View):
@@ -167,11 +163,10 @@ class administerroom_editView(View):
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
             return HttpResponseRedirect(reverse("management_room_add"))
-        else:
-            context = {
-                "form": form
-            }
-            return render(request, "administer/dorm/room/room_management_edit.html", context)
+        context = {
+            "form": form
+        }
+        return render(request, "administer/dorm/room/room_management_edit.html", context)
 
 
 class administerroom_deleteView(View):
@@ -201,11 +196,10 @@ class open_dormitoryView(View):
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
             return HttpResponseRedirect(reverse("open_dormitory"))
-        else:
-            context = {
-                "form": form
-            }
-            return render(request, "administer/dorm/open_dormitory.html", context)
+        context = {
+            "form": form
+        }
+        return render(request, "administer/dorm/open_dormitory.html", context)
 
 
 class open_dormitory_deleteView(View):
@@ -235,37 +229,41 @@ class open_dormitory_editView(View):
             form.save()
             messages.success(request, "บันทึกสำเร็จ")
             return HttpResponseRedirect(reverse("open_dormitory"))
-        else:
-            context = {
-                "form": form
-            }
-            return render(request, "administer/dorm/open_dormitory_edit.html", context)
+        context = {
+            "form": form
+        }
+        return render(request, "administer/dorm/open_dormitory_edit.html", context)
 
 
 class booking_HomeView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         return render(request, "administer/booking/booking_home.html")
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         print("Yes")
         return HttpResponseRedirect(reverse("booking_home"))
 
 
 class booking_View(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
 
         return render(request, "administer/booking/booking.html")
 
 
 class booking_academic_year_View(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         academic_years = Academic_year.objects.all().values('academic_year', 'id')
         context = {
             "academic_years": academic_years,
         }
         return render(request, "administer/booking/booking_academic_year.html", context)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         academic_year = request.POST.get("academic_year")
         bookings = Booking.objects.filter(
             open_booking__academic_year=academic_year)
@@ -277,7 +275,8 @@ class booking_academic_year_View(View):
 
 
 class booking_dorm_View(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         dorms = Dormitory.objects.all()
 
         context = {
@@ -285,7 +284,8 @@ class booking_dorm_View(View):
         }
         return render(request, "administer/booking/booking_dorm.html", context)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         id_dorm = request.POST.get("dorm")
         try:
             bookings = Booking.objects.filter(
@@ -303,7 +303,8 @@ class booking_dorm_View(View):
 
 
 class booking_group_View(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         users = User.objects.filter(is_staff=False, is_superuser=False)
 
         context = {
@@ -313,7 +314,8 @@ class booking_group_View(View):
 
 
 class confirmation_view(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         confirmations = Booking_confirmation.objects.all()
         confirmations_page = paginate_list(request, confirmations, 3)
 
@@ -324,19 +326,22 @@ class confirmation_view(View):
 
 
 class booking_reportView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         return render(request, "administer/booking/booking_report.html")
 
 
 class booking_reportDormView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         dorms = Dormitory.objects.all()
         context = {
             "dorms": dorms,
         }
         return render(request, "administer/booking/booking_report_dorm.html", context)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         dorm = request.POST.get("dorm")
         # get is_room_available_floor
         dorm = Dormitory.objects.get(id=dorm)
@@ -366,7 +371,8 @@ class booking_reportDormView(View):
 
 
 class booking_reportGroupView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         groups = Group.objects.all()
         context = {
             "groups": groups,
@@ -374,7 +380,8 @@ class booking_reportGroupView(View):
 
         return render(request, "administer/booking/booking_report_group.html", context)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         group = request.POST.get("group")
         group = Group.objects.get(id=group)
         # เอากลุ่มออกมาและมีการเช็คกลุ่มเช็คกลุ่มที่มีการเช็คกลุ่มแล้ว
