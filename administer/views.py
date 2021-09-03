@@ -260,29 +260,34 @@ class open_dormitory_editView(View):
 
 
 class booking_HomeView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         return render(request, "administer/booking/booking_home.html")
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         print("Yes")
         return HttpResponseRedirect(reverse("booking_home"))
 
 
 class booking_View(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
 
         return render(request, "administer/booking/booking.html")
 
 
 class booking_academic_year_View(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         academic_years = Academic_year.objects.all().values('academic_year', 'id')
         context = {
             "academic_years": academic_years,
         }
         return render(request, "administer/booking/booking_academic_year.html", context)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         academic_year = request.POST.get("academic_year")
         bookings = Booking.objects.filter(
             open_booking__academic_year=academic_year)
@@ -294,7 +299,8 @@ class booking_academic_year_View(View):
 
 
 class booking_dorm_View(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         dorms = Dormitory.objects.all()
 
         context = {
@@ -302,7 +308,8 @@ class booking_dorm_View(View):
         }
         return render(request, "administer/booking/booking_dorm.html", context)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         id_dorm = request.POST.get("dorm")
         try:
             bookings = Booking.objects.filter(
@@ -320,7 +327,8 @@ class booking_dorm_View(View):
 
 
 class booking_group_View(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         users = User.objects.filter(is_staff=False, is_superuser=False)
 
         context = {
@@ -330,7 +338,8 @@ class booking_group_View(View):
 
 
 class confirmation_view(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         confirmations = Booking_confirmation.objects.all()
         paginator = Paginator(confirmations, 5)
         try:
@@ -349,19 +358,22 @@ class confirmation_view(View):
 
 
 class booking_reportView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         return render(request, "administer/booking/booking_report.html")
 
 
 class booking_reportDormView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         dorms = Dormitory.objects.all()
         context = {
             "dorms": dorms,
         }
         return render(request, "administer/booking/booking_report_dorm.html", context)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         dorm = request.POST.get("dorm")
         # get is_room_available_floor
         dorm = Dormitory.objects.get(id=dorm)
@@ -391,7 +403,8 @@ class booking_reportDormView(View):
 
 
 class booking_reportGroupView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         groups = Group.objects.all()
         context = {
             "groups": groups,
@@ -399,7 +412,8 @@ class booking_reportGroupView(View):
 
         return render(request, "administer/booking/booking_report_group.html", context)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         group = request.POST.get("group")
         group = Group.objects.get(id=group)
         # เอากลุ่มออกมาและมีการเช็คกลุ่มเช็คกลุ่มที่มีการเช็คกลุ่มแล้ว
