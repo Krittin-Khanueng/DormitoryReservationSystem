@@ -61,6 +61,9 @@ class Booking(models.Model):
     def get_academic_year_in_open_booking(self):
         return self.open_booking.academic_year
 
+    def get_user_group(self):
+        return self.user.groups.all()[0].id
+
 
 class Booking_confirmation(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

@@ -15,4 +15,15 @@
           "htm", "html", "django-html"
       ]
   },
+
+  "python.languageServer": "Pylance",
+  "python.testing.unittestArgs": [
+    "-v",
+    "-s",
+    "./booking",
+    "-p",
+    "*test.py"
+  ],
+  "python.testing.pytestEnabled": false,
+  "python.testing.unittestEnabled": true
   }

@@ -92,3 +92,4 @@ class CallBackView(View):
         groups = Group.objects.all()
         for group in groups:
             return group.name == first_two_codes
+

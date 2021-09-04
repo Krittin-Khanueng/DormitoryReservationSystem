@@ -305,10 +305,32 @@ class booking_dorm_View(View):
 class booking_group_View(View):
     @staticmethod
     def get(request):
-        users = User.objects.filter(is_staff=False, is_superuser=False)
+        groups = Group.objects.all()
 
         context = {
-            "users": users,
+            "groups": groups,
+
+        }
+        return render(request, "administer/booking/booking_group.html", context)
+
+    @staticmethod
+    def post(request):
+        bookings = []
+        id_group = int(request.POST.get("group_id"))
+        try:
+            booking_all = Booking.objects.all()
+            for booking in booking_all:
+                if booking.get_user_group() == id_group:
+                    bookings.append(booking)
+
+        except:
+            bookings = None
+
+        if not bookings:
+            messages.warning(request, "ไม่มีข้อมูลการจอง")
+            return HttpResponseRedirect(reverse("booking_group"))
+        context = {
+            "bookings": bookings,
         }
         return render(request, "administer/booking/booking_group.html", context)
 
@@ -358,7 +380,6 @@ class booking_reportDormView(View):
             all_room = None
             room_amount_total = None
             dorm = None
-        print(room_available)
         context = {
             "dorm": dorm,
             "room_available": room_available,

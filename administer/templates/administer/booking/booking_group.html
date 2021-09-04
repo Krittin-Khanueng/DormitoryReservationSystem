@@ -1,0 +1,46 @@
+﻿{% extends 'administer/base_admin_page.html' %}
+
+
+{% block title %}หน้าประวัติการจองตามกลุ่ม{% endblock %}
+
+{% block main %}
+
+{% if bookings %}
+{% include 'administer/booking/table_booking_group.html'%}
+{% else %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">หน้าประวัติการจองตามกลุ่ม</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">กลุ่ม</label>
+                            <form class="form-horizontal" role="form" method="post" action="{% url 'booking_group' %}">
+                                {% csrf_token %}
+                                <div class="col-md-4">
+                                    <select class="form-control" id="group_id" name="group_id">
+                                        <option value="">กรุณาเลือกกลุ่ม</option>
+                                        {% for group in groups %}
+                                        <option value="{{ group.id }}">{{ group.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary mt-2" type="submit">ค้นหา</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif%}
+
+
+
+
+{% endblock %}
