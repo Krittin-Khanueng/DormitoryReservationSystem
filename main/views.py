@@ -92,6 +92,7 @@ class CallBackView(View):
         for group in groups:
             return group.name == first_two_codes
 
+
 class ContextPageView(View):
     def get(self, request):
         return render(request, 'main/context.html')
