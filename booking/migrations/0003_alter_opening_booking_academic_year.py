@@ -14,6 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='opening_booking',
             name='academic_year',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='opening_booking', to='booking.academic_year', verbose_name='ปีการศึกษา'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='opening_booking', to='booking.academic_year', verbose_name='ปีการศึกษา'),
         ),
     ]
