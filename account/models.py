@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-from PIL import Image
 from uuid import uuid4
 import datetime
 import os

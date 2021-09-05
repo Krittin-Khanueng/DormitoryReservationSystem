@@ -1,0 +1,20 @@
+﻿{% extends 'administer/base_admin_page.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% block title %}เข้าสู่ระบบ {% endblock %}
+
+
+
+{% block main %}
+
+<form method="POST" action="{% url 'login_admin'%}">
+    {% csrf_token %}
+
+    {{ form| crispy }}
+
+    <button type="submit" class="btn btn-primary mt-2">เข้าสู่ระบบ</button>
+    <input name="next" type="hidden" value="{% url 'management_dorm' %}" />
+</form>
+
+{% endblock %}

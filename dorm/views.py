@@ -1,8 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 
-from .models import Dormitory, Room, Floor
+from .models import Dormitory, Floor
 from booking.models import Opening_booking
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -61,8 +60,5 @@ class DormDetailsView(View):
     # show dorm details for current
     @staticmethod
     def get(request, dorm_name):
-        dorm = get_object_or_404(Dormitory, name=dorm_name)
-        context = {
-            "dorm": dorm,
-        }
-        return render(request, "dorm/dorm_details.html", context)
+
+        return render(request, "dorm/dorm_details.html")

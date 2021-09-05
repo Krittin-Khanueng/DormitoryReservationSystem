@@ -46,7 +46,7 @@
                                     <input type="hidden" name="room_id" value="{{ room.id }}">
 
                                     <div class="card-body"
-                                            {% if room.amount != 0 %} onclick="submitform({{ room.id }}) {% endif %}">
+                                            {% if room.amount != 0 %} onclick="submitter({{ room.id }}) {% endif %}">
                                         <h5 class="card-title">{{ room.room_id }}</h5>
                                         <p class="card-text">({{ room.amount }})</p>
                                     </div>
@@ -87,7 +87,7 @@
 
     {#    #ใช้axios ในการส่งค่าไปหลังบ้าน#}
     <script>
-        function submitform(form_id) {
+        function submitter(form_id) {
             document.getElementById(form_id).submit();
         }
     </script>

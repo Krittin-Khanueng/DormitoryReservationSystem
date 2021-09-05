@@ -32,15 +32,14 @@ urlpatterns = [
     path('booking/view/academic-year/',
          views.booking_academic_year_View.as_view(), name="booking_academic_year"),
     path('booking/view/dorm/', views.booking_dorm_View.as_view(), name="booking_dorm"),
-    path('booking/view/group/', views.booking_group_View.as_view(), name="booking_group"),
+    path('booking/view/group/',
+         views.booking_group_View.as_view(), name="booking_group"),
     path('confirmation/view/', views.confirmation_view.as_view(),
          name="confirmation_view"),
-    path('booking/report/', views.booking_reportView.as_view(),
+    path('report/', views.booking_reportView.as_view(),
          name="booking_report"),
-    path('booking/report/dorm/', views.booking_reportDormView.as_view(),
+    path('report/dorm/', views.booking_reportDormView.as_view(),
          name="booking_report_dorm"),
-    path('booking/report/group/', views.booking_reportGroupView.as_view(),
-         name="booking_report_group"),
-
+    path('login/', views.loginView.as_view(), name="login_admin")
 
 ]

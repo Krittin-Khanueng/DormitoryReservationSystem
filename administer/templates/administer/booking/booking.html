@@ -15,7 +15,7 @@
                 <div class=" card-body">
                     <h5 class="card-title ">ดูตามปีการศึกษา</h5>
                     <p class="card-description"><i class='bx bxs-calendar' style="font-size: 2rem;"></i></p>
-                    <a href="{% url 'booking_academic_year'%}" class="btn btn-primary ">เลือก</a>
+                    <a href="{% url 'booking_academic_year' %}" class="btn btn-primary ">เลือก</a>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                 <div class=" card-body">
                     <h5 class="card-title">ดูตามหอพัก</h5>
                     <p class="card-description"><i class='bx bx-buildings' style="font-size: 2rem;"></i></p>
-                    <a href="{% url 'booking_dorm'%}" class="btn btn-primary">เลือก</a>
+                    <a href="{% url 'booking_dorm' %}" class="btn btn-primary">เลือก</a>
                 </div>
             </div>
         </div>
@@ -35,15 +35,12 @@
                 <div class=" card-body">
                     <h5 class="card-title">ดูตามกลุ่ม</h5>
                     <p class="card-description"><i class='bx bxs-group' style="font-size: 2rem;"></i></p>
-                    <a href="#" class="btn btn-primary">เลือก</a>
+                    <a href="{% url 'booking_group'%}" class="btn btn-primary">เลือก</a>
                 </div>
             </div>
         </div>
-
-
-
     </div>
 
+</div>
 
-
-    {% endblock %}
+{% endblock %}

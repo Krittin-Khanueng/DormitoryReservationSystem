@@ -13,7 +13,8 @@ urlpatterns = [
     path('', include("main.urls")),
     path('account/', include("account.urls")),
     path('booking/', include("booking.urls")),
-    path('manage/', include("administer.urls"))
+    path('manage/', include("administer.urls")),
+    path("pr/", include("blog.urls"))
 ]
 
 if settings.DEBUG:

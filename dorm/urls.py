@@ -5,4 +5,5 @@ urlpatterns = [
 	path("", views.DormView.as_view(), name="dorm"),
 	path("room/<str:dorm_name>/", views.RoomView.as_view(), name="room-name"),
 	path("dorm/<str:dorm_name>/", views.DormDetailsView.as_view(), name="dorm-name"),
+	path("dorm/detail/", views.DormDetailsView.as_view(), name="dorm-detail"),
 ]

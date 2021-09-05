@@ -103,7 +103,7 @@
                     data.append("id", id)
                     axios.post("{% url 'open_dormitory_delete'%}", data)
                         .then(response => {
-                            if (response.data.status == 'success') {
+                            if (response.data.status === 'success') {
                                 alert("ลบหอวันเปิด-ปิดหอพักสำเร็จ")
                                 window.location.reload()
                             } else {

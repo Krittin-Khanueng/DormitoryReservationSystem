@@ -4,7 +4,6 @@ from django.views import View
 from django.contrib.auth import authenticate, login
 import requests
 from django.contrib.auth.models import Group, User
-from django.http import HttpResponse
 from django.contrib import messages
 
 
@@ -93,3 +92,6 @@ class CallBackView(View):
         for group in groups:
             return group.name == first_two_codes
 
+class ContextPageView(View):
+    def get(self, request):
+        return render(request, 'main/context.html')

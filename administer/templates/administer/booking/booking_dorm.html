@@ -5,52 +5,52 @@
 
 {% block main %}
 
-<div class="container">
-    {% if bookings%}
-    {% include 'administer/booking/table_booking_dorm.html'%}
-    {% else%}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">ดูประวัติการจองห้องพักตามหอพัก</h3>
-                </div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="#">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="dorm" class="col-md-2 control-label">ปีการศึกษา</label>
-                            <div class="col-md-4">
-                                <select class="form-control" name="dorm" id="dorm">
-                                    {% for dorm in dorms %}
-                                    <option value="{{dorm.id}}">{{ dorm.name }}
-                                    </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="col-md-2 mt-2">
-                                <button type="submit" class="btn btn-primary">ค้นหา</button>
-                            </div>
+    <div class="container">
+        {% if bookings %}
+            {% include 'administer/booking/table_booking_dorm.html' %}
+        {% else %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">ดูประวัติการจองห้องพักตามหอพัก</h3>
                         </div>
-                    </form>
+                        <div class="panel-body">
+                            <form class="form-horizontal" role="form" method="POST" action="#">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="dorm" class="col-md-2 control-label">ปีการศึกษา</label>
+                                    <div class="col-md-4">
+                                        <select class="form-control" name="dorm" id="dorm">
+                                            {% for dorm in dorms %}
+                                                <option value="{{ dorm.id }}">{{ dorm.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 mt-2">
+                                        <button type="submit" class="btn btn-primary">ค้นหา</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<button onclick="goBack()" class="btn btn-default">Go Back</button>
+            </div>
+            <button onclick="goBack()" class="btn btn-default">Go Back</button>
 
 
 
-{% endif %}
+        {% endif %}
 
 
-{% block script%}
-<script>
-    function goBack() {
-        window.history.back();
-    }
-</script>
-{% endblock %}
+    {% block script %}
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    {% endblock %}
 
 {% endblock %}

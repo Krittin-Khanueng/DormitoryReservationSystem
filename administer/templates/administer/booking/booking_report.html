@@ -5,31 +5,22 @@
 
 {% block main %}
 <div class="container">
-    <h2>หน้าดูประวัติการจองห้องพัก</h2>
+    <h2>ดูสรุปการจองห้องพัก</h2>
     <div class="row">
         <div class="col-sm-6">
             <div class="card text-center">
                 <div class=" card-body">
                     <h5 class="card-title ">รายงานเป็นหอพัก</h5>
                     <p class="card-description"><i class='bx bx-buildings' style="font-size: 2rem;"></i></p>
-                    <a href="{% url 'booking_report_dorm'%}" class="btn btn-primary ">เลือก</a>
+                    <a href="{% url 'booking_report_dorm' %}" class="btn btn-primary ">เลือก</a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="card text-center">
-                <div class=" card-body">
-                    <h5 class="card-title">รายงานเป็นกลุ่ม</h5>
-                    <p class="card-description"><i class='bx bx-group' style="font-size: 2rem;"></i></p>
-                    <a href="{% url 'booking_report_group'%}" class="btn btn-primary">เลือก</a>
-                </div>
-            </div>
-        </div>
+
 
 
     </div>
 
 
-
-
-    {% endblock %}
+</div>
+{% endblock %}

@@ -1,50 +1,50 @@
 ﻿{% extends 'administer/base_admin_page.html' %}
 {% load static %}
 
-{% block title%}หน้าจัดการหอพัก{% endblock%}
+{% block title %}หน้าจัดการหอพัก{% endblock %}
 
-{% block main%}
+{% block main %}
 
-<!--จัดการหอพัก ชั้น และห้อง  -->
-<div class="row">
-    <div class="col-sm-4">
-        <div class="card text-center">
-            <div class=" card-body">
-                <h5 class="card-title ">จัดการหอพัก</h5>
-                <p class="card-description"><i class="bi bi-building" style="font-size: 2rem;"></i></p>
-                <a href="{% url 'management_dorm_add'%}" class="btn btn-primary ">เลือก</a>
+    <!--จัดการหอพัก ชั้น และห้อง  -->
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card text-center">
+                <div class=" card-body">
+                    <h5 class="card-title ">จัดการหอพัก</h5>
+                    <p class="card-description"><i class="bi bi-building" style="font-size: 2rem;"></i></p>
+                    <a href="{% url 'management_dorm_add' %}" class="btn btn-primary ">เลือก</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="card text-center">
-            <div class=" card-body">
-                <h5 class="card-title">จัดการชั้นหอพัก</h5>
-                <p class="card-description"><i class="bi bi-receipt-cutoff" style="font-size: 2rem;"></i></i></p>
-                <a href="{% url 'management_floor_add' %}" class="btn btn-primary">เลือก</a>
+        <div class="col-sm-4">
+            <div class="card text-center">
+                <div class=" card-body">
+                    <h5 class="card-title">จัดการชั้นหอพัก</h5>
+                    <p class="card-description"><i class="bi bi-receipt-cutoff" style="font-size: 2rem;"></i></p>
+                    <a href="{% url 'management_floor_add' %}" class="btn btn-primary">เลือก</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="card text-center">
-            <div class=" card-body">
-                <h5 class="card-title">จัดการห้องพัก</h5>
-                <p class="card-description"><i class="bi bi-house-door" style="font-size: 2rem;"></i></p>
-                <a href="{% url 'management_room_add' %}" class="btn btn-primary">เลือก</a>
+        <div class="col-sm-4">
+            <div class="card text-center">
+                <div class=" card-body">
+                    <h5 class="card-title">จัดการห้องพัก</h5>
+                    <p class="card-description"><i class="bi bi-house-door" style="font-size: 2rem;"></i></p>
+                    <a href="{% url 'management_room_add' %}" class="btn btn-primary">เลือก</a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-4 mt-4">
-        <div class="card text-center">
-            <div class=" card-body">
-                <h5 class="card-title">จัดการวันเปิดปิดหอพัก</h5>
-                <p class="card-description"><i class="bi bi-people-fill" style=" font-size: 2rem;"></i></p>
-                <a href="{% url 'open_dormitory' %}" class="btn btn-primary">เลือก</a>
+        <div class="col-sm-4 mt-4">
+            <div class="card text-center">
+                <div class=" card-body">
+                    <h5 class="card-title">จัดการวันเปิดปิดหอพัก</h5>
+                    <p class="card-description"><i class="bi bi-people-fill" style=" font-size: 2rem;"></i></p>
+                    <a href="{% url 'open_dormitory' %}" class="btn btn-primary">เลือก</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 

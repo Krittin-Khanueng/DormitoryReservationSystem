@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'dorm',
     'main',
     'account',
+    'blog',
     'booking',
     'administer',
     'crispy_forms',
@@ -60,7 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    
+
 ]
 
 ROOT_URLCONF = 'DormitoryReservationSystem.urls'
@@ -77,6 +78,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'main.context_processors.all_dormitory',
+                'main.context_processors.all_blog',
                 'django.template.context_processors.request',
             ],
         },
@@ -102,7 +104,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-        
+
     }
 }
 # Password validation

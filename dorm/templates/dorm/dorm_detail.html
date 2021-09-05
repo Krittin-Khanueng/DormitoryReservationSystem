@@ -1,7 +1,34 @@
 {#หน้านี้ไว้สำหรับแสดงรายละเอียดหอพัก#}
 {% extends "base.html" %}
-{% block title %} {% endblock %}
+{% block title %}รายละเอียดหอพัก{% endblock %}
 
 {% block content %}
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">รายละเอียดหอพัก</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">ชื่อหอพัก</label>
+                                    <input type="text" class="form-control" id="name" value="{{ hotel.name }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">ที่อยู่</label>
+                                    <input type="text" class="form-control" id="address" value="{{ hotel.address }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">เบอร์โทรศัพท์</label>
+                                    <input type="text" class="form-control" id="phone" value="{{ hotel.phone }}" disabled>  
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">อีเมล</label>
+                                    <input type="text" class="form-control" id="email" value="{{ hotel.email }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="website">เว็บไซต์</label>
+                                    
 {% endblock %}

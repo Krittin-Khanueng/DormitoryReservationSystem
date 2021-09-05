@@ -1,25 +1,25 @@
 ﻿<table class="table table-striped table-bordered">
     <thead>
-        <tr>
-            <th>หอพัก</th>
-            <th>ชั้น</th>
-            <th>ห้อง</th>
-            <th>ชื่อ-นามสกุล</th>
-            <th>วันที่จอง</th>
-        </tr>
+    <tr>
+        <th>หอพัก</th>
+        <th>ชั้น</th>
+        <th>ห้อง</th>
+        <th>ชื่อ-นามสกุล</th>
+        <th>วันที่จอง</th>
+    </tr>
     </thead>
     <tbody>
-        {% for booking in bookings %}
+    {% for booking in bookings %}
         <tr>
-            <td>{{booking.room.floor.dorm_name}}</td>
-            <td>{{booking.room.floor.number}}</td>
-            <td>{{booking.room.room_id}}</td>
-            <td>{{booking.user.first_name}} {{booking.user.last_name}}</td>
-            <td>{{booking.booking_at}}</td>
+            <td>{{ booking.room.floor.dorm_name }}</td>
+            <td>{{ booking.room.floor.number }}</td>
+            <td>{{ booking.room.room_id }}</td>
+            <td>{{ booking.user.first_name }} {{ booking.user.last_name }}</td>
+            <td>{{ booking.booking_at }}</td>
         </tr>
-        {% endfor %}
+    {% endfor %}
     </tbody>
 </table>
 
 <!--ปุ่มย้อนกลับ-->
-<a href="{% url 'booking_dorm'%}" class="btn btn-default">Go Back</a>
+<a href="{% url 'booking_dorm' %}" class="btn btn-default">Go Back</a>

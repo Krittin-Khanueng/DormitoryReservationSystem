@@ -4,86 +4,72 @@
 {% block title %}หน้าแรก{% endblock %}
 
 {% block css_style %}
-    <link rel="stylesheet" href="{% static "css/index.css" %}">
+<link rel="stylesheet" href="{% static "css/index.css" %}">
 {% endblock %}
 {% block content %}
 
-    <!-- เนื้อหา -->
-    <section class="main">
-        <div class="p-5 mb-4 bg-light rounded-3" id="jumbotron">
-            <div class="dark-overlay">
-                <div class="container-fluid py-5">
-                    <h1 class="display-5 fw-bold">หอพักคณะแพทย์ศาสตร์ มหาวิทยาลัยสงขลานครินทร์</h1>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="card-body">
-        <div class="card  mx-3 my-4">
-            <div class="card-header">
-                Dormitory News/ Press Release Hatyai Campus
-            </div>
-            <div class="card-body">
-
-                <h2>
-                    <span><i class="bi bi-arrow-right-short" style="font-size: 2rem;"></i></span>
-                    <span><a href="#" class="news_text">แนวปฏิบัตินักศึกษาเดินทางกลับมามหาวิทยาลัย</a></span>
-                </h2>
-
-                <h2>
-                    <span><i class="bi bi-arrow-right-short" style="font-size: 2rem;"></i></span>
-                    <span><a href="#"
-                             class="news_text">ม.อ. ลดค่าธรรมเนียมการศึกษา และหอพักต่ออีก 1 ปี จากผลกระทบ COVID</a></span>
-                </h2>
-
-                <h2>
-                    <span><i class="bi bi-arrow-right-short" style="font-size: 2rem;"></i></span>
-                    <span><a href="#" class="news_text">แบบประเมินความเสี่ยงและแนวทางการปฏิบัติสำหรับนักศึกษา ในสถานการณ์ การแพร่ระบาดของโรคติดเชื้อไวรัสโคโรนา 2019(COVID-19)</a></span>
-                </h2>
-
-                <h2>
-                    <span><i class="bi bi-arrow-right-short" style="font-size: 2rem;"></i></span>
-                    <span><a href="#" class="news_text">แผนการศึกษาที่เปิดรับสมัคร ปีการศึกษา 2564</a></span>
-                </h2>
+<!-- เนื้อหา -->
+<section class="main">
+    <div class="p-5 mb-4 bg-light rounded-3" id="jumbotron">
+        <div class="dark-overlay">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">หอพักคณะแพทย์ศาสตร์ มหาวิทยาลัยสงขลานครินทร์</h1>
             </div>
         </div>
 
-    </section>
+    </div>
+</section>
 
-    <section id="card">
-        <div class="row row-cols-1 row-cols-md-3 g-4 mx-2">
-            <div class="col text-center">
-                <div class="card h-100">
-                    <i class="bi bi-building" style="font-size: 4rem;"></i>
-                    <div class="card-body">
-                        <h5 class="card-title">ข้อมูลหอพักนักศึกษา</h5>
-                        <a href="#" class="btn btn-primary">เพิ่มเติม</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col text-center">
-                <div class="card h-100">
-                    <i class="bi bi-person" style="font-size: 4rem;"></i>
-                    <div class="card-body">
-                        <h5 class="card-title">บุคลลากรหอพักนักศึกษา</h5>
-                        <a href="#" class="btn btn-primary">เพิ่มเติม</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col text-center">
-                <div class="card h-100">
-                    <i class="bi bi-telephone" style="font-size: 4rem;"></i>
-                    <div class="card-body">
-                        <h5 class="card-title">เบอร์ติดต่อหอพักนักศึกษา</h5>
-                        <a href="#" class="btn btn-primary">เพิ่มเติม</a>
-                    </div>
+<section id="card-body">
+    <div class="card  mx-3 my-4">
+        <div class="card-header">
+            Dormitory News/ Press Release Hatyai Campus
+        </div>
+        <div class="card-body">
+
+            {% for blog in blogs %}
+            <h2>
+                <span><i class="bi bi-arrow-right-short" style="font-size: 2rem;"></i></span>
+                <span><a href="{{blog.get_url}}" class="news_text">{{blog.title}}</a></span>
+            </h2>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+
+{% comment %} <section id="card">
+    <div class="row row-cols-1 row-cols-md-3 g-4 mx-2">
+        <div class="col text-center">
+            <div class="card h-100">
+                <i class="bi bi-building" style="font-size: 4rem;"></i>
+                <div class="card-body">
+                    <h5 class="card-title">ข้อมูลหอพักนักศึกษา</h5>
+                    <a href="#" class="btn btn-primary">เพิ่มเติม</a>
                 </div>
             </div>
         </div>
+        <div class="col text-center">
+            <div class="card h-100">
+                <i class="bi bi-person" style="font-size: 4rem;"></i>
+                <div class="card-body">
+                    <h5 class="card-title">บุคลลากรหอพักนักศึกษา</h5>
+                    <a href="#" class="btn btn-primary">เพิ่มเติม</a>
+                </div>
+            </div>
+        </div>
+        <div class="col text-center">
+            <div class="card h-100">
+                <i class="bi bi-telephone" style="font-size: 4rem;"></i>
+                <div class="card-body">
+                    <h5 class="card-title">เบอร์ติดต่อหอพักนักศึกษา</h5>
+                    <a href="#" class="btn btn-primary">เพิ่มเติม</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    </section>
+</section> {% endcomment %}
 
 
 
