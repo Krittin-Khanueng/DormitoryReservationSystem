@@ -5,7 +5,8 @@ from .models import Blog
 
 
 class blogView(View):
-    def get(self, request, blog_pk):
+    @staticmethod
+    def get(request, blog_pk):
         blog = Blog.objects.get(id=blog_pk)
         context = {
             'blog': blog
