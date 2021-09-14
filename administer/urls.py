@@ -40,6 +40,8 @@ urlpatterns = [
          name="booking_report"),
     path('report/dorm/', views.booking_reportDormView.as_view(),
          name="booking_report_dorm"),
-    path('login/', views.loginView.as_view(), name="login_admin")
+    path('login/', views.loginView.as_view(), name="login_admin"),
+
+    path('users/', views.usersView.as_view(), name="user_all"),
 
 ]

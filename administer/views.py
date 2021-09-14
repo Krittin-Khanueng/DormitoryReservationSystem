@@ -408,3 +408,7 @@ class booking_reportDormView(AdminStaffRequiredMixin, View):
             "booking_not_confirm": booking_not_confirm,
         }
         return render(request, "administer/booking/booking_report_dorm_dashboard.html", context)
+
+
+def usersView(request):
+    return None
