@@ -42,6 +42,11 @@ urlpatterns = [
          name="booking_report_dorm"),
     path('login/', views.loginView.as_view(), name="login_admin"),
 
-    path('users/', views.usersView.as_view(), name="user_all"),
+    path('users/', views.usersView.as_view(), name="users"),
+    path('user/groups/', views.user_groupsView.as_view(), name="user_groups"),
+    path('user/delete/<int:user_id>/',
+         views.user_deleteView.as_view(), name="user_delete"),
+    path('user/detail/<int:user_id>/',
+         views.user_detailView.as_view(), name="user_detail"),
 
 ]

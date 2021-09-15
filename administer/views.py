@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from booking.models import Opening_booking, Booking, Booking_confirmation, Academic_year
 from dorm.models import Dormitory, Room
 from .forms import DormitoryForm, FloorForm, RoomForm, Opening_bookingForm
@@ -410,5 +410,58 @@ class booking_reportDormView(AdminStaffRequiredMixin, View):
         return render(request, "administer/booking/booking_report_dorm_dashboard.html", context)
 
 
-def usersView(request):
-    return None
+class usersView(AdminStaffRequiredMixin, View):
+    @staticmethod
+    def get(request):
+        users = User.objects.all()
+        users_page = paginate_list(request, users, 3)
+
+        context = {
+            "users": users_page,
+        }
+        return render(request, "administer/users/users.html", context)
+
+
+class user_groupsView(AdminStaffRequiredMixin, View):
+    @staticmethod
+    def get(request):
+        groups = Group.objects.all()
+        context = {
+            "groups": groups,
+        }
+        return render(request, "administer/users/user_groups.html", context)
+
+    @staticmethod
+    def post(request):
+        group_id = request.POST.get("group_id")
+        try:
+            users = User.objects.filter(groups__id=group_id)
+            users = paginate_list(request, users, 10)
+        except:
+            users = None
+        if not users:
+            messages.warning(request, "ไม่มีข้อมูลการจอง")
+            return HttpResponseRedirect(reverse("user_groups"))
+        context = {
+            "users": users,
+        }
+        return render(request, "administer/users/user_groups_list.html", context)
+
+
+class user_detailView(AdminStaffRequiredMixin, View):
+    @staticmethod
+    def get(request, user_id):
+        account = User.objects.get(id=user_id)
+        context = {
+            "account": account,
+        }
+        return render(request, "administer/users/user_detail.html", context)
+
+
+class user_deleteView(AdminStaffRequiredMixin, View):
+    @staticmethod
+    def get(request, user_id):
+        user = User.objects.get(id=user_id)
+        user.delete()
+        messages.success(request, "ลบข้อมูลสำเร็จ")
+        return HttpResponseRedirect(reverse("users"))
