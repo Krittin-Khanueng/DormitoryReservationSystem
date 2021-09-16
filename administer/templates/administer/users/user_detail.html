@@ -1,119 +1,136 @@
 ﻿{% extends 'administer/base_admin_page.html' %}
 {% load static %}
 {% block title %}โปรไฟล์{% endblock %}
-{%block css_style%}
-<link rel="stylesheet" href="{% static "css/profile.css" %}">
-{%endblock %}
+{% block css_style %}
+    <link rel="stylesheet" href="{% static "css/profile.css" %}">
+{% endblock %}
 
 {% block main %}
-{% if account %}
-<div class="container rounded bg-white mt-5 mb-5 justify-content-center">
-    <!--disabled form-->
-    <fieldset disabled>
-        <legend>ข้อมูลส่วนตัว</legend>
-        <div class="row">
-            <div class="col-md-5 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+    {% if account %}
+        <div class="container rounded bg-white mt-5 mb-5 justify-content-center">
+            <!--disabled form-->
+            <fieldset disabled>
+                <legend>ข้อมูลส่วนตัว</legend>
+                <div class="row">
+                    <div class="col-md-5 border-right">
+                        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
 
-                    {% if account.account.image_profile %}
-                    <img class="img-fluid rounded-circle mt-5" width="300px"
-                        src="{{ account.account.image_profile.url }}" alt="{{ account.username }}" />
+                            {% if account.account.image_profile %}
+                                <img class="img-fluid rounded-circle mt-5" width="300px"
+                                     src="{{ account.account.image_profile.url }}" alt="{{ account.username }}"/>
 
-                    {% else %}
-                    <img class="rounded-circle mt-5" width="150px"
-                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                        alt="{{ account.name }}">
-                    {% endif %}
-                    <span class="font-weight-bold">{{account.username}}</span>
-                </div>
+                            {% else %}
+                                <img class="rounded-circle mt-5" width="150px"
+                                     src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                                     alt="{{ account.name }}">
+                            {% endif %}
+                            <span class="font-weight-bold">{{ account.username }}</span>
+                        </div>
 
-            </div>
-            <div class="col-md-6 border-right">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">โปรไฟล์</h4>
                     </div>
-                    <div class="row mt-2">
-                        {% comment %} ชื่อภาษาไทย {% endcomment %}
-                        <div class="col-md-6"><label class="labels" for="first_name_th">ชื่อ(ภาษาไทย)</label><input
-                                type="text" class="form-control" placeholder="first name" value="{{account.first_name}}"
-                                id="first_name_th"></div>
-                        <div class="col-md-6"><label class="labels" for="last_name_th">นามสกุล(ภาษาไทย)</label><input
-                                type="text" class="form-control" value="{{account.last_name}}" placeholder="surname"
-                                id="last_name_th"></div>
-
-                        {% comment %} ชื่อภาษาอังกฤษ {% endcomment %}
-                        <div class="col-md-6"><label class="labels" for="first_name_en">ชื่อ(ภาษาอังกฤษ</label><input
-                                type="text" class="form-control" placeholder="first name"
-                                value="{{account.account.first_name_en | upper}}" id="first_name_en"></div>
-                        <div class="col-md-6"><label class="labels" for="last_name_en">นามสกุล(ภาษาอังกฤษ)</label><input
-                                type="text" class="form-control" value="{{account.account.last_name_en |upper}}"
-                                placeholder="surname" id="last_name_en"></div>
-                    </div>
-                    <div class="row mt-3">
-
-                        <!--Datepicker-->
-                        <div class="col-md-6">
-                            <label class="labels" for="birth_date">วันเกิด</label>
-                            <div class="input-group date" id="datepicker">
-                                <input type="text" class="form-control" placeholder="dd/mm/yyyy"
-                                    value="{{account.account.birthday}}" id="birth_date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <div class="col-md-6 border-right">
+                        <div class="p-3 py-5">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="text-right">โปรไฟล์</h4>
                             </div>
+                            <div class="row mt-2">
+                                {% comment %} ชื่อภาษาไทย {% endcomment %}
+                                <div class="col-md-6"><label class="labels"
+                                                             for="first_name_th">ชื่อ(ภาษาไทย)</label><input
+                                        type="text" class="form-control" placeholder="first name"
+                                        value="{{ account.first_name }}"
+                                        id="first_name_th"></div>
+                                <div class="col-md-6"><label class="labels"
+                                                             for="last_name_th">นามสกุล(ภาษาไทย)</label><input
+                                        type="text" class="form-control" value="{{ account.last_name }}"
+                                        placeholder="surname"
+                                        id="last_name_th"></div>
+
+                                {% comment %} ชื่อภาษาอังกฤษ {% endcomment %}
+                                <div class="col-md-6"><label class="labels"
+                                                             for="first_name_en">ชื่อ(ภาษาอังกฤษ</label><input
+                                        type="text" class="form-control" placeholder="first name"
+                                        value="{{ account.account.first_name_en | upper }}" id="first_name_en"></div>
+                                <div class="col-md-6"><label class="labels"
+                                                             for="last_name_en">นามสกุล(ภาษาอังกฤษ)</label><input
+                                        type="text" class="form-control"
+                                        value="{{ account.account.last_name_en |upper }}"
+                                        placeholder="surname" id="last_name_en"></div>
+                            </div>
+                            <div class="row mt-3">
+
+                                <!--Datepicker-->
+                                <div class="col-md-6">
+                                    <label class="labels" for="birth_date">วันเกิด</label>
+                                    <div class="input-group date" id="datepicker">
+                                        <input type="text" class="form-control" placeholder="dd/mm/yyyy"
+                                               value="{{ account.account.birthday }}" id="birth_date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels" for="bank_account_number">เลขที่บัญชีธนาคาร</label>
+                                    <input type="text" class="form-control" placeholder="เลขที่บัญชีธนาคาร"
+                                           value="{{ account.account.bank_account_number }}" id="bank_account_number">
+                                </div>
+
+                                <!--phone number-->
+                                <div class="col-md-6">
+                                    <label class="labels" for="phone_number">เบอร์โทรศัพท์</label>
+                                    <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์"
+                                           value="{{ account.account.phone_number }}" id="phone_number">
+                                </div>
+
+                                <!--address-->
+                                <div class="col-md-12"><label class="labels" for="address">ที่อยู่</label><input
+                                        type="text"
+                                        class="form-control" placeholder="enter address line"
+                                        value="{{ account.account.address }}" id="address"></div>
+
+                                <!--email-->
+
+                                <div class="col-md-12"><label class="labels" for="email">อีเมล์</label><input
+                                        type="text"
+                                        class="form-control" placeholder="enter email" value="{{ account.email }}"
+                                        id="email">
+                                </div>
+
+                                <div class="col-md-12"><label class="labels"
+                                                              for="motorcycle_registration">ป้ายทะเบียนรถจักรยานยนต์</label><input
+                                        type="text"
+                                        class="form-control" placeholder="ป้ายทะเบียนรถจักรยานยนต์"
+                                        value="{{ account.account.motorcycle_registration }}"
+                                        id="motorcycle_registration"></div>
+
+                                <div class="col-md-12"><label class="labels"
+                                                              for="car_registration">ป้ายทะเบียนยนต์</label><input
+                                        type="text" class="form-control"
+                                        placeholder="ป้ายทะเบียนยนต์" value="{{ account.account.car_registration }}"
+                                        id="car_registration"></div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-6"><label class="labels" for="gender">เพศ</label><input type="text"
+                                                                                                           class="form-control"
+                                                                                                           placeholder="เพศ"
+                                                                                                           value="{{ account.account.gender }}"
+                                                                                                           id="gender"
+                                                                                                           name="gender">
+                                </div>
+                            </div>
+
+
                         </div>
-                        <div class="col-md-6">
-                            <label class="labels" for="bank_account_number">เลขที่บัญชีธนาคาร</label>
-                            <input type="text" class="form-control" placeholder="เลขที่บัญชีธนาคาร"
-                                value="{{account.account.bank_account_number}}" id="bank_account_number">
-                        </div>
-
-                        <!--phone number-->
-                        <div class="col-md-6">
-                            <label class="labels" for="phone_number">เบอร์โทรศัพท์</label>
-                            <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์"
-                                value="{{account.account.phone_number}}" id="phone_number">
-                        </div>
-
-                        <!--address-->
-                        <div class="col-md-12"><label class="labels" for="address">ที่อยู่</label><input type="text"
-                                class="form-control" placeholder="enter address line"
-                                value="{{account.account.address}}" id="address"></div>
-
-                        <!--email-->
-
-                        <div class="col-md-12"><label class="labels" for="email">อีเมล์</label><input type="text"
-                                class="form-control" placeholder="enter email" value="{{account.email}}" id="email">
-                        </div>
-
-                        <div class="col-md-12"><label class="labels"
-                                for="motorcycle_registration">ป้ายทะเบียนรถจักรยานยนต์</label><input type="text"
-                                class="form-control" placeholder="ป้ายทะเบียนรถจักรยานยนต์"
-                                value="{{account.account.motorcycle_registration}}" id="motorcycle_registration"></div>
-
-                        <div class="col-md-12"><label class="labels"
-                                for="car_registration">ป้ายทะเบียนยนต์</label><input type="text" class="form-control"
-                                placeholder="ป้ายทะเบียนยนต์" value="{{account.account.car_registration}}"
-                                id="car_registration"></div>
                     </div>
-
-                    <div class="row mt-3">
-                        <div class="col-md-6"><label class="labels" for="gender">เพศ</label><input type="text"
-                                class="form-control" placeholder="เพศ" value="{{account.account.gender}}" id="gender"
-                                name="gender"></div>
-                    </div>
-
-
                 </div>
-            </div>
+
+            </fieldset>
+            <a href="{{ account.account.image_bill.url }}" class="btn btn-primary">บิลการชำระเงิน</a>
+
+
         </div>
 
-    </fieldset>
-    <a href="{{account.account.image_bill.url}}" class="btn btn-primary">บิลการชำระเงิน</a>
-
-
-</div>
-
-{% else %}
-<h1 class="text-center text-danger">ไม่มีข้อมูลในขนาดนี้</h1>
-{% endif %}
+    {% else %}
+        <h1 class="text-center text-danger">ไม่มีข้อมูลในขนาดนี้</h1>
+    {% endif %}
 {% endblock %}

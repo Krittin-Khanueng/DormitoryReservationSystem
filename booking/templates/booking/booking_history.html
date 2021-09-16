@@ -2,33 +2,33 @@
 {% block title %}ประวัติการจองหอพัก{% endblock %}
 
 {% block content %}
-<h1 class="m-2">ประวัติการจองห้องพัก</h1>
-<h3>ชื่อ-นามสกุล:{{request.user.first_name}} {{request.user.last_name}}</h3>
-{% if bookings %}
-<table class="table">
-    <caption>ประวัติการจองห้องพัก</caption>
-    <thead class="thead-dark">
-        <tr>
-            <th>ปีการศึกษา</th>
-            <th>หอพัก</th>
-            <th>ห้องพัก</th>
-            <th>วันที่เข้าพัก</th>
+    <h1 class="m-2">ประวัติการจองห้องพัก</h1>
+    <h3>ชื่อ-นามสกุล:{{ request.user.first_name }} {{ request.user.last_name }}</h3>
+    {% if bookings %}
+        <table class="table">
+            <caption>ประวัติการจองห้องพัก</caption>
+            <thead class="thead-dark">
+            <tr>
+                <th>ปีการศึกษา</th>
+                <th>หอพัก</th>
+                <th>ห้องพัก</th>
+                <th>วันที่เข้าพัก</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        {% for booking in bookings %}
-        <tr>
-            <td>{{booking.open_booking.academic_year}}</td>
-            <td>{{ booking.room.floor.dorm_name }}</td>
-            <td>{{ booking.room.room_id }}</td>
-            <td>{{ booking.booking_at}}</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.open_booking.academic_year }}</td>
+                    <td>{{ booking.room.floor.dorm_name }}</td>
+                    <td>{{ booking.room.room_id }}</td>
+                    <td>{{ booking.booking_at }}</td>
 
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<h1 class="text text-danger text-center mt-5">ไม่มีข้อมูลในขณะนี้</h1>
-{% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h1 class="text text-danger text-center mt-5">ไม่มีข้อมูลในขณะนี้</h1>
+    {% endif %}
 {% endblock %}

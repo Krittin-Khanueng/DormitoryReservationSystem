@@ -1,15 +1,13 @@
 from django.test import TestCase
-from django.test.utils import get_test_data
 from django.urls import reverse
-from .models import Booking, Booking_confirmation, Opening_booking
+
 
 # Create your tests here.
 
 class TestBooking(TestCase):
-        def test_booking_page_view(self):
-            response = self.client.get(reverse('booking:booking_page'))
-            self.assertEqual(response.status_code, 200)
-            self.assertTemplateUsed(response, 'booking/booking_page.html')
-            self.assertContains(response, 'Booking')
-            self.assertContains(response, 'Booking form')
-            
+	def test_booking_page_view(self):
+		response = self.client.get(reverse('booking:booking_page'))
+		self.assertEqual(response.status_code, 200)
+		self.assertTemplateUsed(response, 'booking/booking_page.html')
+		self.assertContains(response, 'Booking')
+		self.assertContains(response, 'Booking form')

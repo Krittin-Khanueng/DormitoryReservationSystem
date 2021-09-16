@@ -5,33 +5,33 @@
 
 {% block main %}
 
-<!--เลือกกลุ่ม-->
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">เลือกกลุ่ม</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="group_id">กลุ่ม</label>
-                            <form action="{% url 'user_groups'%}" method="post">
-                                {% csrf_token %}
-                                <select class="form-control" id="group_id" name="group_id">
-                                    {% for group in groups %}
-                                    <option value="{{ group.id }}">{{ group.name }}</option>
-                                    {% endfor %}
-                                </select>
-                                <button type="submit" class="btn btn-primary mt-2">เลือก</button>
+    <!--เลือกกลุ่ม-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">เลือกกลุ่ม</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="group_id">กลุ่ม</label>
+                                <form action="{% url 'user_groups' %}" method="post">
+                                    {% csrf_token %}
+                                    <select class="form-control" id="group_id" name="group_id">
+                                        {% for group in groups %}
+                                            <option value="{{ group.id }}">{{ group.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <button type="submit" class="btn btn-primary mt-2">เลือก</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
