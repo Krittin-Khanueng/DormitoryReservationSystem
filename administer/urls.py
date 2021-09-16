@@ -48,6 +48,6 @@ urlpatterns = [
          views.user_deleteView.as_view(), name="user_delete"),
     path('user/detail/<int:user_id>/',
          views.user_detailView.as_view(), name="user_detail"),
-     path('user/manage/',views.user_manageView.as_view(),name="user_manage"),
+    path('user/manage/', views.user_manageView.as_view(), name="user_manage"),
 
 ]
