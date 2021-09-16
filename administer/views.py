@@ -487,6 +487,6 @@ class user_manageView(AdminStaffRequiredMixin, View):
 			return HttpResponseRedirect(reverse("user_manage"))
 		for user in users:
 			user.account.current_state = 'มีสิทธิ์จอง'
-		user.account.save()
+			user.account.save()
 		messages.success(request, "จัดการสิทธิ์สำเร็จ")
 		return HttpResponseRedirect(reverse("user_manage"))
