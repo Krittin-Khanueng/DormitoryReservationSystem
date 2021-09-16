@@ -32,13 +32,7 @@
 
                         {% for dorm in dorms %}
 
-                        <li><a class="dropdown-item" href="#">{{ dorm.name }} &raquo;</a>
-                            <ul class="dropdown-menu dropdown-submenu">
-                                <li><a class="dropdown-item" href="#">เบอร์ติดต่อหอพัก</a></li>
-                                <li><a class="dropdown-item" href="#">ข้อมูลหอพัก</a></li>
-                                <li><a class="dropdown-item" href="#">ระเบียบหอพัก</a></li>
-                                <li><a class="dropdown-item" href="#">เจ้าหน้าที่หอพัก</a></li>
-                            </ul>
+                        <li><a class="dropdown-item" href="{% url 'dorm-detail'%}">{{ dorm.name }} &raquo;</a>
 
                         </li>
                         {% endfor %}
@@ -47,11 +41,9 @@
 
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#">เกี่ยวกับ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">ติดต่อ</a>
+                    <a class="nav-link" href="{% url 'context'%}">ติดต่อ</a>
                 </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">

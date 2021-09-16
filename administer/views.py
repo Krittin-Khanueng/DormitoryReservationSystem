@@ -465,3 +465,29 @@ class user_deleteView(AdminStaffRequiredMixin, View):
         user.delete()
         messages.success(request, "ลบข้อมูลสำเร็จ")
         return HttpResponseRedirect(reverse("users"))
+
+
+class user_manageView(AdminStaffRequiredMixin, View):
+    @staticmethod
+    def get(request):
+        groups = Group.objects.all()
+
+        context = {
+            "groups": groups,
+        }
+        return render(request, "administer/users/user_manage.html", context)
+
+    def post(self, request):
+        try:
+            users = User.objects.filter(
+                groups__id=request.POST.get("group_id"))
+        except Exception as e:
+            users = None
+        if not users:
+            messages.warning(request, "ไม่มีข้อมูลการจอง")
+            return HttpResponseRedirect(reverse("user_manage"))
+        for user in users:
+            user.account.current_state = 'มีสิทธิ์จอง'
+        user.account.save()
+        messages.success(request, "จัดการสิทธิ์สำเร็จ")
+        return HttpResponseRedirect(reverse("user_manage"))

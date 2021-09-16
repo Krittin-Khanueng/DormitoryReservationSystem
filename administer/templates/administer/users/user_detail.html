@@ -14,14 +14,16 @@
         <div class="row">
             <div class="col-md-5 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    {%if account.image_profile %}
-                    <img class="img-fluid rounded-circle mt-5" width="300px" src="{{ account.image_profile.url }}"
-                        alt="{{ account.name }}">
-                    {%else%}
+
+                    {% if account.account.image_profile %}
+                    <img class="img-fluid rounded-circle mt-5" width="300px"
+                        src="{{ account.account.image_profile.url }}" alt="{{ account.username }}" />
+
+                    {% else %}
                     <img class="rounded-circle mt-5" width="150px"
                         src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
                         alt="{{ account.name }}">
-                    {%endif%}
+                    {% endif %}
                     <span class="font-weight-bold">{{account.username}}</span>
                 </div>
 
@@ -58,6 +60,11 @@
                                     value="{{account.account.birthday}}" id="birth_date">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels" for="bank_account_number">เลขที่บัญชีธนาคาร</label>
+                            <input type="text" class="form-control" placeholder="เลขที่บัญชีธนาคาร"
+                                value="{{account.account.bank_account_number}}" id="bank_account_number">
                         </div>
 
                         <!--phone number-->
@@ -99,9 +106,13 @@
                 </div>
             </div>
         </div>
+
     </fieldset>
+    <a href="{{account.account.image_bill.url}}" class="btn btn-primary">บิลการชำระเงิน</a>
+
 
 </div>
+
 {% else %}
 <h1 class="text-center text-danger">ไม่มีข้อมูลในขนาดนี้</h1>
 {% endif %}
