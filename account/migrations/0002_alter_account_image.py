@@ -6,14 +6,15 @@ import account.models
 
 
 class Migration(migrations.Migration):
-	dependencies = [
-		('account', '0001_initial'),
-	]
+    dependencies = [
+        ('account', '0001_initial'),
+    ]
 
-	operations = [
-		migrations.AlterField(
-			model_name='account',
-			name='image',
-			field=models.ImageField(blank=True, null=True, upload_to=account.models.path_and_rename),
-		),
-	]
+    operations = [
+        migrations.AlterField(
+            model_name='account',
+            name='image',
+            field=models.ImageField(
+                blank=True, null=True, upload_to=account.models.path_and_rename),
+        ),
+    ]
