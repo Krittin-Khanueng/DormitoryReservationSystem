@@ -3,10 +3,13 @@
 {% block title %}จองสำเร็จ{% endblock %}
 
 {% block content %}
-    <div class="container justify-content-center">
+<div class="container justify-content-center mt-5">
+    <!--ใส่แบลกกราว-->
+    <span class="border-0">
         <h2 class="text-center fw-bold text-success">จองหอพักสำเร็จแล้ว</h2>
         <h3 class="text-center fw-bold text-success">กรุณามายืนยันห้องพัก </h3>
         <h3 class="text-center fw-bold text-success">มิฉะนั้นห้องพักที่คุณของ จะถูกยกเลิกโดยอัตโนมัติ</h3>
-        <a href="{% url 'index' %}" class="btn btn-primary">กลับหน้าแรก</a>
-    </div>
+    </span>
+    <center><a href="{% url 'index' %}" class="btn btn-primary mt-2 ">กลับหน้าแรก</a></center>
+</div>
 {% endblock %}

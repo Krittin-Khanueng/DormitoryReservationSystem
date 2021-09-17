@@ -23,6 +23,7 @@ urlpatterns = [
 		 name="management_room_delete"),
 	path('dorm/open/dormitory/',
 		 views.open_dormitoryView.as_view(), name="open_dormitory"),
+	path('dorm/academic/add/', views.aaministeracademic_addView.as_view(), name="aaministeracademic_add"),
 	path('dorm/open/dormitory/edit/<int:id>/',
 		 views.open_dormitory_editView.as_view(), name="open_dormitory_edit"),
 	path('dorm/open/dormitory/delete/',
@@ -41,7 +42,6 @@ urlpatterns = [
 	path('report/dorm/', views.booking_reportDormView.as_view(),
 		 name="booking_report_dorm"),
 	path('login/', views.loginView.as_view(), name="login_admin"),
-
 	path('users/', views.usersView.as_view(), name="users"),
 	path('user/groups/', views.user_groupsView.as_view(), name="user_groups"),
 	path('user/delete/<int:user_id>/',
