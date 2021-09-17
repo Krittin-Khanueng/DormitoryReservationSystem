@@ -93,9 +93,9 @@ class Academic_yearForm(forms.ModelForm):
         model = Academic_year
         fields = ('academic_year')
 
-	def __init__(self, *args, **kwargs):
-		super(Academic_yearForm, self).__init__(*args, **kwargs)
-		self.fields['academic_year'].widget.attrs.update(
-			{'class': 'form-control'})
+        def __init__(self, *args, **kwargs):
+            super(Academic_yearForm, self).__init__(*args, **kwargs)
+            self.fields['academic_year'].widget.attrs.update(
+                {'class': 'form-control'})
 
-		self.fields['academic_year'].label = 'ปีการศึกษา'
+            self.fields['academic_year'].label = 'ปีการศึกษา'
