@@ -4,41 +4,41 @@
 {% block title %}หน้าแรก{% endblock %}
 
 {% block css_style %}
-    <link rel="stylesheet" href="{% static "css/index.css" %}">
+<link rel="stylesheet" href="{% static "css/index.css" %}">
 {% endblock %}
 {% block content %}
 
-    <!-- เนื้อหา -->
-    <section class="main">
-        <div class="p-5 mb-4 bg-light rounded-3" id="jumbotron">
-            <div class="dark-overlay">
-                <div class="container-fluid py-5">
-                    <h1 class="display-5 fw-bold">หอพักคณะแพทย์ศาสตร์ มหาวิทยาลัยสงขลานครินทร์</h1>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="card-body">
-        <div class="card  mx-3 my-4">
-            <div class="card-header">
-                Dormitory News/ Press Release Hatyai Campus
-            </div>
-            <div class="card-body">
-
-                {% for blog in blogs %}
-                    <h2>
-                        <span><i class="bi bi-arrow-right-short" style="font-size: 2rem;"></i></span>
-                        <span><a href="{{ blog.get_url }}" class="news_text">{{ blog.title }}</a></span>
-                    </h2>
-                {% endfor %}
+<!-- เนื้อหา -->
+<section class="main">
+    <div class="p-5 mb-4 bg-light rounded-3" id="jumbotron">
+        <div class="dark-overlay">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">หอพักคณะแพทยศาสตร์ มหาวิทยาลัยสงขลานครินทร์</h1>
             </div>
         </div>
 
-    </section>
+    </div>
+</section>
 
-    {% comment %} <section id="card">
+<section id="card-body">
+    <div class="card  mx-3 my-4">
+        <div class="card-header">
+            Dormitory News/ Press Release Hatyai Campus
+        </div>
+        <div class="card-body">
+
+            {% for blog in blogs %}
+            <h2>
+                <span><i class="bi bi-arrow-right-short" style="font-size: 2rem;"></i></span>
+                <span><a href="{{ blog.get_url }}" class="news_text">{{ blog.title }}</a></span>
+            </h2>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+
+{% comment %} <section id="card">
     <div class="row row-cols-1 row-cols-md-3 g-4 mx-2">
         <div class="col text-center">
             <div class="card h-100">

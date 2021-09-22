@@ -177,7 +177,6 @@ class ConfirmToBookFormView(Login_by_PSUPASSPORTView, View):
 		account.motorcycle_registration = data.get('motorcycle_registration')
 		account.car_registration = data.get('car_registration')
 		account.phone_number = data.get('tel')
-		account.bank_account_number = data.get('bank_account_number')
 		account.bill_number = data.get('bill_number')
 		# upload image to models
 		account.save()
