@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
+import environ
 from pathlib import Path
 
 # Initialise environment variables
@@ -18,6 +19,14 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Environment variable configuration
+env_base = environ.Path(__file__) - 2
+environ.Env.read_env(env_file=env_base('.env'))
+env = environ.Env(
+	DEBUG=(bool, True),
+	MEDIA_ROOT=(str, os.path.normpath(os.path.join(BASE_DIR, "media")))
+)
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -25,30 +34,39 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-74ko(nx_^k&+e2x$vezf&6nf5q%@=6n!jfpp&u^6xv+)aj6(y8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
+SHELL_PLUS = "ipython"
+
 # Application definition
 
-INSTALLED_APPS = [
-	'jet',
+DJANGO_APPS = [
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+]
+
+THIRD_PARTY_APPS = [
+	'crispy_forms',
+	'django_extensions',
+	'debug_toolbar',
+]
+
+INTERNAL_APPS = [
 	'dorm',
 	'main',
 	'account',
 	'blog',
 	'booking',
 	'administer',
-	'crispy_forms',
-	'django_extensions',
-	'debug_toolbar',
 ]
+
+INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + INTERNAL_APPS
 
 MIDDLEWARE = [
 	'django.middleware.security.SecurityMiddleware',
@@ -88,24 +106,18 @@ WSGI_APPLICATION = 'DormitoryReservationSystem.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-#DATABASES = {
-#	'default': {
-#		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#		'NAME':'dormitory_db',
-#		'USER': 'postgres',
-#		'PASSWORD':'DarkJame0071qQ+-',
-#		'HOST': '127.0.0.1',
-#		'PORT': '5432',
-#	}
-#}
-
 DATABASES = {
- 	'default': {
- 		'ENGINE': 'django.db.backends.sqlite3',
- 		'NAME': BASE_DIR / 'db.sqlite3',
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': env('DB_NAME'),
+		'USER': env('DB_USER'),
+		'PASSWORD': env('DB_PASSWORD'),
+		'HOST': env('DB_HOST', default='localhost'),
+		'PORT': env('DB_PORT', default='5432'),
 
- 	}
- }
+	}
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -127,7 +139,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'th-th'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Bangkok'
 
@@ -135,22 +147,19 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = False
+USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+	os.path.normpath(os.path.join(BASE_DIR, "staticfiles")),
+]
 
-if DEBUG:
-	STATICFILES_DIRS = [
-		BASE_DIR / "static",
-	]
-else:
-	STATIC_ROOT = BASE_DIR / 'static'
-
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media/"
+MEDIA_ROOT = env('MEDIA_ROOT')
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

@@ -1,21 +1,31 @@
 # DormitoryReservationSystem
 
+**สร้าง venv**
+`python3 -m venv ชื่อ`
 
+**run venv**
+`.\ชื่อ\scripts\activate`
 
-สร้าง venv
-python3 -m venv ชื่อ
+**ติดตั้ง**
+`pip install -r requirements.txt`
 
-การรัน 
-.\ชื่อ\scripts\activate
+**อัพเดตฐานข้อมูล**
+`python manage.py migrate`
 
-ติดตั้ง 
-pip install -r requirements.txt
+**สร้าง user admin**
+`python mamage.py createsuperuser`
 
-อัพเดตฐานข้อมูล
-python manage.py migrate
+**รันเซิฟเวอร์**
+`python manage.py runserver`
 
-สร้าง user admin
-python mamage.py createsuperuser
+##### **สร้างไฟล์ .env**
 
-รันเซิฟเวอร์
-python manage.py runserver
+`DB_NAME=''`
+
+`DB_USER=''`
+
+`DB_PASSWORD=''`
+
+`DB_HOST=''`
+
+`DB_PORT=''`
