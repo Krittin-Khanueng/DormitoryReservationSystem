@@ -61,3 +61,4 @@ class DormDetailsView(View):
 	@staticmethod
 	def get(request, dorm_name):
 		return render(request, "dorm/dorm_details.html")
+

@@ -501,3 +501,18 @@ class aaministeracademic_addView(AdminStaffRequiredMixin, View):
             'academic_years': Academic_year.objects.all(),
         }
         return None
+
+    def post(self, request):
+        form = Academic_yearForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "เพิ่มข้อมูลปีการศึกษาสำเร็จ")
+            return HttpResponseRedirect(reverse("academic_add"))
+        context = {
+            'form': form,
+            'academic_years': Academic_year.objects.all(),
+        }
+        return render(request, "administer/academic/academic_add.html", context)
+
+
+

@@ -54,7 +54,7 @@ class Booking(models.Model):
 		Opening_booking, on_delete=models.CASCADE, null=True, related_name="open_booking")
 
 	def __str__(self):
-		return f"{self.user.username} ห้อง:{self.room.room_id} {str(self.booking_at)}"
+		return f'{self.user.username} ห้อง:{self.room.room_id} {self.booking_at}'
 
 	class Meta:
 		verbose_name = "การจอง"
